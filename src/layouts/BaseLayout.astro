@@ -7,10 +7,22 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: Date | string;
+  tags?: string[];
 }
 
-const { title, description = SITE.description, ogImage } = Astro.props;
+const {
+  title,
+  description = SITE.description,
+  ogImage = '/social-card.png',
+  ogType = 'website',
+  publishedTime,
+  tags = [],
+} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(ogImage, Astro.site);
+const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : undefined;
 ---
 
 <!doctype html>
@@ -31,14 +43,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <meta name="description" content={description} />
+    <meta name="author" content={SITE.footerName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={SITE.description} />
+    {ogType === 'article' && <meta property="article:author" content={SITE.footerName} />}
+    {publishedDate && <meta property="article:published_time" content={publishedDate} />}
+    {tags.map(tag => <meta property="article:tag" content={tag} />)}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@tomaugr" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+    <meta name="twitter:image:alt" content={SITE.description} />
     <title>{title}</title>
     <script is:inline>
       // Prevent flash of wrong theme
@@ -88,7 +111,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <span class="flex flex-wrap justify-center gap-2">
           {PROFILE_LINKS.map(link => (
             <>
-              <a href={link.href} class="font-medium text-(--color-link) no-underline hover:underline" target="_blank" rel="noopener">{link.label}</a>
+              <a href={link.href} class="font-medium text-(--color-link) no-underline hover:underline" target="_blank" rel="me noopener">{link.label}</a>
               <span>&middot;</span>
             </>
           ))}
