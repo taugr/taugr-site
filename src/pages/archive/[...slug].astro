@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArchiveLayout from '../../layouts/ArchiveLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('archive', ({ data }) => !data.draft);
+  return entries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<ArchiveLayout frontmatter={{ ...entry.data, readingTime: (entry as any).readingTime }}>
+  <Content />
+</ArchiveLayout>

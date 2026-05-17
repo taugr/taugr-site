@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = await getCollection('archive', ({ data }) => !data.draft);
+const sorted = entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+---
+
+<BaseLayout title="Archive — taugr" description="Older writing and notes.">
+  <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">Archive</h1>
+  <p class="text-[0.95rem] text-(--color-text-secondary) mb-8">
+    Older writing and notes.
+  </p>
+
+  {sorted.map((entry, i) => (
+    <article class:list={['mb-5 pb-5', i < sorted.length - 1 && 'border-b border-(--color-border-light)']}>
+      <a href={`/archive/${entry.id}/`} class="group block no-underline">
+        <h2 class="text-[0.98rem] font-semibold text-(--color-text) leading-snug group-hover:text-(--color-link) transition-colors">
+          {entry.data.title}
+        </h2>
+        <div class="mt-1 text-[0.82rem] text-(--color-text-tertiary)">
+          {formatDate(entry.data.date)} · archived from old blog
+        </div>
+        <p class="text-[0.9rem] text-(--color-text-secondary) mt-1.5 leading-relaxed">
+          {entry.data.description}
+        </p>
+      </a>
+    </article>
+  ))}
+</BaseLayout>

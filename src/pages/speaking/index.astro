@@ -1,0 +1,357 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const talks = [
+  {
+    title: 'Your New AI Co-Worker',
+    event: 'AI Onramp by TUMO Labs',
+    date: 'Apr 17, 2026, 19:00',
+    location: 'TUMO Labs, Yerevan, Armenia',
+    description: 'A practical session on applying AI to everyday work processes, choosing what to automate first, turning AI into an autonomous working unit, and structuring prompts.',
+    media: [
+      {
+        src: '/img/speaking/ai-coworker-luma.jpg',
+        alt: 'Your New AI Co-Worker AI Onramp cover image',
+        label: 'event cover',
+      },
+      {
+        src: '/img/speaking/ai-coworker-flyer.jpg',
+        alt: 'Your New AI Co-Worker AI Onramp flyer',
+        label: 'flyer',
+      },
+      {
+        src: '/img/speaking/ai-coworker-speaking.jpg',
+        alt: 'Your New AI Co-Worker recap photo',
+        label: 'recap photo',
+      },
+      {
+        src: '/img/speaking/your-new-ai-coworker.jpeg',
+        alt: 'Your New AI Co-Worker session photo',
+        label: 'session photo',
+      },
+    ],
+    links: [
+      { href: 'https://luma.com/y6ns6030', label: 'event', icon: 'globe' },
+      { href: 'https://tumolabs.ai/en/', label: 'program', icon: 'globe' },
+      { href: 'https://www.linkedin.com/posts/tumo-labs_the-wide-variety-of-ai-tools-and-models-can-activity-7454786541601628160-krK-', label: 'recap', icon: 'globe' },
+    ],
+  },
+  {
+    title: 'Engineering AI for Education',
+    event: 'DataFest Yerevan 2025',
+    date: 'Sep 12-13, 2025',
+    location: 'Woods Center, Yerevan, Armenia',
+    description: 'A talk on how TUMO is engineering AI-driven applications that guide self-learning, adapt to each student’s pace and interests, and empower personalized learning paths.',
+    media: [
+      {
+        src: '/img/speaking/datafest-yerevan-2025-flyer.jpeg',
+        alt: 'DataFest Yerevan 2025 Engineering AI for Education flyer',
+        label: 'flyer',
+      },
+      {
+        src: '/img/speaking/datafest-yerevan-2025-talk.jpeg',
+        alt: 'Engineering AI for Education talk at DataFest Yerevan 2025',
+        label: 'talk photo',
+      },
+      {
+        src: '/img/speaking/datafest-yerevan-2025-linkedin-speaking.jpg',
+        alt: 'Engineering AI for Education recap photo at DataFest Yerevan 2025',
+        label: 'recap photo',
+      },
+    ],
+    links: [
+      { href: 'https://datafest.am/2025/agenda', label: 'agenda', icon: 'globe' },
+      { href: 'https://docs.google.com/presentation/d/183JsFgBXJxmGZ23c6IF-kMhStK9-7OA1mIt2G-HpInw/edit?usp=sharing', label: 'slides', icon: 'slides' },
+      { href: 'https://www.youtube.com/watch?v=z35cZYnj4jY', label: 'video', icon: 'video' },
+    ],
+  },
+  {
+    title: 'Digital Forensics: Detecting Illegal Content at Scale',
+    event: 'Security BSides Yerevan 2025',
+    date: 'Jun 14-15, 2025',
+    location: 'Yerevan, Armenia',
+    description: 'A talk on the technologies, strategies, and cryptographic techniques used to identify illegal content across large collections of hidden data.',
+    media: [
+      {
+        src: '/img/speaking/bsides-yerevan-2025.jpg',
+        alt: 'BSides Yerevan 2025 speaker flyer',
+        label: 'flyer',
+      },
+      {
+        src: '/img/speaking/bsides-yerevan-2025-talk.jpeg',
+        alt: 'Digital Forensics talk at BSides Yerevan 2025',
+        label: 'talk photo',
+      },
+      {
+        src: '/img/speaking/bsides-yerevan-2025-linkedin-speaking.jpg',
+        alt: 'Digital Forensics recap photo at BSides Yerevan 2025',
+        label: 'recap photo',
+      },
+    ],
+    links: [
+      { href: 'https://luma.com/xu70avh8', label: 'event', icon: 'globe' },
+    ],
+  },
+  {
+    title: 'AI-Driven Learning: The Future of Education',
+    event: 'AI Conf 2024 Armenia',
+    date: 'Oct 12, 2024, 10:00',
+    location: 'Gabriel Sundukyan National Academic Theater, Yerevan, Armenia',
+    description: 'A conference talk on how AI can transform learning and education.',
+    media: [
+      {
+        src: '/img/speaking/ai-conf-2024-poster.jpg',
+        alt: 'AI Conf 2024 Armenia event poster',
+        label: 'event poster',
+      },
+      {
+        src: '/img/speaking/ai-conf-2024-speaker.jpg',
+        alt: 'AI Conf 2024 Armenia speaker flyer for Tom Auger',
+        label: 'speaker flyer',
+      },
+    ],
+    links: [
+      { href: 'https://darpass.com/event/ai-conf-2024/', label: 'event', icon: 'globe' },
+      { href: 'https://aiconf.am/', label: 'site', icon: 'globe' },
+      { href: 'https://www.linkedin.com/posts/tumo-center-for-creative-technologies_guess-whos-taking-the-stage-at-ai-conf-2024-activity-7250490553253916673-QK8V', label: 'linkedin', icon: 'linkedin' },
+    ],
+  },
+  {
+    title: 'Education Re-launched Through AI',
+    event: 'WCIT 2024 / DigiTec',
+    date: 'Oct 6, 2024, 15:10',
+    location: 'Karen Demirchyan Sports and Concert Complex, Yerevan, Armenia',
+    description: 'A WCIT 2024 / DigiTec session on AI and education, part of the AI in Action theme and the broader Power of Mind program.',
+    media: [
+      {
+        src: '/img/speaking/wcit-2024-digitec.jpg',
+        alt: 'WCIT 2024 DigiTec event cover',
+        label: 'event cover',
+      },
+      {
+        src: '/img/speaking/wcit-2024-session.jpeg',
+        alt: 'Education Re-launched Through AI session at WCIT 2024 DigiTec',
+        label: 'session',
+      },
+    ],
+    links: [
+      { href: 'https://www.facebook.com/wcit2024.digitec/', label: 'event', icon: 'globe' },
+    ],
+  },
+  {
+    title: "Generative AI: How It's Changing the World",
+    event: 'AI talk resources',
+    date: 'Jul 20, 2023, 19:30',
+    location: 'Gyumri and Dilijan, Armenia',
+    description: 'Prompt examples and practical resources from a public talk introducing generative AI and how to use it for writing, learning, planning, and coding.',
+    media: [
+      {
+        src: '/img/speaking/genaichangetheworld.png',
+        alt: "Generative AI: How It's Changing the World presentation image",
+        label: 'presentation',
+      },
+      {
+        src: '/img/speaking/aichangingtheworld.jpg',
+        alt: "Generative AI: How It's Changing the World flyer",
+        label: 'flyer',
+      },
+    ],
+    links: [
+      { href: '/speaking/aitalk/', label: 'resources', icon: 'file' },
+      { href: 'https://tomauger.gitlab.io/aitalk/', label: 'original', icon: 'globe' },
+    ],
+  },
+];
+
+const icons = {
+  file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6" /><path d="M8 13h8" /><path d="M8 17h6" />',
+  globe: '<circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2a15.3 15.3 0 0 1 0 20" /><path d="M12 2a15.3 15.3 0 0 0 0 20" />',
+  image: '<rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="8.5" cy="10.5" r="1.5" /><path d="m21 15-5-5L5 21" />',
+  linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />',
+  slides: '<rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8" /><path d="M12 18v4" />',
+  video: '<path d="m22 8-6 4 6 4V8Z" /><rect x="2" y="6" width="14" height="12" rx="2" />',
+};
+---
+
+<BaseLayout title="Speaking — taugr" description="Public talks, panels, and appearances by taugr.">
+  <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">Speaking</h1>
+  <p class="text-[0.95rem] text-(--color-text-secondary) mb-8">
+    Recent talks and panels.
+  </p>
+
+  <section>
+    <div class="space-y-4">
+      {talks.map(talk => (
+        <article class="border border-(--color-border-light) rounded-lg p-4 transition-all hover:border-(--color-border) hover:bg-(--color-project-hover) hover:-translate-y-px flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+          <div class="min-w-0 flex-1">
+            <h3 class="text-[1rem] text-(--color-link) font-semibold leading-tight">
+              <a href={talk.links[0].href} class="inline-flex items-center gap-1.5 hover:underline" target={talk.links[0].href.startsWith('/') ? undefined : '_blank'} rel={talk.links[0].href.startsWith('/') ? undefined : 'noopener'}>
+                <span>{talk.title}</span>
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3 w-3 fill-none stroke-current stroke-2">
+                  <path d="M7 17 17 7" />
+                  <path d="M9 7h8v8" />
+                </svg>
+              </a>
+            </h3>
+            <p class="mt-0.5 text-[0.86rem] text-(--color-text)">{talk.event}</p>
+            <p class="mt-1 text-[0.82rem] text-(--color-text-tertiary)">{talk.date} · {talk.location}</p>
+            <p class="mt-2 text-[0.9rem] text-(--color-text-secondary) leading-relaxed">{talk.description}</p>
+            <div class="flex flex-wrap items-center gap-3 mt-3 text-[0.82rem]">
+              {talk.links.map((link, index) => (
+                <>
+                  {index > 0 && <span class="h-3.5 w-px bg-(--color-border-light)" aria-hidden="true"></span>}
+                  <a href={link.href} class="inline-flex items-center gap-1.5 text-(--color-link) font-medium hover:underline" target={link.href.startsWith('/') ? undefined : '_blank'} rel={link.href.startsWith('/') ? undefined : 'noopener'}>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-none stroke-current stroke-2" set:html={icons[link.icon]} />
+                    <span>{link.label}</span>
+                  </a>
+                </>
+              ))}
+            </div>
+          </div>
+          <button
+            type="button"
+            class="group relative flex h-28 w-full shrink-0 cursor-zoom-in items-center justify-center overflow-hidden rounded-md border border-(--color-border-light) bg-(--color-bg-secondary) p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition hover:border-(--color-border) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link) sm:w-36"
+            data-lightbox-media={JSON.stringify(talk.media)}
+            data-lightbox-index="0"
+            aria-label={`Open larger image for ${talk.title}`}
+          >
+            <img src={talk.media[0].src} alt={talk.media[0].alt} class="max-h-full max-w-full object-contain" loading="lazy" />
+            {talk.media.length > 1 && (
+              <span class="absolute left-1.5 top-1.5 rounded bg-(--color-bg)/90 px-1.5 py-0.5 text-[0.7rem] font-semibold text-(--color-text-secondary) shadow-sm" aria-hidden="true">
+                +{talk.media.length - 1}
+              </span>
+            )}
+            <span class="absolute bottom-1.5 right-1.5 rounded bg-(--color-bg)/90 px-1.5 py-1 text-(--color-link) opacity-0 shadow-sm transition group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-none stroke-current stroke-2">
+                <path d="M15 3h6v6" />
+                <path d="M10 14 21 3" />
+                <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4" />
+              </svg>
+            </span>
+          </button>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <dialog id="speaking-lightbox" class="m-auto max-h-[92vh] max-w-[92vw] rounded-lg border border-(--color-border-light) bg-(--color-bg) p-0 shadow-2xl backdrop:bg-black/70">
+    <div class="relative p-3">
+      <button
+        type="button"
+        class="absolute right-5 top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-(--color-border-light) bg-(--color-bg)/90 text-[0.8rem] font-semibold text-(--color-text-secondary) shadow-sm transition hover:text-(--color-text) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link)"
+        data-lightbox-close
+        aria-label="Close image"
+      >
+        x
+      </button>
+      <button
+        type="button"
+        class="absolute left-5 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-(--color-border-light) bg-(--color-bg)/90 text-(--color-text-secondary) shadow-sm transition hover:text-(--color-text) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link)"
+        data-lightbox-prev
+        aria-label="Previous image"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-none stroke-current stroke-2">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="absolute right-5 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-(--color-border-light) bg-(--color-bg)/90 text-(--color-text-secondary) shadow-sm transition hover:text-(--color-text) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link)"
+        data-lightbox-next
+        aria-label="Next image"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-none stroke-current stroke-2">
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
+      <img data-lightbox-image alt="" class="max-h-[84vh] max-w-[88vw] rounded-md object-contain" />
+      <p class="mt-2 text-center text-[0.82rem] text-(--color-text-secondary)" data-lightbox-caption></p>
+    </div>
+  </dialog>
+
+  <script is:inline>
+    const lightbox = document.getElementById('speaking-lightbox');
+    const lightboxImage = lightbox?.querySelector('[data-lightbox-image]');
+    const closeButton = lightbox?.querySelector('[data-lightbox-close]');
+    const prevButton = lightbox?.querySelector('[data-lightbox-prev]');
+    const nextButton = lightbox?.querySelector('[data-lightbox-next]');
+    const lightboxCaption = lightbox?.querySelector('[data-lightbox-caption]');
+    let lightboxMedia = [];
+    let lightboxIndex = 0;
+
+    const updateLightboxImage = () => {
+      if (!(lightboxImage instanceof HTMLImageElement)) {
+        return;
+      }
+
+      const item = lightboxMedia[lightboxIndex];
+      if (!item) {
+        return;
+      }
+
+      lightboxImage.src = item.src;
+      lightboxImage.alt = item.alt || '';
+
+      if (lightboxCaption) {
+        const count = lightboxMedia.length > 1 ? `${lightboxIndex + 1} of ${lightboxMedia.length}` : '';
+        lightboxCaption.textContent = [item.label, count].filter(Boolean).join(' · ');
+      }
+
+      const hasGallery = lightboxMedia.length > 1;
+      prevButton?.classList.toggle('hidden', !hasGallery);
+      prevButton?.classList.toggle('flex', hasGallery);
+      nextButton?.classList.toggle('hidden', !hasGallery);
+      nextButton?.classList.toggle('flex', hasGallery);
+    };
+
+    document.querySelectorAll('[data-lightbox-media]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!(lightbox instanceof HTMLDialogElement) || !(lightboxImage instanceof HTMLImageElement)) {
+          return;
+        }
+
+        try {
+          lightboxMedia = JSON.parse(button.dataset.lightboxMedia || '[]');
+        } catch {
+          lightboxMedia = [];
+        }
+
+        lightboxIndex = Number(button.dataset.lightboxIndex || 0);
+        updateLightboxImage();
+        lightbox.showModal();
+      });
+    });
+
+    closeButton?.addEventListener('click', () => {
+      if (lightbox instanceof HTMLDialogElement) {
+        lightbox.close();
+      }
+    });
+
+    prevButton?.addEventListener('click', () => {
+      lightboxIndex = (lightboxIndex - 1 + lightboxMedia.length) % lightboxMedia.length;
+      updateLightboxImage();
+    });
+
+    nextButton?.addEventListener('click', () => {
+      lightboxIndex = (lightboxIndex + 1) % lightboxMedia.length;
+      updateLightboxImage();
+    });
+
+    lightbox?.addEventListener('click', (event) => {
+      if (event.target === lightbox && lightbox instanceof HTMLDialogElement) {
+        lightbox.close();
+      }
+    });
+
+    lightbox?.addEventListener('close', () => {
+      if (lightboxImage instanceof HTMLImageElement) {
+        lightboxImage.removeAttribute('src');
+        lightboxImage.alt = '';
+      }
+      if (lightboxCaption) {
+        lightboxCaption.textContent = '';
+      }
+    });
+  </script>
+</BaseLayout>

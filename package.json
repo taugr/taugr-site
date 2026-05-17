@@ -1,0 +1,60 @@
+{
+  "name": "taugr",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Personal website for Tom Auger, built with Astro and published as a static site.",
+  "keywords": [
+    "astro",
+    "blog",
+    "personal-website",
+    "portfolio",
+    "static-site"
+  ],
+  "homepage": "https://github.com/tom-auger/agentic-aspirations#readme",
+  "bugs": {
+    "url": "https://github.com/tom-auger/agentic-aspirations/issues"
+  },
+  "license": "UNLICENSED",
+  "author": "Tom Auger <tom@tau.gr>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tom-auger/agentic-aspirations.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "oxfmt . --check",
+    "format:fix": "oxfmt . --write",
+    "lint": "oxlint -c oxlint.json .",
+    "lint:fix": "oxlint -c oxlint.json . --fix",
+    "prepare": "node scripts/prepare.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.3",
+    "mdast-util-to-string": "^4.0.0",
+    "reading-time": "^1.5.0",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
+    "oxfmt": "^0.50.0",
+    "oxlint": "^1.65.0",
+    "oxlint-tsgolint": "^0.22.1"
+  },
+  "lint-staged": {
+    "*": "oxfmt --no-error-on-unmatched-pattern"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
+}

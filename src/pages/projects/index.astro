@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const allProjects = (await getCollection('projects'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Projects — taugr" description="A selection of my products, tools, and research.">
+  <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">Projects</h1>
+  <p class="text-[0.95rem] text-(--color-text-secondary) mb-8">A selection of my products, tools, and research.</p>
+  {allProjects.map(project => (
+    <ProjectCard
+      name={project.data.name}
+      description={project.data.description}
+      date={project.data.date}
+      type={project.data.type}
+      tech={project.data.tech}
+      github={project.data.github}
+      url={project.data.url}
+      image={project.data.image}
+      imageAlt={project.data.imageAlt}
+    />
+  ))}
+</BaseLayout>

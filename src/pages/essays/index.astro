@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const sorted = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Essays — taugr" description="Essays and experiments.">
+  <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">Essays</h1>
+  <p class="text-[0.95rem] text-(--color-text-secondary) mb-8">Essays and experiments.</p>
+  <PostList posts={sorted} />
+</BaseLayout>

@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Post {
+  id: string;
+  data: {
+    title: string;
+    description: string;
+    date: Date;
+    tags: string[];
+    draft: boolean;
+    image?: ImageMetadata;
+    imageAlt?: string;
+  };
+  readingTime?: string;
+}
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// Tag color palette — each tag gets a consistent color via hash
+const tagColors = [
+  { bg: 'var(--color-tag-purple-bg)', text: 'var(--color-tag-purple-text)', border: 'var(--color-tag-purple-border)' },
+  { bg: 'var(--color-tag-blue-bg)', text: 'var(--color-tag-blue-text)', border: 'var(--color-tag-blue-border)' },
+  { bg: 'var(--color-tag-green-bg)', text: 'var(--color-tag-green-text)', border: 'var(--color-tag-green-border)' },
+  { bg: 'var(--color-tag-amber-bg)', text: 'var(--color-tag-amber-text)', border: 'var(--color-tag-amber-border)' },
+  { bg: 'var(--color-tag-rose-bg)', text: 'var(--color-tag-rose-text)', border: 'var(--color-tag-rose-border)' },
+];
+
+function hashTag(tag: string): number {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = ((hash << 5) - hash) + tag.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash) % tagColors.length;
+}
+
+function getTagColor(tag: string) {
+  return tagColors[hashTag(tag)];
+}
+---
+
+{posts.map((post, i) => (
+  <article class:list={['mb-6 pb-6', i < posts.length - 1 && 'border-b border-(--color-border-light)']}>
+    <a href={`/essays/${post.id}/`} class:list={['group no-underline', post.data.image ? 'flex items-start gap-4' : 'block']}>
+      <div class="min-w-0 flex-1">
+        <h3 class="text-[1.08rem] font-semibold text-(--color-text) leading-snug group-hover:text-(--color-link) transition-colors">
+          {post.data.title}
+        </h3>
+        <div class="flex items-center gap-2 mt-1 text-[0.82rem] text-(--color-text-tertiary)">
+          {formatDate(post.data.date)} · {post.readingTime || '5 min read'}
+        </div>
+        {post.data.tags.length > 0 && (
+          <div class="flex gap-1.5 mt-1.5">
+            {post.data.tags.slice(0, 3).map(tag => {
+              const color = getTagColor(tag);
+              return (
+                <span
+                  class="text-[0.7rem] px-2 py-0.5 rounded border font-medium"
+                  style={`background: ${color.bg}; color: ${color.text}; border-color: ${color.border};`}
+                >
+                  {tag}
+                </span>
+              );
+            })}
+          </div>
+        )}
+        <p class="text-[0.94rem] text-(--color-text-secondary) mt-1.5 leading-relaxed">
+          {post.data.description}
+        </p>
+      </div>
+      {post.data.image && (
+        <Image
+          src={post.data.image}
+          alt={post.data.imageAlt || post.data.title}
+          width={96}
+          height={64}
+          class="h-16 w-24 shrink-0 rounded-md border border-(--color-border-light) object-cover"
+          loading="lazy"
+        />
+      )}
+    </a>
+  </article>
+))}

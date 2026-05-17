@@ -1,0 +1,29 @@
+---
+import { SITE } from '../site';
+
+interface Props {
+  destination: string;
+  title?: string;
+  message?: string;
+}
+
+const { destination, title = 'Moved', message = 'This page has moved' } = Astro.props;
+const redirectURL = new URL(destination, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content={`0; url=${destination}`} />
+    <link rel="canonical" href={redirectURL} />
+    <title>{title} — {SITE.name}</title>
+    <script is:inline define:vars={{ destination }}>
+      location.replace(destination);
+    </script>
+  </head>
+  <body>
+    <p>{message} to <a href={destination}>{redirectURL.href}</a>.</p>
+  </body>
+</html>

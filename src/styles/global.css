@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', 'Fira Code', 'Cascadia Code', Menlo, monospace;
+
+  /* Light theme colors (default) */
+  --color-bg: #fafaf9;
+  --color-bg-secondary: #f5f5f4;
+  --color-text: #1c1917;
+  --color-text-secondary: #57534e;
+  --color-text-tertiary: #a8a29e;
+  --color-nav-muted: #78716c;
+  --color-border: #d6d3d1;
+  --color-border-light: #e7e5e4;
+  --color-link: #2563eb;
+  --color-project-hover: #f5f5f4;
+
+  /* Tag colors — 5-color palette */
+  --color-tag-purple-bg: #faf5ff;
+  --color-tag-purple-text: #7c3aed;
+  --color-tag-purple-border: #e9d5ff;
+  --color-tag-blue-bg: #eff6ff;
+  --color-tag-blue-text: #2563eb;
+  --color-tag-blue-border: #bfdbfe;
+  --color-tag-green-bg: #f0fdf4;
+  --color-tag-green-text: #16a34a;
+  --color-tag-green-border: #bbf7d0;
+  --color-tag-amber-bg: #fffbeb;
+  --color-tag-amber-text: #d97706;
+  --color-tag-amber-border: #fde68a;
+  --color-tag-rose-bg: #fff1f2;
+  --color-tag-rose-text: #e11d48;
+  --color-tag-rose-border: #fecdd3;
+
+  --color-code-bg: #f5f5f4;
+  --color-code-border: #e7e5e4;
+}
+
+/* Dark theme overrides — GitHub-dark style from v2 wireframe */
+.dark {
+  --color-bg: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-text: #c9d1d9;
+  --color-text-secondary: #8b949e;
+  --color-text-tertiary: #6e7681;
+  --color-nav-muted: #9aa4b2;
+  --color-border: #30363d;
+  --color-border-light: #21262d;
+  --color-link: #58a6ff;
+  --color-project-hover: #161b22;
+
+  --color-tag-purple-bg: #1f1b2e;
+  --color-tag-purple-text: #a78bfa;
+  --color-tag-purple-border: #3b2d5e;
+  --color-tag-blue-bg: #1a2332;
+  --color-tag-blue-text: #58a6ff;
+  --color-tag-blue-border: #1f3a5f;
+  --color-tag-green-bg: #1a2e1a;
+  --color-tag-green-text: #7ee787;
+  --color-tag-green-border: #2d4a2d;
+  --color-tag-amber-bg: #2e2510;
+  --color-tag-amber-text: #f0b429;
+  --color-tag-amber-border: #5c4a1e;
+  --color-tag-rose-bg: #2e1519;
+  --color-tag-rose-text: #f0758e;
+  --color-tag-rose-border: #5c2d3a;
+
+  --color-code-bg: #161b22;
+  --color-code-border: #21262d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  transition:
+    background-color 0.25s,
+    color 0.25s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Shiki dual theme support */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: transparent !important;
+}
+
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+}
+
+.astro-code {
+  background-color: var(--color-code-bg) !important;
+  border: 1px solid var(--color-code-border);
+  border-radius: 0.375rem;
+  padding: 1.2rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}

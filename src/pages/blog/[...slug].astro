@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import { SITE } from '../../site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const redirectPath = `/essays/${post.id}/`;
+const redirectURL = new URL(redirectPath, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content={`0; url=${redirectPath}`} />
+    <link rel="canonical" href={redirectURL} />
+    <title>{post.data.title} — {SITE.name}</title>
+    <script is:inline define:vars={{ redirectPath }}>
+      location.replace(redirectPath);
+    </script>
+  </head>
+  <body>
+    <p>This post has moved to <a href={redirectPath}>{redirectURL.href}</a>.</p>
+  </body>
+</html>

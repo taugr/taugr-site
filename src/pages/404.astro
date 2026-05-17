@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Not Found — taugr">
+  <script is:inline>
+    const path = window.location.pathname;
+    const redirects = new Map([
+      ['/about', '/about/'],
+      ['/search', '/archive/'],
+      ['/fringeevents.html', '/archive/'],
+    ]);
+
+    const postRedirects = new Map([
+      ['/posts/2021-06-08-simple-vs-easy/', '/archive/posts/2021-06-08-simple-vs-easy/'],
+      ['/posts/2019/2019-06-27-secret-box/', '/archive/posts/2019-06-27-secret-box/'],
+      ['/posts/2019-03-02-set-up-wireguard-vpn-ubuntu-mac/', '/essays/set-up-wireguard-vpn-ubuntu-mac/'],
+      ['/posts/2019-03-03-set-up-cloudflared-ubuntu-wireguard/', '/essays/set-up-cloudflared-ubuntu-wireguard/'],
+      ['/posts/2020/2020-02-23-my_customizations_i3/', '/archive/posts/2020-02-23-my_customizations_i3/'],
+      ['/posts/2021-06-08-zsh-command-time/', '/archive/posts/2021-06-08-zsh-command-time/'],
+      ['/posts/2018-06-20-two-chrome-dev-console-tricks/', '/archive/posts/2018-06-20-two-chrome-dev-console-tricks/'],
+    ]);
+
+    const normalized = path.endsWith('/') ? path : `${path}/`;
+    let destination = redirects.get(path) || postRedirects.get(normalized);
+
+    if (!destination && normalized.startsWith('/posts/page/')) {
+      destination = '/archive/';
+    }
+
+    if (!destination && normalized.startsWith('/posts/')) {
+      destination = `/archive/posts/${normalized.replace(/^\/posts\//, '')}`;
+    }
+
+    if (
+      !destination &&
+      (
+        normalized.startsWith('/archives/') ||
+        normalized.startsWith('/tags/') ||
+        normalized.startsWith('/categories/') ||
+        normalized.startsWith('/series/') ||
+        normalized.startsWith('/page/')
+      )
+    ) {
+      destination = '/archive/';
+    }
+
+    if (!destination && normalized.startsWith('/tumo2023/')) {
+      destination = '/teaching/tumo2023/';
+    }
+
+    if (!destination && normalized.startsWith('/aitalk/')) {
+      destination = '/speaking/aitalk/';
+    }
+
+    if (!destination && normalized.startsWith('/aisymposium/')) {
+      destination = '/speaking/aisymposium/';
+    }
+
+    if (destination) {
+      window.location.replace(destination);
+    }
+  </script>
+  <div class="text-center py-16">
+    <h1 class="text-[2rem] font-bold text-(--color-text) mb-2">404</h1>
+    <p class="text-(--color-text-secondary) mb-6">This page doesn't exist.</p>
+    <a href="/" class="text-(--color-link) text-[0.85rem] hover:underline">Back to home</a>
+  </div>
+</BaseLayout>

@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentic Aspirations - Wireframe v5</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root[data-theme='light'] {
+        --bg: #fafaf9;
+        --bg-secondary: #f5f5f4;
+        --text: #1c1917;
+        --text-secondary: #57534e;
+        --text-tertiary: #a8a29e;
+        --border: #d6d3d1;
+        --border-light: #e7e5e4;
+        --link: #2563eb;
+        --tag-research-bg: #faf5ff;
+        --tag-research-text: #7c3aed;
+        --tag-research-border: #e9d5ff;
+        --tag-eng-bg: #eff6ff;
+        --tag-eng-text: #2563eb;
+        --tag-eng-border: #bfdbfe;
+        --tag-ventures-bg: #f0fdf4;
+        --tag-ventures-text: #16a34a;
+        --tag-ventures-border: #bbf7d0;
+        --code-bg: #f5f5f4;
+        --code-border: #e7e5e4;
+        --project-hover: #f5f5f4;
+      }
+      :root[data-theme='dark'] {
+        --bg: #111110;
+        --bg-secondary: #1a1918;
+        --text: #e7e5e4;
+        --text-secondary: #a8a29e;
+        --text-tertiary: #57534e;
+        --border: #3a3733;
+        --border-light: #292524;
+        --link: #60a5fa;
+        --tag-research-bg: #1e1333;
+        --tag-research-text: #c4b5fd;
+        --tag-research-border: #2e2155;
+        --tag-eng-bg: #0f1d33;
+        --tag-eng-text: #93c5fd;
+        --tag-eng-border: #1e3a5f;
+        --tag-ventures-bg: #0a2015;
+        --tag-ventures-text: #86efac;
+        --tag-ventures-border: #14532d;
+        --code-bg: #1a1918;
+        --code-border: #292524;
+        --project-hover: #1a1918;
+      }
+
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        transition:
+          background 0.25s,
+          color 0.25s;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      }
+
+      header {
+        margin-bottom: 2.5rem;
+      }
+      .header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .site-name {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: -0.03em;
+      }
+      .theme-toggle {
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 99px;
+        padding: 0.2rem 0.6rem;
+        cursor: pointer;
+        font-size: 0.68rem;
+        color: var(--text-tertiary);
+        font-family: 'Inter', sans-serif;
+        transition: all 0.15s;
+      }
+      .theme-toggle:hover {
+        border-color: var(--text-secondary);
+        color: var(--text-secondary);
+      }
+      .site-intro {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-top: 0.5rem;
+        line-height: 1.6;
+      }
+      nav {
+        display: flex;
+        gap: 1.5rem;
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 0.75rem;
+        margin-top: 1.25rem;
+      }
+      nav a {
+        color: var(--text-tertiary);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: color 0.15s;
+      }
+      nav a:hover,
+      nav a.active {
+        color: var(--text);
+      }
+
+      .section-title {
+        font-size: 0.72rem;
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin: 2.5rem 0 1rem;
+        font-weight: 500;
+      }
+
+      .post-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-light);
+      }
+      .post-item:last-child {
+        border-bottom: none;
+      }
+      .post-title {
+        font-size: 1.05rem;
+        color: var(--text);
+        font-weight: 600;
+        line-height: 1.35;
+        cursor: pointer;
+      }
+      .post-title:hover {
+        color: var(--link);
+      }
+      .post-meta {
+        font-size: 0.72rem;
+        color: var(--text-tertiary);
+        margin-top: 0.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .tag {
+        font-size: 0.6rem;
+        padding: 0.1rem 0.35rem;
+        border-radius: 3px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .tag-research {
+        background: var(--tag-research-bg);
+        color: var(--tag-research-text);
+        border: 1px solid var(--tag-research-border);
+      }
+      .tag-engineering {
+        background: var(--tag-eng-bg);
+        color: var(--tag-eng-text);
+        border: 1px solid var(--tag-eng-border);
+      }
+      .tag-ventures {
+        background: var(--tag-ventures-bg);
+        color: var(--tag-ventures-text);
+        border: 1px solid var(--tag-ventures-border);
+      }
+      .post-excerpt {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin-top: 0.35rem;
+        line-height: 1.6;
+      }
+
+      .project-card {
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        margin-bottom: 0.75rem;
+        transition: all 0.15s;
+      }
+      .project-card:hover {
+        border-color: var(--border);
+        background: var(--project-hover);
+      }
+      .project-name {
+        font-size: 0.85rem;
+        color: var(--link);
+        font-weight: 600;
+        font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      }
+      .project-desc {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+      }
+      .project-tech {
+        font-size: 0.68rem;
+        color: var(--text-tertiary);
+        margin-top: 0.4rem;
+        font-family: 'SF Mono', 'Fira Code', monospace;
+      }
+      .project-links {
+        margin-top: 0.45rem;
+        font-size: 0.72rem;
+        display: flex;
+        gap: 1rem;
+      }
+      .project-links a {
+        color: var(--link);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .project-links a:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        margin-top: 4rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-light);
+        font-size: 0.72rem;
+        color: var(--text-tertiary);
+        display: flex;
+        justify-content: space-between;
+      }
+      footer a {
+        color: var(--text-tertiary);
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: var(--text-secondary);
+      }
+
+      .screen-break {
+        margin: 4rem 0;
+        padding: 1rem 0;
+        text-align: center;
+        border-top: 2px dashed var(--border-light);
+        border-bottom: 2px dashed var(--border-light);
+        color: var(--text-tertiary);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+      }
+
+      .article-title {
+        font-size: 1.6rem;
+        color: var(--text);
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+      }
+      .article-body p {
+        font-size: 0.92rem;
+        color: var(--text);
+        margin-bottom: 1.3rem;
+        line-height: 1.85;
+      }
+      .article-body strong {
+        font-weight: 600;
+      }
+      .code-block {
+        background: var(--code-bg);
+        border: 1px solid var(--code-border);
+        border-radius: 6px;
+        padding: 1.2rem;
+        margin: 1.5rem 0;
+        font-size: 0.78rem;
+        font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+        overflow-x: auto;
+        line-height: 1.6;
+      }
+      .mdx-component {
+        border: 2px dashed var(--border);
+        border-radius: 8px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+        color: var(--text-tertiary);
+        font-size: 0.78rem;
+      }
+      .mdx-label {
+        font-size: 0.62rem;
+        color: var(--tag-research-text);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-row">
+          <div class="site-name">Agentic Aspirations</div>
+          <button class="theme-toggle" onclick="toggleTheme()">dark</button>
+        </div>
+        <div class="site-intro">
+          AI research, engineering, and ventures by Thomas Auger.
+        </div>
+        <nav>
+          <a href="#" class="active">home</a>
+          <a href="#">research</a>
+          <a href="#">engineering</a>
+          <a href="#">ventures</a>
+          <a href="#">about</a>
+        </nav>
+      </header>
+
+      <div class="section-title">Latest</div>
+
+      <div class="post-item">
+        <div class="post-title">
+          Why Agent Memory Architectures Are Still Wrong
+        </div>
+        <div class="post-meta">
+          <span class="tag tag-research">research</span>
+          Mar 15, 2026 &middot; 12 min
+        </div>
+        <div class="post-excerpt">
+          Most agentic systems treat memory as a retrieval problem. It's
+          actually a forgetting problem. Here's what I learned building memory
+          systems that actually work in production.
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-title">Building a Multi-Agent Code Review System</div>
+        <div class="post-meta">
+          <span class="tag tag-engineering">eng</span>
+          Feb 22, 2026 &middot; 8 min
+        </div>
+        <div class="post-excerpt">
+          A walkthrough of the architecture, the prompting patterns that worked
+          (and didn't), and the surprising bottleneck that had nothing to do
+          with the LLM.
+        </div>
+      </div>
+
+      <div class="post-item">
+        <div class="post-title">The Solo AI Company Playbook</div>
+        <div class="post-meta">
+          <span class="tag tag-ventures">ventures</span>
+          Jan 10, 2026 &middot; 15 min
+        </div>
+        <div class="post-excerpt">
+          What I've learned building products as a one-person AI company.
+          Revenue, tools, tradeoffs, and why this is the best time in history to
+          be a solo technical founder.
+        </div>
+      </div>
+
+      <div class="section-title">Projects</div>
+
+      <div class="project-card">
+        <div class="project-name">agent-memory</div>
+        <div class="project-desc">
+          Persistent memory layer for agentic systems. Handles context
+          compression, semantic dedup, and priority-based recall.
+        </div>
+        <div class="project-tech">python &middot; faiss &middot; sqlite</div>
+        <div class="project-links">
+          <a href="#">github</a>
+          <a href="#">demo</a>
+          <a href="#">paper</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">code-review-agents</div>
+        <div class="project-desc">
+          Multi-agent system for automated code review. Catches bugs, security
+          issues, and style violations across 12 languages.
+        </div>
+        <div class="project-tech">
+          typescript &middot; claude api &middot; ast parsing
+        </div>
+        <div class="project-links">
+          <a href="#">github</a>
+          <a href="#">live demo</a>
+        </div>
+      </div>
+
+      <footer>
+        <span>&copy; 2026 Thomas Auger</span>
+        <span>
+          <a href="#">rss</a> &middot; <a href="#">github</a> &middot;
+          <a href="#">twitter/x</a>
+        </span>
+      </footer>
+    </div>
+
+    <div class="screen-break">Screen 2: Blog Post View</div>
+
+    <div class="container">
+      <header>
+        <div class="header-row">
+          <div class="site-name">Agentic Aspirations</div>
+          <button class="theme-toggle" onclick="toggleTheme()">dark</button>
+        </div>
+        <nav>
+          <a href="#">home</a>
+          <a href="#" class="active">research</a>
+          <a href="#">engineering</a>
+          <a href="#">ventures</a>
+          <a href="#">about</a>
+        </nav>
+      </header>
+
+      <article style="margin-top: 2rem">
+        <div class="post-meta" style="margin-bottom: 0.5rem">
+          <span class="tag tag-research">research</span>
+          March 15, 2026 &middot; 12 min read
+        </div>
+        <div class="article-title">
+          Why Agent Memory Architectures Are Still Wrong
+        </div>
+
+        <div class="article-body" style="margin-top: 1.5rem">
+          <p>
+            Most agentic systems treat memory as a retrieval problem. You store
+            everything, embed it, and hope the right context surfaces when you
+            need it.
+          </p>
+
+          <p>This is backwards.</p>
+
+          <p>
+            The real problem is <strong>forgetting</strong>. Human memory works
+            because it discards. The things that stick are the things that
+            mattered. Everything else fades, and that's a feature, not a bug.
+          </p>
+
+          <div class="code-block">
+            <span style="color: var(--tag-research-text)">class</span>
+            <span style="color: var(--link)">MemoryStore</span>:
+            <span style="color: var(--tag-research-text)">def</span>
+            <span style="color: var(--link)">remember</span>(self, fact,
+            importance):
+            <span style="color: var(--text-tertiary)"
+              ># Priority queue, not append-only log</span
+            >
+            self.decay_old_memories() self.store(fact, weight=importance)
+
+            <span style="color: var(--tag-research-text)">def</span>
+            <span style="color: var(--link)">recall</span>(self, query, k=5):
+            <span style="color: var(--text-tertiary)"
+              ># Recency + importance + relevance</span
+            >
+            <span style="color: var(--tag-research-text)">return</span>
+            self.weighted_search(query, k)
+          </div>
+
+          <div class="mdx-component">
+            <div class="mdx-label">Interactive Component</div>
+            Memory decay visualization<br />
+            <span style="font-size: 0.7rem"
+              >[slider: decay rate | live chart: memory retention over
+              time]</span
+            >
+          </div>
+
+          <p>
+            After building three production memory systems, the pattern that
+            actually works is surprisingly simple. You need three things: a
+            decay function, an importance scorer, and a compressor.
+          </p>
+        </div>
+      </article>
+
+      <footer>
+        <span>&copy; 2026 Thomas Auger</span>
+        <span>
+          <a href="#">rss</a> &middot; <a href="#">github</a> &middot;
+          <a href="#">twitter/x</a>
+        </span>
+      </footer>
+    </div>
+
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const next =
+          html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        document
+          .querySelectorAll('.theme-toggle')
+          .forEach(
+            (b) => (b.textContent = next === 'light' ? 'dark' : 'light'),
+          );
+      }
+    </script>
+  </body>
+</html>

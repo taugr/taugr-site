@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const timeline = [
+  {
+    title: 'Lead AI Engineer',
+    organization: 'TUMO Center for Creative Technologies',
+    date: 'Dec 2023 - Present',
+    location: 'Yerevan, Armenia',
+    note: 'Building an AI-powered learning platform for teaching AI.',
+    logo: '/img/about/tumologo.webp',
+    url: 'https://tumo.org/',
+  },
+  {
+    title: 'Senior Software Developer',
+    organization: 'Cyacomb',
+    date: 'Sep 2021 - Aug 2023',
+    location: 'Edinburgh, Scotland, UK',
+    note: 'Built privacy-preserving digital forensics tools for identifying illegal content.',
+    logo: '/img/about/cyacomb.png',
+    url: 'https://www.cyacomb.com/company',
+  },
+  {
+    title: "Master's degree, Computer Science",
+    organization: 'The University of Edinburgh',
+    date: '2020 - 2021',
+    location: '',
+    note: 'Focused on the intersection of AI and cybersecurity.',
+    logo: '/img/about/uoe.png',
+    url: 'https://informatics.ed.ac.uk/',
+  },
+  {
+    title: 'Software Engineer',
+    organization: 'MathWorks',
+    date: 'Oct 2018 - Sep 2020',
+    location: 'Cambridge, UK',
+    note: 'Developed build and integration tooling for MATLAB and Simulink.',
+    logo: '/img/about/mathworks.jpg',
+    url: 'https://www.mathworks.com/',
+  },
+  {
+    title: 'Software Developer',
+    organization: 'Gas Management Services Limited',
+    date: 'Oct 2015 - Oct 2018',
+    location: 'Cambridge, UK',
+    note: 'Developed portfolio management and secure trading systems for UK and European gas markets.',
+    logo: '/img/about/gmsl.png',
+    url: 'https://www.gmsl.co.uk/',
+  },
+  {
+    title: "Bachelor's degree, Mathematics",
+    organization: 'University of Cambridge',
+    date: '2012 - 2015',
+    location: '',
+    note: 'Pure mathematics.',
+    logo: '/img/about/uoc.jpeg',
+    url: 'https://www.maths.cam.ac.uk/',
+  },
+];
+---
+
+<BaseLayout title="About — taugr" description="About taugr.">
+  <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-4">About</h1>
+  <div class="text-[1rem] text-(--color-text) leading-relaxed space-y-4">
+    <p>
+      Hi, I'm Tom Auger, Lead AI Engineer at the TUMO Center for Creative Technologies, a free educational program where teens build skills in technology and design.
+    </p>
+    <p>
+      My technical interests are in AI and cyber security. Occasionally I run workshops teaching AI to teens around the world.
+    </p>
+    <p>
+      If you spot an error, or have comments or questions, email me at <a href="mailto:tom@tau.gr" class="text-(--color-link) underline underline-offset-2 hover:decoration-2">tom@tau.gr</a>.
+    </p>
+    <blockquote class="border-l-2 border-(--color-border) pl-4 text-[0.86rem] text-(--color-text-secondary) italic">
+      You can't be normal and expect abnormal returns.
+    </blockquote>
+  </div>
+
+  <section class="mt-12">
+    <div class="relative">
+      <div class="absolute left-10 top-2 bottom-2 w-px bg-(--color-border) sm:left-12" aria-hidden="true"></div>
+      <div class="space-y-6">
+        {timeline.map(item => (
+          <article class="relative grid grid-cols-[5rem_1fr] gap-4 sm:grid-cols-[6rem_1fr] sm:gap-5">
+            <div class="relative z-10 flex h-20 w-20 items-center justify-center rounded-md border border-(--color-border-light) bg-white sm:h-24 sm:w-24">
+              {item.logo ? (
+                <img src={item.logo} alt={`${item.organization} logo`} class="max-h-16 max-w-16 object-contain sm:max-h-20 sm:max-w-20" loading="lazy" />
+              ) : (
+                <span class="text-[0.95rem] font-semibold text-(--color-link)">T</span>
+              )}
+            </div>
+            <div class="min-w-0 pb-5 border-b border-(--color-border) last:border-b-0 last:pb-0">
+              <h3 class="text-[1rem] font-semibold text-(--color-text) leading-tight">{item.title}</h3>
+              <p class="mt-0.5 text-[0.9rem] text-(--color-text)">
+                <a href={item.url} class="text-(--color-link) underline underline-offset-2 hover:decoration-2" target="_blank" rel="noopener">{item.organization}</a>
+              </p>
+              <p class="mt-1 text-[0.82rem] text-(--color-text-tertiary)">{item.location ? `${item.date} · ${item.location}` : item.date}</p>
+              {item.note && <p class="mt-2 text-[0.9rem] text-(--color-text-secondary) leading-relaxed">{item.note}</p>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,102 @@
+---
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { NAV_ITEMS, PROFILE_LINKS, SITE } from '../site';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = SITE.description, ogImage } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href={SITE.links.rss} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <title>{title}</title>
+    <script is:inline>
+      // Prevent flash of wrong theme
+      (function() {
+        const theme = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="max-w-[680px] mx-auto px-4 py-8 sm:px-6 sm:py-12">
+      <header class="mb-10">
+        <div class="flex items-center justify-between gap-4">
+          <a href="/" class="text-[1.22rem] font-bold text-(--color-text) tracking-tight no-underline hover:no-underline sm:text-[1.35rem]">
+            {SITE.name}
+          </a>
+          <ThemeToggle />
+        </div>
+        <p class="text-[0.9rem] text-(--color-text-secondary) mt-2">
+          {SITE.description}
+        </p>
+        <nav class="flex flex-wrap gap-x-3 gap-y-2 border-b border-(--color-border-light) pb-3 mt-5 sm:gap-x-6">
+          {NAV_ITEMS.map(item => (
+            <a
+              href={item.href}
+              class:list={[
+                'text-[0.875rem] font-medium no-underline transition-colors py-0.5 sm:text-[0.95rem]',
+                item.href === '/' && 'hidden sm:inline',
+                Astro.url.pathname === item.href || (item.href !== '/' && Astro.url.pathname.startsWith(item.href))
+                  ? 'text-(--color-text)'
+                  : 'text-(--color-nav-muted) hover:text-(--color-text)',
+              ]}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer class="mt-16 pt-6 border-t border-(--color-border-light) text-[0.8rem] text-(--color-text-tertiary) flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between">
+        <span class="text-(--color-text-secondary)">&copy; {new Date().getFullYear()} {SITE.footerName}</span>
+        <span class="flex flex-wrap justify-center gap-2">
+          {PROFILE_LINKS.map(link => (
+            <>
+              <a href={link.href} class="font-medium text-(--color-link) no-underline hover:underline" target="_blank" rel="noopener">{link.label}</a>
+              <span>&middot;</span>
+            </>
+          ))}
+          <a href={SITE.links.archive} class="font-medium text-(--color-link) no-underline hover:underline">archive</a>
+          <span>&middot;</span>
+          <a href={SITE.links.rss} class="font-medium text-(--color-link) no-underline hover:underline">rss</a>
+        </span>
+      </footer>
+    </div>
+  </body>
+</html>

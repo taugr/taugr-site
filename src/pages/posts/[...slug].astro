@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import { SITE } from '../../site';
+
+export async function getStaticPaths() {
+  const oldPostSlug = (originalUrl?: string) => {
+    if (!originalUrl) return undefined;
+    const pathname = new URL(originalUrl).pathname;
+    return pathname.replace(/^\/posts\/?/, '').replace(/\/$/, '') || undefined;
+  };
+
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const archive = await getCollection('archive', ({ data }) => !data.draft);
+
+  return [
+    ...posts
+      .map(post => {
+        const slug = oldPostSlug(post.data.originalUrl);
+        return slug && {
+          params: { slug },
+          props: {
+            title: post.data.title,
+            destination: `/essays/${post.id}/`,
+          },
+        };
+      })
+      .filter(Boolean),
+    ...archive
+      .map(entry => {
+        const slug = oldPostSlug(entry.data.originalUrl);
+        return slug && {
+          params: { slug },
+          props: {
+            title: entry.data.title,
+            destination: `/archive/${entry.id}/`,
+          },
+        };
+      })
+      .filter(Boolean),
+  ];
+}
+
+const { title, destination } = Astro.props;
+const redirectURL = new URL(destination, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content={`0; url=${destination}`} />
+    <link rel="canonical" href={redirectURL} />
+    <title>{title} — {SITE.name}</title>
+    <script is:inline define:vars={{ destination }}>
+      location.replace(destination);
+    </script>
+  </head>
+  <body>
+    <p>This post has moved to <a href={destination}>{redirectURL.href}</a>.</p>
+  </body>
+</html>
