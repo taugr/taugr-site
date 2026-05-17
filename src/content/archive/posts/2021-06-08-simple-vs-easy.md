@@ -10,7 +10,7 @@ originalUrl: 'https://tomauger.gitlab.io/posts/2021-06-08-simple-vs-easy/'
 In software development, professionals often tackle complex problems that require intricate solutions. However, the key to building reliable software systems lies in simplicity. A clear and uncomplicated approach to design and implementation results in systems that are dependable, maintainable, and adaptable to evolving requirements.
 
 <p align="right">
-  <img src="/img/2023-03-30/illustration.jpeg" alt="Simplicity in Software Development" width="250px" style="float: right; margin: 10px">
+  <img src="/img/2023-03-30/illustration.webp" alt="Simplicity in Software Development" width="250px" style="float: right; margin: 10px">
 </p>
 
 ## Understanding Simple vs. Easy

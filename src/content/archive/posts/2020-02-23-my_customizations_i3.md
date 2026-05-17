@@ -13,7 +13,7 @@ i3 is a tiling window manager for Linux/BSD targeted at advanced users and devel
 
 I primarily use Linux for software development at work, so it's important for me to have a desktop environment that's optimized to my workflow. Here I describe my setup and customizations, and maybe they will inspire others to set up their linux desktop environment to be more productive and enjoyable.
 
-![i3 desktop](/img/2020-02-23/i3desktop.png)
+![i3 desktop](/img/2020-02-23/i3desktop.webp)
 
 ## Install i3
 
