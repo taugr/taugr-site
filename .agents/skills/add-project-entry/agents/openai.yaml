@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Project Entry"
+  short_description: "Add project entries to the Astro personal site."
+  default_prompt: "Add or update a project entry, including featured status, README logo assets, build verification, and browser screenshot workflow."
