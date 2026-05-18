@@ -6,7 +6,7 @@ type: open-source
 tech: [typescript, nestjs, zod, swagger, openapi]
 github: https://github.com/taugr/nest-zod
 url: https://nestzod.dev/
-featured: true
+featured: false
 image: ./nest-zod-logo.svg
 imageAlt: nest-zod logo
 ---
