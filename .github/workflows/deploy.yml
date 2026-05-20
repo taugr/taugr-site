@@ -30,6 +30,9 @@ jobs:
       - run: pnpm install
 
       - run: pnpm run build
+        env:
+          PUBLIC_POSTHOG_PROJECT_TOKEN: ${{ vars.PUBLIC_POSTHOG_PROJECT_TOKEN }}
+          PUBLIC_POSTHOG_HOST: ${{ vars.PUBLIC_POSTHOG_HOST }}
 
       - uses: actions/upload-pages-artifact@v5
         with:

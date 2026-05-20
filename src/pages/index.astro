@@ -101,7 +101,7 @@ const recentEngagements = [
           <div class="min-w-0 flex-1">
             <p class="text-[0.75rem] font-semibold uppercase tracking-wide text-(--color-text-tertiary)">{item.kind}</p>
             <h3 class="mt-1 text-[0.98rem] font-semibold leading-tight text-(--color-link)">
-              <a href={item.href} class="inline-flex items-center gap-1.5 no-underline hover:underline">
+              <a href={item.href} class="inline-flex items-center gap-1.5 no-underline hover:underline" data-engagement-title={item.title} data-engagement-kind={item.kind}>
                 <span>{item.title}</span>
                 <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                   <path
@@ -133,4 +133,16 @@ const recentEngagements = [
     </div>
   </section>
 
+
+<script is:inline>
+  document.querySelectorAll('[data-engagement-title]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      window.posthog?.capture('homepage_engagement_clicked', {
+        engagement_title: el.getAttribute('data-engagement-title'),
+        engagement_kind: el.getAttribute('data-engagement-kind'),
+        link_href: el.getAttribute('href'),
+      });
+    });
+  });
+</script>
 </BaseLayout>

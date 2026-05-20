@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro';
+import PostHog from '../components/posthog.astro';
 import { NAV_ITEMS, PROFILE_LINKS, SITE } from '../site';
 import '../styles/global.css';
 
@@ -71,6 +72,7 @@ const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : un
         if (theme === 'dark') document.documentElement.classList.add('dark');
       })();
     </script>
+    <PostHog />
   </head>
   <body>
     <div class="max-w-[680px] mx-auto px-4 py-8 sm:px-6 sm:py-12">
@@ -111,15 +113,32 @@ const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : un
         <span class="flex flex-wrap justify-center gap-2">
           {PROFILE_LINKS.map(link => (
             <>
-              <a href={link.href} class="font-medium text-(--color-link) no-underline hover:underline" target="_blank" rel="me noopener">{link.label}</a>
+              <a href={link.href} class="font-medium text-(--color-link) no-underline hover:underline" target="_blank" rel="me noopener" data-profile-link={link.label}>{link.label}</a>
               <span>&middot;</span>
             </>
           ))}
           <a href={SITE.links.archive} class="font-medium text-(--color-link) no-underline hover:underline">archive</a>
           <span>&middot;</span>
-          <a href={SITE.links.rss} class="font-medium text-(--color-link) no-underline hover:underline">rss</a>
+          <a href={SITE.links.rss} class="font-medium text-(--color-link) no-underline hover:underline" id="rss-link">rss</a>
         </span>
       </footer>
     </div>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('[data-profile-link]').forEach(function (el) {
+          el.addEventListener('click', function () {
+            window.posthog?.capture('profile_link_clicked', {
+              link_label: el.getAttribute('data-profile-link'),
+              link_href: el.getAttribute('href'),
+            });
+          });
+        });
+
+        var rssLink = document.getElementById('rss-link');
+        rssLink?.addEventListener('click', function () {
+          window.posthog?.capture('rss_feed_clicked');
+        });
+      });
+    </script>
   </body>
 </html>

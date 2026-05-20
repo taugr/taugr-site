@@ -17,3 +17,13 @@ const { Content } = await render(post);
 <PostLayout frontmatter={{ ...post.data, readingTime: (post as any).readingTime }}>
   <Content />
 </PostLayout>
+
+<script is:inline define:vars={{ title: post.data.title, slug: post.id, tags: post.data.tags ?? [] }}>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.posthog?.capture('essay_viewed', {
+      essay_title: title,
+      essay_slug: slug,
+      tags: tags,
+    });
+  });
+</script>

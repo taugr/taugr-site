@@ -34,7 +34,9 @@
   // Toggle on click
   document.getElementById('theme-toggle')?.addEventListener('click', () => {
     const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    setTheme(current === 'dark' ? 'light' : 'dark');
+    const next = current === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    window.posthog?.capture('theme_toggled', { theme: next });
   });
 
   // Listen for system theme changes
