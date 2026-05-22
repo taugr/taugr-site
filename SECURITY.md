@@ -1,9 +1,9 @@
 # Security Policy
 
-If you believe you have found a security vulnerability in `taugr`, please use
+If you believe you have found a security vulnerability in `taugr-site`, please use
 GitHub's private vulnerability reporting flow:
 
-[Report a vulnerability](https://github.com/tom-auger/agentic-aspirations/security)
+[Report a vulnerability](https://github.com/taugr/taugr-site/security)
 
 Please do not open public issues for suspected vulnerabilities.
 
