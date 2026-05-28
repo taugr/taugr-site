@@ -17,19 +17,19 @@ There already exists a ZSH plugin called [timer](https://github.com/ohmyzsh/ohmy
 
 To install it clone the repo [https://github.com/tom-auger/cmdtime](https://github.com/tom-auger/cmdtime) into your `~/.oh-my-zsh/custom/plugins/` directory:
 
-```
+```zsh
 $ cd ~/.oh-my-zsh/custom/plugins
 $ git clone https://github.com/tom-auger/cmdtime
 ```
 
 Then edit `~/.zshrc` and add to the list of plugins:
 
-```
+```zsh
 plugins=(cmdtime other_plugins)
 ```
 
 Finally reload your ZSH config to apply:
 
-```
+```zsh
 $ source ~/.zshrc
 ```

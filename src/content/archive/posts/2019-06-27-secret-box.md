@@ -42,7 +42,7 @@ Here are some fancy buttons to do those things:
 
 Add to your project via [nuget](https://www.nuget.org/packages/SecretBox/):
 
-```
+```sh
 dotnet add package SecretBox
 ```
 
