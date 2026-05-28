@@ -90,7 +90,9 @@ And to make this change persist after reboots, edit `/etc/sysctl.conf` and uncom
 
 1. If you're setting up the server behind NAT (e.g. if the server is on your home network behind a router) then you may want to add the additional setting:
 
-   {{< highlight ini "linenostart=7">}}PersistentKeepalive = 25{{< / highlight >}}
+   ```ini
+   PersistentKeepalive = 25
+   ```
 
    This will send an empty authenticated packet every 25 seconds to keep your firewall or NAT mapping persistent.
 

@@ -36,13 +36,13 @@ Cloudflare provides a DNS over HTTPS (DoH) resolver to use with their `1.1.1.1` 
 
 1.  Configure the service to use Cloudflare's `1.1.1.1` and `1.0.0.1` resolvers:
 
-        {{< highlight sh >}}
-
+    ```sh
     mkdir -p /usr/local/etc/cloudflared
     cat << EOF > /usr/local/etc/cloudflared/config.yml
     proxy-dns: true
     proxy-dns-upstream: - https://1.1.1.1/dns-query - https://1.0.0.1/dns-query
-    EOF{{< / highlight >}}
+    EOF
+    ```
 
 1.  Install the service:
 
