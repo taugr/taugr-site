@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -12,7 +13,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
-    remarkPlugins: [remarkReadingTime],
+    processor: unified({ remarkPlugins: [remarkReadingTime] }),
     shikiConfig: {
       themes: {
         light: 'github-light',
