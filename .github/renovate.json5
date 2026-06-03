@@ -14,6 +14,10 @@
   // Labels for GitHub PRs
   labels: ['dependencies'],
 
+  // Automerge all dependency updates, including majors, once checks pass
+  automerge: true,
+  automergeType: 'pr',
+
   // Package rules for different update schedules
   packageRules: [
     {
@@ -45,19 +49,6 @@
       matchFileNames: ['.github/workflows/**'],
       // Cron: Every Monday during days 15-21 (contains 3rd Monday)
       schedule: ['* * 15-21 * 1'],
-    },
-    {
-      description: 'Automerge non-major pnpm updates like devDependencies',
-      matchPackageNames: ['pnpm'],
-      matchUpdateTypes: ['minor', 'patch', 'digest'],
-      automerge: true,
-      automergeType: 'pr',
-    },
-    {
-      description: 'Automerge devDependencies',
-      matchDepTypes: ['devDependencies'],
-      automerge: true,
-      automergeType: 'pr',
     },
     {
       description: 'Group non-major devDependencies; majors stay one PR per package',
