@@ -13,6 +13,34 @@ export type TeachingItem = {
 
 export const teachingItems: TeachingItem[] = [
   {
+    title: 'From Idea to Prototype',
+    format: 'AI warmup',
+    host: 'TUMO Labs',
+    date: 'June 8-19, 2026',
+    location: 'TUMO Labs, Yerevan',
+    description:
+      'A six-session warmup where participants used Claude Code and AI workflows for research, ideation, product planning, pitch decks, design, and building a demo-ready MVP.',
+    media: [
+      {
+        src: '/img/teaching/from-idea-to-prototype.webp',
+        alt: 'From Idea to Prototype with AI TUMO Labs promotional flyer with June 8 start date',
+        label: 'course promo',
+      },
+    ],
+    links: [
+      {
+        href: 'https://tumolabs.ai/en/from-idea-to-prototype-with-ai/',
+        label: 'official',
+        icon: 'globe',
+      },
+      {
+        href: 'https://github.com/taugr/idea-to-prototype',
+        label: 'github',
+        icon: 'github',
+      },
+    ],
+  },
+  {
     title: 'TUMO Gunma AI Learning Lab',
     format: '',
     host: 'Storytelling x AI',

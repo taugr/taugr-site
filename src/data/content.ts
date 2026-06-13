@@ -1,5 +1,6 @@
 export type ContentIcon =
   | 'file'
+  | 'github'
   | 'globe'
   | 'image'
   | 'linkedin'
