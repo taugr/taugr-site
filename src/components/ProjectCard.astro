@@ -43,6 +43,12 @@ function hashTag(tag: string): number {
 function getTagColor(tag: string) {
   return tagColors[hashTag(tag)];
 }
+
+function isStatusTag(tag: string): boolean {
+  return tag.toLowerCase() === 'prototype';
+}
+
+const orderedTech = [...tech].sort((a, b) => Number(isStatusTag(b)) - Number(isStatusTag(a)));
 ---
 
 <div class:list={['border border-(--color-border-light) rounded-lg p-4 mb-3 transition-all hover:border-(--color-border) hover:bg-(--color-project-hover) hover:-translate-y-px', image && 'flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5']}>
@@ -74,11 +80,17 @@ function getTagColor(tag: string) {
     <p class="text-[0.9rem] text-(--color-text-secondary) mt-1 leading-relaxed">{description}</p>
     {tech.length > 0 && (
       <div class="flex flex-wrap gap-1.5 mt-2.5">
-        {tech.map(tag => {
-          const color = getTagColor(tag);
+        {orderedTech.map(tag => {
+          const isStatus = isStatusTag(tag);
+          const color = isStatus
+            ? { bg: 'var(--color-tag-status-bg)', text: 'var(--color-tag-status-text)', border: 'var(--color-tag-status-border)' }
+            : getTagColor(tag);
           return (
             <span
-              class="text-[0.7rem] px-2 py-0.5 rounded border font-medium font-mono"
+              class:list={[
+                'text-[0.7rem] px-2 py-0.5 rounded border font-medium font-mono',
+                isStatus && 'font-semibold shadow-[inset_0_0_0_1px_var(--color-tag-status-border)]',
+              ]}
               style={`background: ${color.bg}; color: ${color.text}; border-color: ${color.border};`}
             >
               {tag}
