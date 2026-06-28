@@ -6,7 +6,7 @@ type: open-source
 tech: [rust, tauri, magenta, video, background-music, prototype]
 github: https://github.com/taugr/vidbgm
 url: https://taugr.github.io/vidbgm/
-featured: false
+featured: true
 image: ./vidbgm-app-icon.svg
 imageAlt: vidbgm app icon
 ---
