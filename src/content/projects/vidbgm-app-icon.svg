@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3A3A4A"/>
+      <stop offset="100%" stop-color="#121217"/>
+    </linearGradient>
+
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.15"/>
+      <stop offset="30%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#00BFA5"/>
+    </linearGradient>
+
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+
+    <filter id="appShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+
+    <filter id="elementShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <rect x="32" y="32" width="448" height="448" rx="115" fill="url(#bgGrad)" filter="url(#appShadow)"/>
+  <rect x="32" y="32" width="448" height="448" rx="115" fill="url(#glassGrad)"/>
+  <rect x="32" y="32" width="448" height="448" rx="115" fill="none" stroke="#5A5A6E" stroke-width="1.5" opacity="0.6"/>
+
+  <g filter="url(#elementShadow)">
+    <rect x="76" y="146" width="360" height="220" rx="28" fill="#181822"/>
+    <rect x="76" y="146" width="360" height="220" rx="28" fill="none" stroke="url(#tealGrad)" stroke-width="12"/>
+  </g>
+
+  <g filter="url(#elementShadow)">
+    <rect x="122" y="232" width="20" height="48" rx="10" fill="url(#tealGrad)"/>
+    <rect x="162" y="200" width="20" height="112" rx="10" fill="url(#tealGrad)"/>
+
+    <path
+      d="M 228 198 L 302 248 C 308 252 308 260 302 264 L 228 314 C 218 321 206 314 206 302 L 206 210 C 206 198 218 191 228 198 Z"
+      fill="url(#amberGrad)"
+    />
+
+    <rect x="330" y="208" width="20" height="96" rx="10" fill="url(#tealGrad)"/>
+    <rect x="370" y="236" width="20" height="40" rx="10" fill="url(#tealGrad)"/>
+  </g>
+</svg>
