@@ -2,9 +2,10 @@
 ---
 <button
   id="theme-toggle"
-  class="border border-(--color-border) rounded-full px-3 py-1 text-xs text-(--color-text-tertiary) hover:border-(--color-text-secondary) hover:text-(--color-text-secondary) transition-all cursor-pointer font-sans bg-transparent"
+  class="theme-toggle"
   aria-label="Toggle dark mode"
 >
+  <i id="theme-icon" class="ph ph-sun" aria-hidden="true"></i>
   <span id="theme-label">dark</span>
 </button>
 
@@ -13,7 +14,7 @@
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme');
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return 'dark';
   }
 
   function setTheme(theme) {
@@ -26,6 +27,8 @@
     localStorage.setItem('theme', theme);
     const label = document.getElementById('theme-label');
     if (label) label.textContent = theme === 'dark' ? 'light' : 'dark';
+    const icon = document.getElementById('theme-icon');
+    if (icon) icon.className = theme === 'dark' ? 'ph ph-sun' : 'ph ph-moon';
   }
 
   // Set initial theme immediately to avoid flash
@@ -37,12 +40,5 @@
     const next = current === 'dark' ? 'light' : 'dark';
     setTheme(next);
     window.posthog?.capture('theme_toggled', { theme: next });
-  });
-
-  // Listen for system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
   });
 </script>

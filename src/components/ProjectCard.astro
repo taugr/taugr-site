@@ -12,9 +12,20 @@ interface Props {
   url?: string;
   image?: ImageMetadata;
   imageAlt?: string;
+  variant?: 'card' | 'featured';
 }
 
-const { name, description, date, tech, github, url, image, imageAlt } = Astro.props;
+const {
+  name,
+  description,
+  date,
+  tech,
+  github,
+  url,
+  image,
+  imageAlt,
+  variant = 'card',
+} = Astro.props;
 const formattedDate = date?.toLocaleDateString('en', {
   month: 'short',
   day: 'numeric',
@@ -22,119 +33,80 @@ const formattedDate = date?.toLocaleDateString('en', {
   timeZone: 'UTC',
 });
 const primaryUrl = url ?? github;
-
-const tagColors = [
-  { bg: 'var(--color-tag-purple-bg)', text: 'var(--color-tag-purple-text)', border: 'var(--color-tag-purple-border)' },
-  { bg: 'var(--color-tag-blue-bg)', text: 'var(--color-tag-blue-text)', border: 'var(--color-tag-blue-border)' },
-  { bg: 'var(--color-tag-green-bg)', text: 'var(--color-tag-green-text)', border: 'var(--color-tag-green-border)' },
-  { bg: 'var(--color-tag-amber-bg)', text: 'var(--color-tag-amber-text)', border: 'var(--color-tag-amber-border)' },
-  { bg: 'var(--color-tag-rose-bg)', text: 'var(--color-tag-rose-text)', border: 'var(--color-tag-rose-border)' },
-];
-
-function hashTag(tag: string): number {
-  let hash = 0;
-  for (let i = 0; i < tag.length; i++) {
-    hash = ((hash << 5) - hash) + tag.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash) % tagColors.length;
-}
-
-function getTagColor(tag: string) {
-  return tagColors[hashTag(tag)];
-}
-
-function isStatusTag(tag: string): boolean {
-  return tag.toLowerCase() === 'prototype';
-}
-
-const orderedTech = [...tech].sort((a, b) => Number(isStatusTag(b)) - Number(isStatusTag(a)));
+const primaryTech = tech.filter(tag => tag.toLowerCase() !== 'prototype').slice(0, 3);
 ---
 
-<div class:list={['border border-(--color-border-light) rounded-lg p-4 mb-3 transition-all hover:border-(--color-border) hover:bg-(--color-project-hover) hover:-translate-y-px', image && 'flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5']}>
-  <div class="min-w-0 flex-1">
-    <h3 class="text-[1rem] text-(--color-link) font-semibold font-mono">
-      {primaryUrl ? (
-        <a href={primaryUrl} class="inline-flex items-center gap-1.5 hover:underline" target="_blank" rel="noopener">
-          <span>{name}</span>
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3 w-3 fill-none stroke-current stroke-2">
-            <path d="M7 17 17 7" />
-            <path d="M9 7h8v8" />
-          </svg>
-        </a>
-      ) : (
-        name
-      )}
-    </h3>
-    {formattedDate && (
-      <p class="mt-1 inline-flex items-center gap-1.5 text-[0.82rem] text-(--color-text-tertiary)">
-        <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-none stroke-current stroke-2">
-          <path d="M8 2v4" />
-          <path d="M16 2v4" />
-          <rect x="3" y="4" width="18" height="18" rx="2" />
-          <path d="M3 10h18" />
-        </svg>
-        <span>{formattedDate}</span>
-      </p>
-    )}
-    <p class="text-[0.9rem] text-(--color-text-secondary) mt-1 leading-relaxed">{description}</p>
-    {tech.length > 0 && (
-      <div class="flex flex-wrap gap-1.5 mt-2.5">
-        {orderedTech.map(tag => {
-          const isStatus = isStatusTag(tag);
-          const color = isStatus
-            ? { bg: 'var(--color-tag-status-bg)', text: 'var(--color-tag-status-text)', border: 'var(--color-tag-status-border)' }
-            : getTagColor(tag);
-          return (
-            <span
-              class:list={[
-                'text-[0.7rem] px-2 py-0.5 rounded border font-medium font-mono',
-                isStatus && 'font-semibold shadow-[inset_0_0_0_1px_var(--color-tag-status-border)]',
-              ]}
-              style={`background: ${color.bg}; color: ${color.text}; border-color: ${color.border};`}
-            >
-              {tag}
-            </span>
-          );
-        })}
-      </div>
-    )}
-    <div class="flex items-center gap-3 mt-3 text-[0.82rem]">
-      {github && (
-        <a href={github} class="inline-flex items-center gap-1.5 text-(--color-link) font-medium hover:underline" target="_blank" rel="noopener" data-project-link-name={name} data-project-link-type="github">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-current">
-            <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.1-1.46-1.1-1.46-.9-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.33 1.08 2.9.83.09-.64.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 7.02c.85 0 1.7.11 2.5.33 1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.57c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
-          </svg>
-          <span>github</span>
-        </a>
-      )}
-      {github && url && <span class="h-3.5 w-px bg-(--color-border-light)" aria-hidden="true"></span>}
-      {url && (
-        <a href={url} class="inline-flex items-center gap-1.5 text-(--color-link) font-medium hover:underline" target="_blank" rel="noopener" data-project-link-name={name} data-project-link-type="site">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-none stroke-current stroke-2">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M2 12h20" />
-            <path d="M12 2a15.3 15.3 0 0 1 0 20" />
-            <path d="M12 2a15.3 15.3 0 0 0 0 20" />
-          </svg>
-          <span>site</span>
-        </a>
-      )}
-    </div>
-  </div>
+<article class:list={['project', variant === 'featured' ? 'project--featured' : 'project--card']}>
   {image && (
-    <div class="flex h-28 w-full shrink-0 items-center justify-center rounded-md border border-(--color-border-light) bg-(--color-bg-secondary) p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] sm:w-36">
+    <div class="project__art">
       <Image
         src={image}
         alt={imageAlt || name}
         width={image.width}
         height={image.height}
-        class="max-h-full max-w-full object-contain"
+        class="project__image"
         loading="lazy"
       />
     </div>
   )}
-</div>
+
+  <div class="project__content">
+    <h3 class="project__title">
+      {primaryUrl ? (
+        <a
+          href={primaryUrl}
+          target="_blank"
+          rel="noopener"
+          data-project-link-name={name}
+          data-project-link-type="primary"
+        >
+          <span>{name}</span>
+          <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+        </a>
+      ) : (
+        name
+      )}
+    </h3>
+    <p class="project__description">{description}</p>
+  </div>
+
+  <div class="project__meta">
+    {formattedDate && (
+      <p><i class="ph ph-calendar-blank" aria-hidden="true"></i><span>{formattedDate}</span></p>
+    )}
+    {primaryTech.length > 0 && (
+      <p><i class="ph ph-code" aria-hidden="true"></i><span>{primaryTech.join(', ')}</span></p>
+    )}
+    {tech.length > 0 && variant === 'featured' && (
+      <p class="project__tags"><i class="ph ph-tag" aria-hidden="true"></i><span>{tech.join(', ')}</span></p>
+    )}
+  </div>
+
+  <div class="project__links">
+    {github && (
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener"
+        data-project-link-name={name}
+        data-project-link-type="github"
+      >
+        <i class="ph ph-github-logo" aria-hidden="true"></i><span>github</span>
+      </a>
+    )}
+    {url && (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener"
+        data-project-link-name={name}
+        data-project-link-type="site"
+      >
+        <i class="ph ph-globe" aria-hidden="true"></i><span>site</span>
+      </a>
+    )}
+  </div>
+</article>
 
 <script is:inline>
   document.querySelectorAll('[data-project-link-name]').forEach(function (el) {
