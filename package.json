@@ -34,22 +34,22 @@
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.1",
-    "@astrojs/mdx": "^7.0.2",
+    "@astrojs/mdx": "^7.0.3",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@phosphor-icons/web": "^2.1.2",
-    "@tailwindcss/vite": "^4.3.2",
-    "astro": "^7.0.7",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.1.0",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
     "sharp": "^0.35.3",
-    "tailwindcss": "^4.3.2"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
-    "oxfmt": "^0.58.0",
-    "oxlint": "^1.73.0",
+    "oxfmt": "^0.59.0",
+    "oxlint": "^1.74.0",
     "oxlint-tsgolint": "^0.24.0"
   },
   "lint-staged": {
