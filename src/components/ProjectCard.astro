@@ -77,9 +77,6 @@ const primaryTech = tech.filter(tag => tag.toLowerCase() !== 'prototype').slice(
     {primaryTech.length > 0 && (
       <p><i class="ph ph-code" aria-hidden="true"></i><span>{primaryTech.join(', ')}</span></p>
     )}
-    {tech.length > 0 && variant === 'featured' && (
-      <p class="project__tags"><i class="ph ph-tag" aria-hidden="true"></i><span>{tech.join(', ')}</span></p>
-    )}
   </div>
 
   <div class="project__links">

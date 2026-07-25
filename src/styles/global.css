@@ -523,10 +523,6 @@ button:focus-visible {
   font-size: 0.9rem;
 }
 
-.project__tags span {
-  overflow-wrap: anywhere;
-}
-
 .project__links {
   min-height: 74px;
   display: flex;
