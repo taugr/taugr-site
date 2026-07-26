@@ -18,6 +18,8 @@
   --color-border: #cbd3ce;
   --color-border-light: #dde3df;
   --color-link: #0f7d6d;
+  --color-link-hover: #095f55;
+  --color-on-link-hover: #ffffff;
   --color-accent: #0f8e7b;
   --color-accent-soft: #a9e8d8;
   --color-accent-contrast: #062a24;
@@ -59,6 +61,8 @@
   --color-border: #344049;
   --color-border-light: #232d35;
   --color-link: #79dbc5;
+  --color-link-hover: #a8eadb;
+  --color-on-link-hover: #071d19;
   --color-accent: #79dbc5;
   --color-accent-soft: #a8eadb;
   --color-accent-contrast: #071d19;
@@ -201,7 +205,7 @@ button:focus-visible {
 }
 
 .site-actions__link:hover {
-  color: var(--color-accent);
+  color: var(--color-link-hover);
   transform: translateY(-1px);
 }
 
@@ -262,7 +266,7 @@ button:focus-visible {
 }
 
 .site-footer a:hover {
-  color: var(--color-accent);
+  color: var(--color-link-hover);
 }
 
 /* Homepage */
@@ -332,8 +336,9 @@ button:focus-visible {
 }
 
 .button--primary:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
+  background: var(--color-link-hover);
+  border-color: var(--color-link-hover);
+  color: var(--color-on-link-hover);
 }
 
 .button--text {
@@ -414,7 +419,7 @@ button:focus-visible {
 }
 
 .section-heading a:hover {
-  color: var(--color-accent);
+  color: var(--color-link-hover);
 }
 
 .section-heading__links {
@@ -482,7 +487,7 @@ button:focus-visible {
 }
 
 .project__title a:hover {
-  color: var(--color-accent-soft);
+  color: var(--color-link-hover);
 }
 
 .project__title i {
@@ -544,7 +549,7 @@ button:focus-visible {
 }
 
 .project__links a:hover {
-  color: var(--color-accent-soft);
+  color: var(--color-link-hover);
 }
 
 .project__links i {
@@ -637,7 +642,7 @@ button:focus-visible {
 }
 
 .engagement h3 a:hover {
-  color: var(--color-accent-soft);
+  color: var(--color-link-hover);
 }
 
 .engagement__type {
