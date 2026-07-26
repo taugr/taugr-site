@@ -1,6 +1,6 @@
 ---
 name: vuemarkik
-description: 'Markdown rendering for Vue.js, built on unified, remark, and rehype with custom components, async rendering, and streaming-friendly error handling.'
+description: 'Safe-by-default, extensible Markdown rendering for Vue.js, powered by unified, remark, and rehype.'
 date: 2025-11-22
 type: open-source
 tech: [typescript, vue, markdown, remark, rehype]

@@ -7,6 +7,7 @@ interface Props {
   description: string;
   date?: Date;
   type?: 'personal' | 'open-source' | 'commercial';
+  status?: 'prototype' | 'archived';
   tech: string[];
   github?: string;
   url?: string;
@@ -19,6 +20,7 @@ const {
   name,
   description,
   date,
+  status,
   tech,
   github,
   url,
@@ -66,6 +68,7 @@ const primaryTech = tech.filter(tag => tag.toLowerCase() !== 'prototype').slice(
       ) : (
         name
       )}
+      {status && <span class:list={['project__status', `project__status--${status}`]}>{status}</span>}
     </h3>
     <p class="project__description">{description}</p>
   </div>

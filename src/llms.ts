@@ -137,7 +137,10 @@ function renderOverview({ baseUrl, posts, projects }: SiteContent) {
         .filter(Boolean)
         .join(', ');
       const suffix = links ? ` Links: ${links}.` : '';
-      return `- [${project.data.name}](${absoluteUrl(baseUrl, `/projects/`)}) (${formatDate(project.data.date)}): ${normalizeText(project.data.description)}${suffix}`;
+      const status = project.data.status
+        ? ` Status: ${project.data.status}.`
+        : '';
+      return `- [${project.data.name}](${absoluteUrl(baseUrl, `/projects/`)}) (${formatDate(project.data.date)}): ${normalizeText(project.data.description)}${status}${suffix}`;
     }),
     '',
     '## Teaching',
@@ -183,6 +186,7 @@ function renderProject(project: CollectionEntry<'projects'>) {
     '',
     `Date: ${formatDate(project.data.date)}`,
     `Type: ${project.data.type}`,
+    project.data.status ? `Status: ${project.data.status}` : undefined,
     `Description: ${normalizeText(project.data.description)}`,
     `Tech: ${project.data.tech.join(', ')}`,
     project.data.url ? `URL: ${project.data.url}` : undefined,

@@ -39,6 +39,7 @@ const projects = defineCollection({
       type: z
         .enum(['personal', 'open-source', 'commercial'])
         .default('personal'),
+      status: z.enum(['prototype', 'archived']).optional(),
       tech: z.array(z.string()),
       github: z.string().url().optional(),
       url: z.string().url().optional(),

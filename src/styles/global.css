@@ -470,6 +470,10 @@ button:focus-visible {
 }
 
 .project__title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
   margin: 0;
   font-family: var(--font-mono);
   font-size: 1.3rem;
@@ -492,6 +496,29 @@ button:focus-visible {
 
 .project__title i {
   font-size: 0.92rem;
+}
+
+.project__status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.35rem;
+  padding: 0.08rem 0.42rem;
+  background: var(--color-tag-status-bg);
+  border: 1px solid var(--color-tag-status-border);
+  border-radius: 999px;
+  color: var(--color-tag-status-text);
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.project__status--archived {
+  background: var(--color-surface-muted);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
 }
 
 .project__description {
