@@ -1,12 +1,23 @@
 ---
+import { getMessages, type Locale } from '../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'en' } = Astro.props;
+const messages = getMessages(locale);
 ---
+
 <button
   id="theme-toggle"
   class="theme-toggle"
-  aria-label="Toggle dark mode"
+  aria-label={messages.theme.toggle}
+  data-light-label={messages.theme.light}
+  data-dark-label={messages.theme.dark}
 >
   <i id="theme-icon" class="ph ph-sun" aria-hidden="true"></i>
-  <span id="theme-label">dark</span>
+  <span id="theme-label">{messages.theme.light}</span>
 </button>
 
 <script is:inline>
@@ -26,7 +37,10 @@
     }
     localStorage.setItem('theme', theme);
     const label = document.getElementById('theme-label');
-    if (label) label.textContent = theme === 'dark' ? 'light' : 'dark';
+    const toggle = document.getElementById('theme-toggle');
+    const lightLabel = toggle?.dataset.lightLabel || 'light';
+    const darkLabel = toggle?.dataset.darkLabel || 'dark';
+    if (label) label.textContent = theme === 'dark' ? lightLabel : darkLabel;
     const icon = document.getElementById('theme-icon');
     if (icon) icon.className = theme === 'dark' ? 'ph ph-sun' : 'ph ph-moon';
   }

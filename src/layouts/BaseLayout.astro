@@ -1,7 +1,18 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro';
+import LanguagePicker from '../components/LanguagePicker.astro';
 import PostHog from '../components/posthog.astro';
-import { NAV_ITEMS, PROFILE_LINKS, SITE } from '../site';
+import {
+  exactRouteKey,
+  getMessages,
+  LOCALES,
+  localeFromPath,
+  localizedPath,
+  ROUTES,
+  type Locale,
+  type RouteKey,
+} from '../i18n';
+import { PROFILE_LINKS, SITE } from '../site';
 import '../styles/global.css';
 
 interface Props {
@@ -12,6 +23,7 @@ interface Props {
   publishedTime?: Date | string;
   tags?: string[];
   wide?: boolean;
+  locale?: Locale;
 }
 
 const {
@@ -22,18 +34,33 @@ const {
   publishedTime,
   tags = [],
   wide = false,
+  locale: requestedLocale,
 } = Astro.props;
+const locale = requestedLocale ?? localeFromPath(Astro.url.pathname);
+const messages = getMessages(locale);
+const translatedRoute = exactRouteKey(Astro.url.pathname);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(ogImage, Astro.site);
 const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : undefined;
+const navItems = (Object.keys(ROUTES) as RouteKey[])
+  .filter(route => route !== 'archive')
+  .map(route => ({ route, href: localizedPath(locale, route), label: messages.nav[route] }));
+const alternateLinks = translatedRoute
+  ? (Object.keys(LOCALES) as Locale[]).map(alternateLocale => ({
+      locale: alternateLocale,
+      href: new URL(localizedPath(alternateLocale, translatedRoute), Astro.site),
+    }))
+  : [];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={LOCALES[locale].tag}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href={canonicalURL} />
+    {alternateLinks.map(link => <link rel="alternate" hreflang={LOCALES[link.locale].tag} href={link.href} />)}
+    {translatedRoute && <link rel="alternate" hreflang="x-default" href={new URL(localizedPath('en', translatedRoute), Astro.site)} />}
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -45,19 +72,21 @@ const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : un
     <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <meta name="description" content={description} />
-    <meta name="author" content={SITE.footerName} />
+    <meta name="author" content={messages.site.footerName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:site_name" content={messages.site.name} />
+    <meta property="og:locale" content={LOCALES[locale].og} />
+    {alternateLinks.filter(link => link.locale !== locale).map(link => <meta property="og:locale:alternate" content={LOCALES[link.locale].og} />)}
     <meta property="og:image" content={socialImageURL} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={SITE.description} />
-    {ogType === 'article' && <meta property="article:author" content={SITE.footerName} />}
+    <meta property="og:image:alt" content={messages.site.description} />
+    {ogType === 'article' && <meta property="article:author" content={messages.site.footerName} />}
     {publishedDate && <meta property="article:published_time" content={publishedDate} />}
     {tags.map(tag => <meta property="article:tag" content={tag} />)}
     <meta name="twitter:card" content="summary_large_image" />
@@ -65,7 +94,7 @@ const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : un
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
-    <meta name="twitter:image:alt" content={SITE.description} />
+    <meta name="twitter:image:alt" content={messages.site.description} />
     <title>{title}</title>
     <script is:inline>
       // Prevent flash of wrong theme
@@ -80,17 +109,18 @@ const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : un
     <div class="site-shell">
       <header class="site-header">
         <div class="site-header__inner">
-          <a href="/" class="site-brand">
-            {SITE.name}
+          <a href={localizedPath(locale, 'home')} class="site-brand" data-site-brand>
+            {messages.site.name}
           </a>
-          <nav class="site-nav" aria-label="Primary navigation">
-          {NAV_ITEMS.map(item => (
+          <nav class="site-nav" aria-label={messages.site.primaryNavigation}>
+          {navItems.map(item => (
             <a
               href={item.href}
+              data-nav-route={item.route}
               class:list={[
                 'site-nav__link',
-                item.href === '/' && 'site-nav__home',
-                Astro.url.pathname === item.href || (item.href !== '/' && Astro.url.pathname.startsWith(item.href))
+                item.route === 'home' && 'site-nav__home',
+                Astro.url.pathname === item.href || (item.route !== 'home' && Astro.url.pathname.startsWith(item.href))
                   ? 'site-nav__link--active'
                   : '',
               ]}
@@ -120,7 +150,8 @@ const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : un
                 ></i>
               </a>
             ))}
-            <ThemeToggle />
+            <LanguagePicker locale={locale} pathname={Astro.url.pathname} />
+            <ThemeToggle locale={locale} />
           </div>
         </div>
       </header>
@@ -130,15 +161,15 @@ const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : un
       </main>
 
       <footer class="site-footer">
-        <span>&copy; {new Date().getFullYear()} {SITE.footerName}</span>
+        <span data-footer-owner>&copy; {new Date().getFullYear()} {messages.site.footerName}</span>
         <span class="site-footer__links">
           {PROFILE_LINKS.map(link => (
             <>
               <a href={link.href} target="_blank" rel="me noopener" data-profile-link={link.label}>{link.label}</a>
             </>
           ))}
-          <a href={SITE.links.archive}>archive</a>
-          <a href={SITE.links.rss} id="rss-link">rss</a>
+          <a href={localizedPath(locale, 'archive')} data-footer-archive>{messages.site.archive}</a>
+          <a href={SITE.links.rss} id="rss-link">{messages.site.rss}</a>
         </span>
       </footer>
     </div>

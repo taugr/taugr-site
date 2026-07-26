@@ -33,6 +33,15 @@ pnpm format:fix
   - `src/pages/teaching/index.astro`
   - `src/pages/speaking/index.astro`
 
+## Languages
+
+English is served at the existing unprefixed routes. European Spanish and Eastern Armenian are available under `/es/` and `/hy/` respectively.
+
+- Shared interface messages and translated content overlays live in `src/i18n/`.
+- Spanish copy follows `es-ES`; Armenian copy follows `hy-AM` and uses `Թոմ Օգեր` for Tom's name.
+- Essay and archive article details remain canonical English content. Localized indexes label and link to those English URLs.
+- `pnpm build` runs `scripts/check-i18n.mjs` after Astro builds to verify localized routes, language tags, canonicals, alternate links, sitemap entries, the Armenian name, and the English-only article boundary.
+
 ## Redirects
 
 The site is intended to work on GitHub Pages, so old URL redirects are implemented as static HTML rather than relying on server rules.

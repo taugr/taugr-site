@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { formatDate, getMessages, type Locale } from '../i18n';
 
 interface Post {
   id: string;
@@ -18,13 +19,11 @@ interface Post {
 
 interface Props {
   posts: Post[];
+  locale?: Locale;
 }
 
-const { posts } = Astro.props;
-
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
+const { posts, locale = 'en' } = Astro.props;
+const messages = getMessages(locale);
 
 // Tag color palette — each tag gets a consistent color via hash
 const tagColors = [
@@ -57,7 +56,8 @@ function getTagColor(tag: string) {
           {post.data.title}
         </h3>
         <div class="flex items-center gap-2 mt-1 text-[0.82rem] text-(--color-text-tertiary)">
-          {formatDate(post.data.date)} · {post.readingTime || '5 min read'}
+          {formatDate(post.data.date, locale)} · {post.readingTime || '5 min read'}
+          {locale !== 'en' && <span class="article-language">· {messages.essays.english}</span>}
         </div>
         {post.data.tags.length > 0 && (
           <div class="flex gap-1.5 mt-1.5">

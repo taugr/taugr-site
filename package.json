@@ -23,7 +23,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/check-i18n.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "format": "oxfmt . --check",

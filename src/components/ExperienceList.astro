@@ -1,0 +1,150 @@
+---
+import type { LocalizedExperience, Locale } from '../i18n';
+import { getMessages } from '../i18n';
+
+interface Props {
+  items: LocalizedExperience[];
+  kind: 'teaching' | 'speaking';
+  locale: Locale;
+}
+
+const { items, kind, locale } = Astro.props;
+const messages = getMessages(locale);
+const icons: Record<string, string> = {
+  file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6" /><path d="M8 13h8" /><path d="M8 17h6" />',
+  github: '<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4" /><path d="M9 18c-4.51 2-5-2-7-2" />',
+  globe: '<circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2a15.3 15.3 0 0 1 0 20" /><path d="M12 2a15.3 15.3 0 0 0 0 20" />',
+  image: '<rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="8.5" cy="10.5" r="1.5" /><path d="m21 15-5-5L5 21" />',
+  linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />',
+  slides: '<rect x="3" y="4" width="18" height="14" rx="2" /><path d="M8 22h8" /><path d="M12 18v4" />',
+  video: '<path d="m22 8-6 4 6 4V8Z" /><rect x="2" y="6" width="14" height="12" rx="2" />',
+};
+---
+
+<section>
+  <div class="space-y-4">
+    {items.map(item => (
+      <article class="border border-(--color-border-light) rounded-lg p-4 transition-all hover:border-(--color-border) hover:bg-(--color-project-hover) hover:-translate-y-px flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+        <div class="min-w-0 flex-1">
+          <h3 class="text-[1rem] text-(--color-link) font-semibold leading-tight">
+            <a href={item.links[0].href} class="inline-flex items-center gap-1.5 hover:underline" target={item.links[0].href.startsWith('/') ? undefined : '_blank'} rel={item.links[0].href.startsWith('/') ? undefined : 'noopener'}>
+              <span>{item.title}</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3 w-3 fill-none stroke-current stroke-2">
+                <path d="M7 17 17 7" />
+                <path d="M9 7h8v8" />
+              </svg>
+            </a>
+          </h3>
+          <p class="mt-0.5 text-[0.86rem] text-(--color-text)">{[item.secondary, item.format].filter(Boolean).join(' · ')}</p>
+          <p class="mt-1 text-[0.82rem] text-(--color-text-tertiary)">{item.date} · {item.location}</p>
+          <p class="mt-2 text-[0.9rem] text-(--color-text-secondary) leading-relaxed">{item.description}</p>
+          <div class="flex flex-wrap items-center gap-3 mt-3 text-[0.82rem]">
+            {item.links.map((link, index) => (
+              <>
+                {index > 0 && <span class="h-3.5 w-px bg-(--color-border-light)" aria-hidden="true"></span>}
+                <a href={link.href} class="inline-flex items-center gap-1.5 text-(--color-link) font-medium hover:underline" target={link.href.startsWith('/') ? undefined : '_blank'} rel={link.href.startsWith('/') ? undefined : 'noopener'} data-experience-title={item.canonicalTitle} data-experience-label={link.label}>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-none stroke-current stroke-2" set:html={icons[link.icon]} />
+                  <span>{link.label}</span>
+                </a>
+              </>
+            ))}
+          </div>
+        </div>
+        <button
+          type="button"
+          class="group relative flex h-28 w-full shrink-0 cursor-zoom-in items-center justify-center overflow-hidden rounded-md border border-(--color-border-light) bg-(--color-bg-secondary) p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition hover:border-(--color-border) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link) sm:w-36"
+          data-experience-media={JSON.stringify(item.media)}
+          data-experience-index="0"
+          data-experience-title={item.canonicalTitle}
+          aria-label={`${messages.lightbox.open} ${item.title}`}
+        >
+          <img src={item.media[0].src} alt={item.media[0].alt} class="max-h-full max-w-full object-contain" loading="lazy" />
+          {item.media.length > 1 && (
+            <span class="absolute left-1.5 top-1.5 rounded bg-(--color-bg)/90 px-1.5 py-0.5 text-[0.7rem] font-semibold text-(--color-text-secondary) shadow-sm" aria-hidden="true">
+              +{item.media.length - 1}
+            </span>
+          )}
+          <span class="absolute bottom-1.5 right-1.5 rounded bg-(--color-bg)/90 px-1.5 py-1 text-(--color-link) opacity-0 shadow-sm transition group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-none stroke-current stroke-2">
+              <path d="M15 3h6v6" />
+              <path d="M10 14 21 3" />
+              <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4" />
+            </svg>
+          </span>
+        </button>
+      </article>
+    ))}
+  </div>
+</section>
+
+<dialog id={`experience-lightbox-${kind}`} class="m-auto max-h-[92vh] max-w-[92vw] rounded-lg border border-(--color-border-light) bg-(--color-bg) p-0 shadow-2xl backdrop:bg-black/70">
+  <div class="relative p-3">
+    <button type="button" class="absolute right-5 top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-(--color-border-light) bg-(--color-bg)/90 text-[0.8rem] font-semibold text-(--color-text-secondary) shadow-sm transition hover:text-(--color-text) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link)" data-experience-close aria-label={messages.lightbox.close}>×</button>
+    <button type="button" class="absolute left-5 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-(--color-border-light) bg-(--color-bg)/90 text-(--color-text-secondary) shadow-sm transition hover:text-(--color-text) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link)" data-experience-prev aria-label={messages.lightbox.previous}>
+      <i class="ph ph-caret-left" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="absolute right-5 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-(--color-border-light) bg-(--color-bg)/90 text-(--color-text-secondary) shadow-sm transition hover:text-(--color-text) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link)" data-experience-next aria-label={messages.lightbox.next}>
+      <i class="ph ph-caret-right" aria-hidden="true"></i>
+    </button>
+    <img data-experience-image alt="" class="max-h-[84vh] max-w-[88vw] rounded-md object-contain" />
+    <p class="mt-2 text-center text-[0.82rem] text-(--color-text-secondary)" data-experience-caption></p>
+  </div>
+</dialog>
+
+<script is:inline define:vars={{ kind, ofLabel: messages.lightbox.of }}>
+  const lightbox = document.getElementById(`experience-lightbox-${kind}`);
+  const image = lightbox?.querySelector('[data-experience-image]');
+  const caption = lightbox?.querySelector('[data-experience-caption]');
+  const close = lightbox?.querySelector('[data-experience-close]');
+  const previous = lightbox?.querySelector('[data-experience-prev]');
+  const next = lightbox?.querySelector('[data-experience-next]');
+  let media = [];
+  let index = 0;
+
+  function updateImage() {
+    if (!(image instanceof HTMLImageElement) || !media[index]) return;
+    image.src = media[index].src;
+    image.alt = media[index].alt || '';
+    const count = media.length > 1 ? `${index + 1} ${ofLabel} ${media.length}` : '';
+    if (caption) caption.textContent = [media[index].label, count].filter(Boolean).join(' · ');
+    const gallery = media.length > 1;
+    previous?.classList.toggle('hidden', !gallery);
+    previous?.classList.toggle('flex', gallery);
+    next?.classList.toggle('hidden', !gallery);
+    next?.classList.toggle('flex', gallery);
+  }
+
+  document.querySelectorAll('[data-experience-media]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (!(lightbox instanceof HTMLDialogElement)) return;
+      try { media = JSON.parse(button.getAttribute('data-experience-media') || '[]'); }
+      catch { media = []; }
+      index = Number(button.getAttribute('data-experience-index') || 0);
+      updateImage();
+      lightbox.showModal();
+      window.posthog?.capture(`${kind}_lightbox_opened`, {
+        item_title: button.getAttribute('data-experience-title'),
+        media_count: media.length,
+      });
+    });
+  });
+
+  document.querySelectorAll('[data-experience-label]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      window.posthog?.capture(`${kind}_link_clicked`, {
+        item_title: link.getAttribute('data-experience-title'),
+        link_label: link.getAttribute('data-experience-label'),
+        link_href: link.getAttribute('href'),
+      });
+    });
+  });
+
+  close?.addEventListener('click', () => lightbox instanceof HTMLDialogElement && lightbox.close());
+  previous?.addEventListener('click', () => { index = (index - 1 + media.length) % media.length; updateImage(); });
+  next?.addEventListener('click', () => { index = (index + 1) % media.length; updateImage(); });
+  lightbox?.addEventListener('click', event => event.target === lightbox && lightbox instanceof HTMLDialogElement && lightbox.close());
+  lightbox?.addEventListener('close', () => {
+    if (image instanceof HTMLImageElement) { image.removeAttribute('src'); image.alt = ''; }
+    if (caption) caption.textContent = '';
+  });
+</script>

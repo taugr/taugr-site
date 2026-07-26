@@ -1,0 +1,68 @@
+---
+import {
+  closestRouteKey,
+  getMessages,
+  LOCALES,
+  localizedPath,
+  type Locale,
+} from '../i18n';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
+const route = closestRouteKey(pathname);
+const messages = getMessages(locale);
+const choices = (Object.keys(LOCALES) as Locale[]).map((choice) => ({
+  locale: choice,
+  href: localizedPath(choice, route),
+  ...LOCALES[choice],
+}));
+---
+
+<details class="language-picker">
+  <summary aria-label={messages.site.chooseLanguage} title={messages.site.chooseLanguage}>
+    <i class="ph ph-translate" aria-hidden="true"></i>
+    <span class="language-picker__current" data-language-current>{LOCALES[locale].endonym}</span>
+    <span class="language-picker__short" data-language-short aria-hidden="true">{LOCALES[locale].short}</span>
+    <i class="ph ph-caret-down language-picker__caret" aria-hidden="true"></i>
+  </summary>
+  <ul>
+    {choices.map((choice) => (
+      <li>
+        <a
+          href={choice.href}
+          lang={choice.tag}
+          hreflang={choice.tag}
+          aria-current={choice.locale === locale ? 'true' : undefined}
+          data-language-choice={choice.locale}
+          data-language-source={locale}
+          data-language-route={route}
+        >
+          <span>{choice.endonym}</span>
+          {choice.locale === locale && <i class="ph ph-check" aria-hidden="true"></i>}
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>
+
+<script is:inline>
+  document.querySelectorAll('[data-language-choice]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      window.posthog?.capture('language_changed', {
+        source_locale: link.getAttribute('data-language-source'),
+        destination_locale: link.getAttribute('data-language-choice'),
+        route_key: link.getAttribute('data-language-route'),
+      });
+    });
+  });
+
+  document.addEventListener('click', function (event) {
+    document.querySelectorAll('.language-picker[open]').forEach(function (picker) {
+      if (!picker.contains(event.target)) picker.removeAttribute('open');
+    });
+  });
+</script>

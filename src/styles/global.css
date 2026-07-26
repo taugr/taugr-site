@@ -191,6 +191,87 @@ button:focus-visible {
   gap: 1rem;
 }
 
+.language-picker {
+  position: relative;
+}
+
+.language-picker summary {
+  min-height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-nav-muted);
+  cursor: pointer;
+  font: 500 0.76rem/1 var(--font-sans);
+  list-style: none;
+  white-space: nowrap;
+}
+
+.language-picker summary::-webkit-details-marker {
+  display: none;
+}
+
+.language-picker summary:hover,
+.language-picker[open] summary {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.language-picker__short {
+  display: none;
+}
+
+.language-picker__caret {
+  font-size: 0.65rem;
+  transition: transform 0.15s ease;
+}
+
+.language-picker[open] .language-picker__caret {
+  transform: rotate(180deg);
+}
+
+.language-picker ul {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  min-width: 9.5rem;
+  margin: 0;
+  padding: 0.35rem;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background: var(--color-bg);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 0.16);
+  list-style: none;
+}
+
+.language-picker a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 3px;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.language-picker a:hover,
+.language-picker a[aria-current='true'] {
+  background: var(--color-project-hover);
+  color: var(--color-text);
+}
+
+.language-picker a:focus-visible,
+.language-picker summary:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
 .site-actions__link {
   width: 1.5rem;
   height: 1.5rem;
@@ -267,6 +348,46 @@ button:focus-visible {
 
 .site-footer a:hover {
   color: var(--color-link-hover);
+}
+
+.article-language-notice {
+  margin: 0 0 1.75rem;
+  padding: 0.65rem 0.8rem;
+  border-left: 2px solid var(--color-accent);
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.article-language {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+html:lang(hy-AM) body,
+html:lang(hy-AM) button,
+html:lang(hy-AM) input,
+html:lang(hy-AM) select,
+html:lang(hy-AM) textarea {
+  font-family: 'Noto Sans Armenian', var(--font-sans);
+}
+
+html:lang(hy-AM) .home-hero__copy h1,
+html:lang(hy-AM) .project__title,
+html:lang(hy-AM) .project__meta p,
+html:lang(hy-AM) .project__links a,
+html:lang(hy-AM) .engagement h3,
+html:lang(hy-AM) .engagement__meta,
+html:lang(hy-AM) .button,
+html:lang(hy-AM) .home-profile__eyebrow {
+  font-family: 'Noto Sans Armenian', var(--font-sans);
+}
+
+html:lang(hy-AM) .home-hero__copy h1 {
+  font-size: clamp(2.7rem, 4.2vw, 3.25rem);
+  letter-spacing: -0.035em;
+  word-break: keep-all;
 }
 
 /* Homepage */
@@ -742,6 +863,14 @@ button:focus-visible {
     display: none;
   }
 
+  .language-picker__current {
+    display: none;
+  }
+
+  .language-picker__short {
+    display: inline;
+  }
+
   .home-hero {
     grid-template-columns: minmax(0, 1.5fr) minmax(250px, 0.7fr);
     gap: 3.5rem;
@@ -877,9 +1006,22 @@ button:focus-visible {
     display: none;
   }
 
+  .site-actions {
+    gap: 0.55rem;
+  }
+
+  .language-picker summary {
+    padding-inline: 0.45rem;
+  }
+
   .home-hero__copy h1 {
     font-size: clamp(2.3rem, 11.6vw, 3rem);
     line-height: 1.08;
+  }
+
+  html:lang(hy-AM) .home-hero__copy h1 {
+    font-size: clamp(2.05rem, 9.4vw, 2.45rem);
+    line-height: 1.16;
   }
 
   .home-hero__copy > p {

@@ -25,3 +25,4 @@ pnpm-debug.log*
 .idea/
 .gstack/
 .playwright-cli/
+output/playwright/

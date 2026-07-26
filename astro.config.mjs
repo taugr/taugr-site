@@ -8,6 +8,17 @@ import { remarkReadingTime } from './src/plugins/reading-time.mjs';
 
 export default defineConfig({
   site: 'https://tau.gr',
+  i18n: {
+    defaultLocale: 'en',
+    locales: [
+      'en',
+      { path: 'es', codes: ['es-ES', 'es'] },
+      { path: 'hy', codes: ['hy-AM', 'hy'] },
+    ],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

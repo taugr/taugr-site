@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { MESSAGES } from '../i18n';
 ---
 
 <BaseLayout title="Not Found — taugr">
@@ -63,7 +64,77 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </script>
   <div class="text-center py-16">
     <h1 class="text-[2rem] font-bold text-(--color-text) mb-2">404</h1>
-    <p class="text-(--color-text-secondary) mb-6">This page doesn't exist.</p>
-    <a href="/" class="text-(--color-link) text-[0.85rem] hover:underline">Back to home</a>
+    <p id="not-found-message" class="text-(--color-text-secondary) mb-6">This page doesn't exist.</p>
+    <a id="not-found-home" href="/" class="text-(--color-link) text-[0.85rem] hover:underline">Back to home</a>
   </div>
+  <script is:inline define:vars={{ translations: {
+    es: MESSAGES.es,
+    hy: MESSAGES.hy,
+  } }}>
+    function localizeNotFound() {
+      const locale = window.location.pathname.match(/^\/(es|hy)(?:\/|$)/)?.[1];
+      if (!locale || !translations[locale]) return;
+      const copy = translations[locale];
+      const homeHref = `/${locale}/`;
+      document.documentElement.lang = locale === 'es' ? 'es-ES' : 'hy-AM';
+      document.title = copy.notFound.title;
+      const message = document.getElementById('not-found-message');
+      const home = document.getElementById('not-found-home');
+      if (message) message.textContent = copy.notFound.message;
+      if (home) {
+        home.textContent = copy.notFound.home;
+        home.setAttribute('href', homeHref);
+      }
+
+      const brand = document.querySelector('[data-site-brand]');
+      if (brand) {
+        brand.textContent = copy.site.name;
+        brand.setAttribute('href', homeHref);
+      }
+      const nav = document.querySelector('.site-nav');
+      nav?.setAttribute('aria-label', copy.site.primaryNavigation);
+      document.querySelectorAll('[data-nav-route]').forEach(function (link) {
+        const route = link.getAttribute('data-nav-route');
+        if (!route) return;
+        link.textContent = copy.nav[route];
+        link.setAttribute('href', route === 'home' ? homeHref : `/${locale}/${route}/`);
+      });
+      const footerOwner = document.querySelector('[data-footer-owner]');
+      if (footerOwner) footerOwner.textContent = `© ${new Date().getFullYear()} ${copy.site.footerName}`;
+      const footerArchive = document.querySelector('[data-footer-archive]');
+      if (footerArchive) {
+        footerArchive.textContent = copy.site.archive;
+        footerArchive.setAttribute('href', `/${locale}/archive/`);
+      }
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.setAttribute('aria-label', copy.theme.toggle);
+        themeToggle.dataset.lightLabel = copy.theme.light;
+        themeToggle.dataset.darkLabel = copy.theme.dark;
+        const themeLabel = document.getElementById('theme-label');
+        const dark = document.documentElement.classList.contains('dark');
+        if (themeLabel) themeLabel.textContent = dark ? copy.theme.light : copy.theme.dark;
+      }
+      const languageSummary = document.querySelector('.language-picker summary');
+      languageSummary?.setAttribute('aria-label', copy.site.chooseLanguage);
+      languageSummary?.setAttribute('title', copy.site.chooseLanguage);
+      const currentLanguage = document.querySelector('[data-language-current]');
+      const shortLanguage = document.querySelector('[data-language-short]');
+      if (currentLanguage) currentLanguage.textContent = locale === 'es' ? 'Español' : 'Հայերեն';
+      if (shortLanguage) shortLanguage.textContent = locale === 'es' ? 'ES' : 'ՀՅ';
+      document.querySelectorAll('[data-language-choice]').forEach(function (link) {
+        const choice = link.getAttribute('data-language-choice');
+        if (!choice) return;
+        link.setAttribute('href', choice === 'en' ? '/' : `/${choice}/`);
+        if (choice === locale) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', localizeNotFound, { once: true });
+    } else {
+      localizeNotFound();
+    }
+  </script>
 </BaseLayout>
