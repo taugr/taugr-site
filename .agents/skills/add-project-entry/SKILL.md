@@ -22,17 +22,16 @@ description: Add or update project entries for this Astro personal site. Use whe
    - Set `featured: true` for projects that should appear on the homepage.
    - Set `featured: false` for projects to remove from the homepage.
    - Do not delete old project entries unless explicitly asked.
-6. Run `pnpm build`.
-7. Run the app and visually verify.
+6. Complete the verification sequence below after the final content edit.
 
 ## Verification
 
 Use this order:
 
-1. Run `pnpm build`.
+1. Run `pnpm build` once; reuse a successful build for the unchanged content. It includes the locale checks.
 2. Start a clean local server:
    - Check `lsof -ti tcp:4321`.
-   - Stop stale Astro processes if needed.
+   - Reuse a suitable server or choose another port. Stop only processes started by this task unless the user asked to replace another server.
    - Run `pnpm dev --host 127.0.0.1`.
 3. Confirm rendered HTML with `curl`/`rg` for:
    - Project name.
@@ -42,7 +41,7 @@ Use this order:
    - Use the built-in Browser plugin first.
    - If Browser is unavailable or its required execution tool is not exposed, use Chrome as fallback.
    - When using Chrome fallback, save screenshots with a new filename to avoid stale preview confusion.
-5. Stop the dev server before finishing.
+5. Stop servers started for this check, unless the user wants the preview left running. Embed any review screenshots in the task.
 
 ## Commit Hygiene
 
