@@ -111,7 +111,6 @@ const en = {
     aboutLabel: 'About Tom Auger',
     name: 'Tom Auger',
     tagline: 'Coding, researching, and teaching with AI.',
-    roles: 'Engineer, researcher, educator, speaker, and open-source builder.',
     selectedProjects: 'Selected projects',
     viewAll: 'View all',
     recent: 'Recent teaching & speaking',
@@ -216,8 +215,6 @@ const es: Messages = {
     aboutLabel: 'Sobre Tom Auger',
     name: 'Tom Auger',
     tagline: 'Programación, investigación y enseñanza con IA.',
-    roles:
-      'Ingeniero, investigador, educador, ponente y creador de software libre.',
     selectedProjects: 'Proyectos destacados',
     viewAll: 'Ver todos',
     recent: 'Docencia y charlas recientes',
@@ -340,8 +337,6 @@ const hy: Messages = {
     aboutLabel: 'Թոմ Օգերի մասին',
     name: 'Թոմ Օգեր',
     tagline: 'ԱԲ-ով ծրագրավորում, հետազոտություն և դասավանդում։',
-    roles:
-      'Ինժեներ, հետազոտող, մանկավարժ, բանախոս և բաց կոդով նախագծերի հեղինակ։',
     selectedProjects: 'Ընտրված նախագծեր',
     viewAll: 'Դիտել բոլորը',
     recent: 'Վերջին դասընթացներն ու ելույթները',

@@ -124,7 +124,7 @@ const icons: Record<string, string> = {
   </div>
 </section>
 
-<dialog id={`experience-lightbox-${kind}`} class="m-auto max-h-[92vh] max-w-[92vw] rounded-lg border border-(--color-border-light) bg-(--color-bg) p-0 shadow-2xl backdrop:bg-black/70">
+<dialog id={`experience-lightbox-${kind}`} aria-label={kind === 'teaching' ? teachingCopy.gallery : speakingCopy.gallery} class="m-auto max-h-[92vh] max-w-[92vw] rounded-lg border border-(--color-border-light) bg-(--color-bg) p-0 shadow-2xl backdrop:bg-black/70">
   <div class="relative p-3">
     <button type="button" class="absolute right-5 top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-(--color-border-light) bg-(--color-bg)/90 text-[0.8rem] font-semibold text-(--color-text-secondary) shadow-sm transition hover:text-(--color-text) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link)" data-experience-close aria-label={messages.lightbox.close}>×</button>
     <button type="button" class="absolute left-5 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-(--color-border-light) bg-(--color-bg)/90 text-(--color-text-secondary) shadow-sm transition hover:text-(--color-text) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link)" data-experience-prev aria-label={messages.lightbox.previous}>
@@ -210,7 +210,7 @@ const icons: Record<string, string> = {
   .experience-list [data-experience-label] { min-height: 36px; text-underline-offset: 3px; }
   .resource-action { min-height: 44px !important; padding: .6rem .85rem; border: 1px solid var(--color-border); border-radius: .3rem; background: var(--color-project-hover); font-weight: 600; }
   .resource-action:hover { border-color: var(--color-link); }
-  @media (max-width: 640px) {
+  @media (width < 40rem) {
     .experience-gallery { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .experience-gallery button { height: 8.5rem; }
     .experience-gallery button:only-of-type { grid-column: 1 / -1; height: 13rem; }
