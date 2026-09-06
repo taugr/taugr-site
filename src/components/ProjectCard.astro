@@ -31,6 +31,7 @@ const {
   variant = 'card',
   locale = 'en',
 } = Astro.props;
+const Heading = variant === 'featured' ? 'h3' : 'h2';
 const messages = getMessages(locale);
 const formattedDate = date ? formatDate(date, locale) : undefined;
 const primaryUrl = url ?? github;
@@ -52,7 +53,7 @@ const primaryTech = tech.filter(tag => tag.toLowerCase() !== 'prototype').slice(
   )}
 
   <div class="project__content">
-    <h3 class="project__title">
+    <Heading class="project__title">
       {primaryUrl ? (
         <a
           href={primaryUrl}
@@ -68,7 +69,7 @@ const primaryTech = tech.filter(tag => tag.toLowerCase() !== 'prototype').slice(
         name
       )}
       {status && <span class:list={['project__status', `project__status--${status}`]}>{messages.projects.status[status]}</span>}
-    </h3>
+    </Heading>
     <p class="project__description">{description}</p>
   </div>
 

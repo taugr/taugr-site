@@ -6,7 +6,7 @@ type: open-source
 tech: [typescript, vue, markdown, remark, rehype]
 github: https://github.com/taugr/vuemarkik
 url: https://vuemarkik.dev/
-featured: true
+featured: false
 image: ./vuemarkik-logo.webp
 imageAlt: VueMarkik logo
 ---

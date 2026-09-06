@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { compareProjects } from '../data/project-order';
 import ContactInvite from '../components/ContactInvite.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
@@ -8,7 +9,7 @@ import { SITE } from '../site';
 const projects = await getCollection('projects');
 const featuredProjects = projects
   .filter(project => project.data.featured)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .sort(compareProjects)
   .slice(0, 3);
 
 const recentEngagements = [

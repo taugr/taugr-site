@@ -44,6 +44,7 @@ const projects = defineCollection({
       github: z.string().url().optional(),
       url: z.string().url().optional(),
       featured: z.boolean().default(false),
+      displayOrder: z.number().int().positive().optional(),
       image: image().optional(),
       imageAlt: z.string().optional(),
     }),

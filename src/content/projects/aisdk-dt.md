@@ -6,7 +6,7 @@ type: open-source
 tech: [typescript, ai-sdk, cli, devtools]
 github: https://github.com/taugr/aisdk-dt
 url: https://taugr.github.io/aisdk-dt/
-featured: false
+featured: true
 image: ./aisdk-dt-logo.svg
 imageAlt: aisdk-dt logo
 ---

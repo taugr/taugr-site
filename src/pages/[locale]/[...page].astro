@@ -1,11 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
+import { compareProjects } from '../../data/project-order';
 import AboutTimeline from '../../components/AboutTimeline.astro';
 import ContactInvite from '../../components/ContactInvite.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ExperienceList from '../../components/ExperienceList.astro';
 import PostList from '../../components/PostList.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import ProjectsList from '../../components/ProjectsList.astro';
 import { speakingTalks } from '../../data/speaking';
 import { teachingItems } from '../../data/teaching';
 import {
@@ -45,7 +47,7 @@ export function getStaticPaths() {
 const { locale, route } = Astro.props as { locale: LocalizedLocale; route: RouteKey };
 const messages = getMessages(locale);
 const projects = await getCollection('projects');
-const sortedProjects = projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedProjects = projects.sort(compareProjects);
 const featuredProjects = sortedProjects.filter(project => project.data.featured).slice(0, 3);
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -187,24 +189,7 @@ const recentEngagements = [
     <>
       <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">{messages.projects.heading}</h1>
       <p class="text-[0.95rem] text-(--color-text-secondary) mb-8">{messages.projects.description}</p>
-      {sortedProjects.map(project => {
-        const copy = localizeProject(project, locale);
-        return (
-          <ProjectCard
-            name={project.data.name}
-            description={copy.description}
-            date={project.data.date}
-            type={project.data.type}
-            status={project.data.status}
-            tech={project.data.tech}
-            github={project.data.github}
-            url={project.data.url}
-            image={project.data.image}
-            imageAlt={copy.imageAlt}
-            locale={locale}
-          />
-        );
-      })}
+      <ProjectsList projects={sortedProjects} locale={locale} />
     </>
   )}
 

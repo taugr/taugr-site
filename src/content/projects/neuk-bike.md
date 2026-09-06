@@ -7,6 +7,7 @@ tech: [typescript, bike, cycling, edinburgh, parking]
 github: https://github.com/taugr/neuk-bike
 url: https://neuk.bike/
 featured: true
+displayOrder: 1
 image: ./neuk-bike-icon.png
 imageAlt: Bike Neuks icon
 ---

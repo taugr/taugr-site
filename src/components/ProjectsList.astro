@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+import { localizeProject, type Locale } from '../i18n';
+import { projectStories, storyLabels } from '../data/project-stories';
+import scranbook from '../assets/projects/scranbook.png';
+import neukBike from '../assets/projects/neuk-bike.png';
+import vuemarkik from '../assets/projects/vuemarkik.png';
+import cmdtime from '../content/projects/cmdtime-screenshot.png';
+
+interface Props { projects: CollectionEntry<'projects'>[]; locale?: Locale }
+const { projects, locale = 'en' } = Astro.props;
+const labels = storyLabels[locale];
+const screenshots = { scranbook, vuemarkik, 'neuk-bike': neukBike, cmdtime };
+---
+
+<div class="projects-list">
+  {projects.map(project => {
+    const copy = localizeProject(project, locale);
+    const story = projectStories[project.id]?.[locale];
+    const screenshot = screenshots[project.id as keyof typeof screenshots];
+    return (
+      <section class:list={['project-entry', { 'project-entry--story': story || screenshot }]} aria-label={project.data.name}>
+        <ProjectCard {...project.data} description={copy.description} imageAlt={copy.imageAlt} locale={locale} />
+        {(story || screenshot) && (
+          <div class="project-story">
+            {screenshot && (
+              <a class="project-story__preview" href={screenshot.src} target="_blank" rel="noopener" aria-label={`${labels.image}: ${project.data.name}`}>
+                <Image src={screenshot} alt={story?.alt ?? copy.imageAlt ?? project.data.name} width={800} format="webp" loading="lazy" />
+                <span>{labels.image} <i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
+              </a>
+            )}
+            {story && (<>
+            <p class="project-story__problem"><strong>{labels.problem}</strong> {story.problem}</p>
+            <details>
+              <summary>{labels.details}<i class="ph ph-plus" aria-hidden="true"></i></summary>
+              <dl>
+                <div><dt>{labels.decision}</dt><dd>{story.decision}</dd></div>
+                <div><dt>{labels.result}</dt><dd>{story.result}</dd></div>
+              </dl>
+            </details>
+            </>)}
+          </div>
+        )}
+      </section>
+    );
+  })}
+</div>
+
+<style>
+  .project-entry--story { margin-bottom: 2.75rem; }
+  .project-story { margin-top: -0.4rem; }
+  .project-story__preview { display: block; overflow: hidden; border: 1px solid var(--color-border); border-radius: 0.7rem; color: var(--color-text-secondary); text-decoration: none; margin-bottom: 1.25rem; }
+  .project-story__preview img { display: block; width: 100%; height: auto; }
+  .project-story__preview span { display: flex; align-items: center; justify-content: space-between; padding: 0.55rem 0.85rem; font-size: 0.75rem; }
+  .project-story__preview:hover { color: var(--color-accent); border-color: var(--color-accent); }
+  .project-story__problem { color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.65rem; }
+  .project-story__problem strong { color: var(--color-text); font-weight: 600; margin-right: 0.35rem; }
+  details { border-bottom: 1px solid var(--color-border); }
+  summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; color: var(--color-accent); cursor: pointer; font-size: 0.85rem; font-weight: 600; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  details[open] summary i { transform: rotate(45deg); }
+  dl { display: grid; gap: 1rem; margin: 0.3rem 0 1.2rem; }
+  dt { color: var(--color-text); font-size: 0.8rem; font-weight: 600; margin-bottom: 0.3rem; }
+  dd { margin: 0; color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.7; }
+</style>
