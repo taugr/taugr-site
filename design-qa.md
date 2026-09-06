@@ -53,3 +53,18 @@ The typography update was compared with the preceding implementation at 1330 × 
 ## Review notes
 
 The local production preview remains running for review. Changes are uncommitted. All publishing decisions are deferred to the user. Font loading continues to use the site's existing Google Fonts integration.
+
+## About timeline update
+
+final result: passed
+
+The preceding homepage redesign was committed as `ae049d7ccdda3fdfef6b7a9666d362b965fa05d0` and deployed successfully by GitHub Pages run `34041688793`. The live homepage and About navigation were checked in the browser with no warning/error logs. The timeline changes below are a subsequent local update awaiting review.
+
+- Shared `AboutTimeline.astro` now renders all three languages with smaller original logos, a date column, chronological markers, and a subtle green highlight for the current role. Mobile dates move above each entry.
+- All six entries, descriptions, locations, dates, organization URLs, and the thesis link are preserved. Entries use an ordered list and level-two headings; redundant logo announcements are omitted.
+- Desktop light/dark layouts were visually inspected. English was checked at 390px and 320px, and both translated routes at 320px, with no horizontal overflow. All six entries render in each language. No broken desktop images or browser warnings/errors were found.
+- `pnpm lint` and `pnpm build` passed (94 pages; 14 translated-route checks).
+- Desktop evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/timeline-desktop.png`
+- Mobile evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/timeline-mobile.png`
+- Dark evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/timeline-dark.png`
+- Review: `http://100.111.214.18:4322/about/`
