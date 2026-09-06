@@ -68,3 +68,25 @@ The preceding homepage redesign was committed as `ae049d7ccdda3fdfef6b7a9666d362
 - Mobile evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/timeline-mobile.png`
 - Dark evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/timeline-dark.png`
 - Review: `http://100.111.214.18:4322/about/`
+
+## Contact and teaching preview
+
+final result: passed
+
+Local update for review before deployment. Added a translated contact invitation to the homepage and teaching page, and an email link to the shared footer. Teaching now uses the shared experience component for all three languages, with level-two headings, summaries of documented learning activities, larger galleries, and existing student-work images leading the AI chatroom gallery. July 2025 now precedes May 2025. All original descriptions, media, links, and dates remain available.
+
+Verified the completed build in the Tailscale preview. Nine entries and nine outcome summaries render in each language. Checked 390px English and 320px Spanish/Armenian layouts without horizontal overflow, and desktop light/dark appearance. The second chatroom thumbnail opens image 2 of 5; Next advances to image 3; Escape closes the dialog and restores focus to the trigger. Homepage and teaching contact actions target `mailto:tom@tau.gr`. Browser warning/error logs were empty. Formatting, lint, build (94 pages and 14 translated-route checks), and whitespace checks passed.
+
+Evidence: `teaching-desktop.png`, `teaching-mobile.png`, and `contact-mobile.png` in `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/`.
+
+Preview remains running at `http://100.111.214.18:4322/teaching/`. No commit, push, or deployment for this update.
+
+## Speaking preview
+
+final result: passed
+
+Speaking now shares the teaching page's open row layout and larger media treatment, with level-two headings and a translated speaking enquiry invitation. Existing recordings, slides, internal resources, and recaps receive prominent action labels and are ordered before event/agenda links. No resource availability or talk content was invented; all seven talks and source URLs remain. English and translated routes use the same component.
+
+Verified desktop light/dark appearance, 390px English, and 320px Spanish/Armenian with no horizontal overflow. Confirmed resource action destinations, seven talk entries, translated labels, and the enquiry mailto destination. Gallery Next advances to the second image; Escape closes and returns focus. Teaching still renders nine entries and nine outcome summaries. Browser warning/error logs were empty. Formatting, lint, build (94 pages; 14 translated routes), and whitespace checks passed.
+
+Evidence: `speaking-desktop.png` and `speaking-mobile.png` in `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/`. Preview remains at `http://100.111.214.18:4322/speaking/`. Contact, teaching, and speaking updates remain uncommitted and undeployed for review.

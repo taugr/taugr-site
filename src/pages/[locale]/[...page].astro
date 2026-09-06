@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import AboutTimeline from '../../components/AboutTimeline.astro';
+import ContactInvite from '../../components/ContactInvite.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ExperienceList from '../../components/ExperienceList.astro';
 import PostList from '../../components/PostList.astro';
@@ -178,6 +179,7 @@ const recentEngagements = [
           });
         });
       </script>
+      <ContactInvite locale={locale} />
     </>
   )}
 
@@ -211,6 +213,7 @@ const recentEngagements = [
       <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">{messages.teaching.heading}</h1>
       <p class="text-[0.95rem] text-(--color-text-secondary) mb-8">{messages.teaching.description}</p>
       <ExperienceList items={localizedTeaching} kind="teaching" locale={locale} />
+      <ContactInvite locale={locale} />
     </>
   )}
 
@@ -219,6 +222,7 @@ const recentEngagements = [
       <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">{messages.speaking.heading}</h1>
       <p class="text-[0.95rem] text-(--color-text-secondary) mb-8">{messages.speaking.description}</p>
       <ExperienceList items={localizedSpeaking} kind="speaking" locale={locale} />
+      <ContactInvite kind="speaking" locale={locale} />
     </>
   )}
 

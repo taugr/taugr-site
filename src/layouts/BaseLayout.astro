@@ -163,6 +163,7 @@ const alternateLinks = translatedRoute
       <footer class="site-footer">
         <span data-footer-owner>&copy; {new Date().getFullYear()} {messages.site.footerName}</span>
         <span class="site-footer__links">
+          <a href="mailto:tom@tau.gr">{locale === 'hy' ? 'էլ․ փոստ' : locale === 'es' ? 'correo' : 'email'}</a>
           {PROFILE_LINKS.map(link => (
             <>
               <a href={link.href} target="_blank" rel="me noopener" data-profile-link={link.label}>{link.label}</a>

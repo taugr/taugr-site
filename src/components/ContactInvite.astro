@@ -1,0 +1,28 @@
+---
+import type { Locale } from '../i18n';
+interface Props { locale?: Locale; kind?: 'general' | 'speaking' }
+const { locale = 'en', kind = 'general' } = Astro.props;
+const generalCopy = {
+  en: { title: 'Let’s talk', text: 'Have a workshop, talk, or collaboration in mind? I’d love to hear about it.', action: 'Get in touch' },
+  es: { title: 'Hablemos', text: '¿Tienes en mente un taller, una charla o una colaboración? Me encantará conocer tu idea.', action: 'Ponte en contacto' },
+  hy: { title: 'Եկեք խոսենք', text: 'Ունե՞ք աշխատարանի, ելույթի կամ համագործակցության գաղափար։ Սիրով կլսեմ այն։', action: 'Կապ հաստատել' },
+}[locale];
+const speakingCopy = {
+  en: { title: 'Invite me to speak', text: 'Planning a talk or panel on AI, education, or digital forensics? Tell me about your event.', action: 'Discuss a talk' },
+  es: { title: 'Invítame a dar una charla', text: '¿Planeas una charla o un panel sobre IA, educación o informática forense? Cuéntame sobre tu evento.', action: 'Hablemos de tu evento' },
+  hy: { title: 'Հրավիրեք ինձ ելույթ ունենալու', text: 'Պլանավորո՞ւմ եք ելույթ կամ քննարկում ԱԲ-ի, կրթության կամ թվային քրեագիտության մասին։ Պատմեք ձեր միջոցառման մասին։', action: 'Քննարկել ելույթը' },
+}[locale];
+const copy = kind === 'speaking' ? speakingCopy : generalCopy;
+---
+<section class="contact-invite">
+  <div><h2>{copy.title}</h2><p>{copy.text}</p></div>
+  <a href="mailto:tom@tau.gr"><i class="ph ph-envelope-simple" aria-hidden="true"></i><span>{copy.action}</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+</section>
+<style>
+  .contact-invite { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 3rem; padding: 1.6rem 0; border-top: 1px solid var(--color-border); }
+  h2 { margin: 0; font-size: 1.3rem; font-weight: 600; letter-spacing: -.025em; }
+  p { margin: .45rem 0 0; max-width: 28rem; color: var(--color-text-secondary); font-size: .9rem; }
+  a { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; gap: .65rem; min-height: 44px; padding: .65rem 1rem; border-radius: .25rem; background: var(--color-accent-soft); color: var(--color-accent-contrast); font-size: .86rem; font-weight: 600; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 640px) { .contact-invite { align-items: flex-start; flex-direction: column; gap: 1rem; } }
+</style>

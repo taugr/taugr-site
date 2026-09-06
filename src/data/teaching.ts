@@ -80,34 +80,6 @@ export const teachingItems: TeachingItem[] = [
     ],
   },
   {
-    title: 'TUMO Mumbai Generative AI Workshop',
-    format: '',
-    host: 'TUMO and Shikha Academy',
-    date: 'May 2025',
-    location: 'Mumbai, India',
-    description:
-      'A pilot workshop on multimodal AI through code generation, configuring AI agents, coding interactive websites, and creating visuals and songs.',
-    media: [
-      {
-        src: '/img/teaching/tumo-mumbai-workshop.webp',
-        alt: 'TUMO Mumbai generative AI workshop',
-        label: 'video',
-      },
-    ],
-    links: [
-      {
-        href: 'https://www.youtube.com/watch?v=lBOiCDEvW4U',
-        label: 'video',
-        icon: 'video',
-      },
-      {
-        href: 'https://www.linkedin.com/posts/tumo-center-for-creative-technologies_our-chief-development-officer-pegor-papazian-activity-7331906798842490880-ShV3',
-        label: 'linkedin',
-        icon: 'linkedin',
-      },
-    ],
-  },
-  {
     title: 'AI Agent Chatroom / Talking AI Avatars',
     format: 'Alt July learning lab',
     host: 'TUMO',
@@ -152,6 +124,34 @@ export const teachingItems: TeachingItem[] = [
         href: 'https://www.instagram.com/p/DMsRu34NfKp/',
         label: 'post',
         icon: 'image',
+      },
+    ],
+  },
+  {
+    title: 'TUMO Mumbai Generative AI Workshop',
+    format: '',
+    host: 'TUMO and Shikha Academy',
+    date: 'May 2025',
+    location: 'Mumbai, India',
+    description:
+      'A pilot workshop on multimodal AI through code generation, configuring AI agents, coding interactive websites, and creating visuals and songs.',
+    media: [
+      {
+        src: '/img/teaching/tumo-mumbai-workshop.webp',
+        alt: 'TUMO Mumbai generative AI workshop',
+        label: 'video',
+      },
+    ],
+    links: [
+      {
+        href: 'https://www.youtube.com/watch?v=lBOiCDEvW4U',
+        label: 'video',
+        icon: 'video',
+      },
+      {
+        href: 'https://www.linkedin.com/posts/tumo-center-for-creative-technologies_our-chief-development-officer-pegor-papazian-activity-7331906798842490880-ShV3',
+        label: 'linkedin',
+        icon: 'linkedin',
       },
     ],
   },

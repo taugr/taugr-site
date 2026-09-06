@@ -1,4 +1,5 @@
 ---
+import { teachingOutcomes } from '../data/teaching-outcomes';
 import type { LocalizedExperience, Locale } from '../i18n';
 import { getMessages } from '../i18n';
 
@@ -10,6 +11,44 @@ interface Props {
 
 const { items, kind, locale } = Astro.props;
 const messages = getMessages(locale);
+const Heading = 'h2';
+const teachingCopy = {
+  en: { outcome: 'Built & learned', gallery: 'Workshop gallery' },
+  es: { outcome: 'Creación y aprendizaje', gallery: 'Galería del taller' },
+  hy: { outcome: 'Ստեղծածն ու սովորածը', gallery: 'Աշխատարանի պատկերասրահ' },
+}[locale];
+const speakingCopy = {
+  en: { video: 'Watch talk', slides: 'View slides', resources: 'Explore resources', recap: 'Read recap', gallery: 'Talk gallery' },
+  es: { video: 'Ver charla', slides: 'Ver diapositivas', resources: 'Explorar recursos', recap: 'Leer resumen', gallery: 'Galería de la charla' },
+  hy: { video: 'Դիտել ելույթը', slides: 'Դիտել սլայդները', resources: 'Դիտել նյութերը', recap: 'Կարդալ ամփոփումը', gallery: 'Ելույթի պատկերասրահ' },
+}[locale];
+function resourceKind(link: LocalizedExperience['links'][number]) {
+  if (link.icon === 'video') return 'video';
+  if (link.icon === 'slides') return 'slides';
+  if (link.href.startsWith('/speaking/')) return 'resources';
+  if (link.sourceLabel === 'recap') return 'recap';
+  return undefined;
+}
+function orderedLinks(item: LocalizedExperience) {
+  if (kind !== 'speaking') return item.links;
+  const priorities = { video: 0, slides: 1, resources: 2, recap: 3 };
+  const priority = (link: LocalizedExperience['links'][number]) => {
+    const resource = resourceKind(link);
+    return resource ? priorities[resource] : 4;
+  };
+  return [...item.links].sort((a, b) => priority(a) - priority(b));
+}
+function actionLabel(link: LocalizedExperience['links'][number]) {
+  const resource = kind === 'speaking' && resourceKind(link);
+  if (!resource) return link.label;
+  return speakingCopy[resource] + (resource === 'resources' && locale !== 'en' ? ` (${messages.essays.english})` : '');
+}
+function galleryMedia(item: LocalizedExperience) {
+  // Lead with existing student work instead of the group photo for this lab.
+  return kind === 'teaching' && item.canonicalTitle === 'AI Agent Chatroom / Talking AI Avatars'
+    ? [item.media[2], item.media[1], item.media[0], ...item.media.slice(3)]
+    : item.media;
+}
 const icons: Record<string, string> = {
   file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6" /><path d="M8 13h8" /><path d="M8 17h6" />',
   github: '<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4" /><path d="M9 18c-4.51 2-5-2-7-2" />',
@@ -21,45 +60,50 @@ const icons: Record<string, string> = {
 };
 ---
 
-<section>
+<section class="experience-list" data-kind={kind}>
   <div class="space-y-4">
     {items.map(item => (
       <article class="border border-(--color-border-light) rounded-lg p-4 transition-all hover:border-(--color-border) hover:bg-(--color-project-hover) hover:-translate-y-px flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
         <div class="min-w-0 flex-1">
-          <h3 class="text-[1rem] text-(--color-link) font-semibold leading-tight">
-            <a href={item.links[0].href} class="inline-flex items-center gap-1.5 hover:underline" target={item.links[0].href.startsWith('/') ? undefined : '_blank'} rel={item.links[0].href.startsWith('/') ? undefined : 'noopener'}>
+          <Heading class="text-[1rem] text-(--color-link) font-semibold leading-tight">
+            <a href={orderedLinks(item)[0].href} class="inline-flex items-center gap-1.5 hover:underline" target={orderedLinks(item)[0].href.startsWith('/') ? undefined : '_blank'} rel={orderedLinks(item)[0].href.startsWith('/') ? undefined : 'noopener'}>
               <span>{item.title}</span>
               <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3 w-3 fill-none stroke-current stroke-2">
                 <path d="M7 17 17 7" />
                 <path d="M9 7h8v8" />
               </svg>
             </a>
-          </h3>
+          </Heading>
           <p class="mt-0.5 text-[0.86rem] text-(--color-text)">{[item.secondary, item.format].filter(Boolean).join(' · ')}</p>
           <p class="mt-1 text-[0.82rem] text-(--color-text-tertiary)">{item.date} · {item.location}</p>
+          {kind === 'teaching' && teachingOutcomes[item.canonicalTitle] && (
+            <div class="teaching-outcome"><p>{teachingCopy.outcome}</p><strong>{teachingOutcomes[item.canonicalTitle][locale]}</strong></div>
+          )}
           <p class="mt-2 text-[0.9rem] text-(--color-text-secondary) leading-relaxed">{item.description}</p>
           <div class="flex flex-wrap items-center gap-3 mt-3 text-[0.82rem]">
-            {item.links.map((link, index) => (
+            {orderedLinks(item).map((link, index) => (
               <>
-                {index > 0 && <span class="h-3.5 w-px bg-(--color-border-light)" aria-hidden="true"></span>}
-                <a href={link.href} class="inline-flex items-center gap-1.5 text-(--color-link) font-medium hover:underline" target={link.href.startsWith('/') ? undefined : '_blank'} rel={link.href.startsWith('/') ? undefined : 'noopener'} data-experience-title={item.canonicalTitle} data-experience-label={link.label}>
+                {index > 0 && kind !== 'speaking' && <span class="h-3.5 w-px bg-(--color-border-light)" aria-hidden="true"></span>}
+                <a href={link.href} class:list={["inline-flex items-center gap-1.5 text-(--color-link) font-medium hover:underline", { 'resource-action': kind === 'speaking' && resourceKind(link) }]} target={link.href.startsWith('/') ? undefined : '_blank'} rel={link.href.startsWith('/') ? undefined : 'noopener'} data-experience-title={item.canonicalTitle} data-experience-label={link.label}>
                   <svg aria-hidden="true" viewBox="0 0 24 24" class="h-3.5 w-3.5 fill-none stroke-current stroke-2" set:html={icons[link.icon]} />
-                  <span>{link.label}</span>
+                  <span>{actionLabel(link)}</span>
                 </a>
               </>
             ))}
           </div>
         </div>
+        <div class="experience-gallery">
+          {galleryMedia(item).slice(0, kind === 'teaching' ? 2 : 1).map((media, mediaIndex) => (
         <button
           type="button"
           class="group relative flex h-28 w-full shrink-0 cursor-zoom-in items-center justify-center overflow-hidden rounded-md border border-(--color-border-light) bg-(--color-bg-secondary) p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition hover:border-(--color-border) focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-link) sm:w-36"
-          data-experience-media={JSON.stringify(item.media)}
-          data-experience-index="0"
+          data-experience-media={JSON.stringify(galleryMedia(item))}
+          data-experience-index={mediaIndex}
           data-experience-title={item.canonicalTitle}
-          aria-label={`${messages.lightbox.open} ${item.title}`}
+          aria-label={`${messages.lightbox.open} ${item.title}${kind === 'teaching' ? ` — ${mediaIndex + 1}` : ''}`}
         >
-          <img src={item.media[0].src} alt={item.media[0].alt} class="max-h-full max-w-full object-contain" loading="lazy" />
-          {item.media.length > 1 && (
+          <img src={media.src} alt={media.alt} class="max-h-full max-w-full object-contain" loading="lazy" />
+          {item.media.length > 1 && kind !== 'teaching' && (
             <span class="absolute left-1.5 top-1.5 rounded bg-(--color-bg)/90 px-1.5 py-0.5 text-[0.7rem] font-semibold text-(--color-text-secondary) shadow-sm" aria-hidden="true">
               +{item.media.length - 1}
             </span>
@@ -72,6 +116,9 @@ const icons: Record<string, string> = {
             </svg>
           </span>
         </button>
+          ))}
+          <p class="experience-gallery-label"><i class="ph ph-images" aria-hidden="true"></i>{kind === 'teaching' ? teachingCopy.gallery : speakingCopy.gallery} · {item.media.length}</p>
+        </div>
       </article>
     ))}
   </div>
@@ -148,3 +195,25 @@ const icons: Record<string, string> = {
     if (caption) caption.textContent = '';
   });
 </script>
+
+<style>
+  .experience-list article { padding: 1.5rem 0 2rem; border: 0; border-bottom: 1px solid var(--color-border-light); border-radius: 0; gap: 1.75rem; }
+  .experience-list article:hover { transform: none; background: transparent; }
+  .experience-list article:first-child { padding-top: 0; }
+  .experience-list h2 { font-size: 1.22rem; line-height: 1.4; letter-spacing: -.02em; }
+  .teaching-outcome { margin: 1.15rem 0 .9rem; padding-left: .9rem; border-left: 2px solid var(--color-link); }
+  .teaching-outcome p { font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--color-link); margin-bottom: .35rem; }
+  .teaching-outcome strong { font-size: .94rem; font-weight: 500; line-height: 1.6; color: var(--color-text); }
+  .experience-gallery { width: 15rem; flex-shrink: 0; display: grid; gap: .65rem; }
+  .experience-gallery button { height: 10rem; width: 100%; }
+  .experience-gallery-label { display: flex; align-items: center; gap: .4rem; font-size: .75rem; color: var(--color-text-secondary); }
+  .experience-list [data-experience-label] { min-height: 36px; text-underline-offset: 3px; }
+  .resource-action { min-height: 44px !important; padding: .6rem .85rem; border: 1px solid var(--color-border); border-radius: .3rem; background: var(--color-project-hover); font-weight: 600; }
+  .resource-action:hover { border-color: var(--color-link); }
+  @media (max-width: 640px) {
+    .experience-gallery { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .experience-gallery button { height: 8.5rem; }
+    .experience-gallery button:only-of-type { grid-column: 1 / -1; height: 13rem; }
+    .experience-gallery-label { grid-column: 1 / -1; }
+  }
+</style>

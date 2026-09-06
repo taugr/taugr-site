@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import ContactInvite from '../components/ContactInvite.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { SITE } from '../site';
@@ -125,6 +126,8 @@ const recentEngagements = [
       ))}
     </div>
   </section>
+
+  <ContactInvite />
 
   <script is:inline>
     document.querySelectorAll('[data-engagement-title]').forEach(function (el) {

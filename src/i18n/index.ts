@@ -888,7 +888,7 @@ export type LocalizedExperience = {
   location: string;
   description: string;
   media: { src: string; alt: string; label: string }[];
-  links: { href: string; label: string; icon: string }[];
+  links: { href: string; label: string; icon: string; sourceLabel?: string }[];
 };
 
 function localizedLinkLabel(
@@ -930,6 +930,7 @@ export function localizeSpeaking(
       })),
       links: talk.links.map((link) => ({
         ...link,
+        sourceLabel: link.label,
         label: localizedLinkLabel(locale, link.label, link.href),
       })),
     };
