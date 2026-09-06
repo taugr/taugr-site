@@ -25,7 +25,7 @@ const messages = getMessages(locale);
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme');
     }
-    return 'dark';
+    return 'light';
   }
 
   function setTheme(theme) {

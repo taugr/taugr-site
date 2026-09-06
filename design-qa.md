@@ -1,59 +1,55 @@
-# Design QA
-
-- Source visual truth: `/Users/tomauger/.codex/generated_images/019f4859-99b5-7811-9980-faa6dc8aae2c/exec-6f613da6-7cca-4ede-a40c-fb7fa1665900.png`
-- Implementation screenshot: `/Users/tomauger/.codex/visualizations/2026/07/09/019f4859-99b5-7811-9980-faa6dc8aae2c/redesign-implementation-pass-2-correct.png`
-- Mobile screenshot: `/Users/tomauger/.codex/visualizations/2026/07/09/019f4859-99b5-7811-9980-faa6dc8aae2c/redesign-mobile-390.png`
-- Desktop viewport: 1536 × 1024; the in-app capture surface recorded the visible 1536 × 864 region and DOM geometry was checked through y=1024.
-- Mobile viewport: 390 × 844.
-- State: homepage, dark theme, signed-out/public state, scroll position at top.
-
-## Full-view comparison evidence
-
-- Side-by-side source and implementation: `/Users/tomauger/.codex/visualizations/2026/07/09/019f4859-99b5-7811-9980-faa6dc8aae2c/design-qa-comparison-final.png`
-- The final desktop geometry places the hero heading at y=110, selected projects at y=440, and teaching/speaking at y=860. These positions align with the selected mock's visible section rhythm.
-- The implementation preserves the mock's wide header, two-column hero, circular portrait, ruled project rows, compact metadata column, mint links/actions, and two-column engagement strip.
-
-## Focused region comparison evidence
-
-- Hero/header comparison: `/Users/tomauger/.codex/visualizations/2026/07/09/019f4859-99b5-7811-9980-faa6dc8aae2c/design-qa-hero-focus.png`
-- Project-list comparison: `/Users/tomauger/.codex/visualizations/2026/07/09/019f4859-99b5-7811-9980-faa6dc8aae2c/design-qa-projects-focus.png`
-- Direct browser inspection confirmed the full navigation and project link columns remain inside the 1536px viewport with no horizontal overflow; `scrollWidth` equals `innerWidth`.
-
-## Findings
-
-No actionable P0, P1, or P2 differences remain.
-
-- Fonts and typography: IBM Plex Mono provides the selected mock's technical display voice for the hero, project names, CTAs, and metadata; Inter keeps navigation and body copy readable. Weight, wrapping, hierarchy, and line lengths remain stable at desktop and mobile widths.
-- Spacing and layout rhythm: the final 1220px content frame, 1336px header frame, section rules, project-row density, and vertical positions match the mock's composition. Mobile collapses to a single column without overlap or clipped content.
-- Colors and visual tokens: the graphite background, warm off-white text, subdued gray secondary text, mint actions, and violet date accent map closely to the source. The light theme remains fully functional as an alternate state.
-- Image quality and asset fidelity: the implementation uses Tom's real portrait and the repository's real project and engagement images. Images preserve aspect ratio and use contained or cover crops appropriate to their slots; no placeholders, CSS drawings, or custom SVG substitutes were introduced.
-- Copy and content: the hero text, role description, project names, project descriptions, dates, engagement names, organizations, and locations are accurate to the repository rather than the mock's earlier generated inaccuracies.
-- Icons: Phosphor's regular icon family is used consistently for social links, theme, metadata, and external actions.
-- Accessibility and behavior: semantic sections and headings are present; focus styles are visible; the theme control is keyboard-addressable; the 390px layout has no horizontal overflow; reduced-motion preferences are respected.
-
-## Comparison history
-
-### Pass 1
-
-- [P2] The initial implementation's vertical density placed the selected-project section at y=480 and the engagement section at y=900, about 40px lower than the selected mock.
-- Fix: reduced the wide-page top margin from 3.5rem to 1rem while retaining the hero's internal spacing and section proportions.
-- Evidence: `/Users/tomauger/.codex/visualizations/2026/07/09/019f4859-99b5-7811-9980-faa6dc8aae2c/redesign-implementation-pass-1.png`.
-
-### Pass 2
-
-- Post-fix geometry: hero heading y=110, selected projects y=440, engagements y=860.
-- No P0/P1/P2 issues remained in desktop, mobile, theme, interaction, copy, image, or console checks.
-- Evidence: `/Users/tomauger/.codex/visualizations/2026/07/09/019f4859-99b5-7811-9980-faa6dc8aae2c/redesign-implementation-pass-2-correct.png` and `/Users/tomauger/.codex/visualizations/2026/07/09/019f4859-99b5-7811-9980-faa6dc8aae2c/redesign-mobile-390.png`.
-
-## Primary interactions tested
-
-- Theme toggle: dark → light → dark; labels and background tokens updated correctly.
-- Primary CTA: `Explore my work` updated the URL hash to `#selected-projects` and placed the target 24px below the viewport top.
-- Navigation and external project/profile links were present with correct destinations in the browser DOM.
-- Browser console: no warnings or errors.
-
-## Follow-up polish
-
-- [P3] The production project artwork differs slightly from ImageGen's stylized thumbnails. Keeping the real repository assets is the intentional, more authentic choice.
+# Centred portfolio redesign review
 
 final result: passed
+
+## Scope and visual target
+
+Implemented the selected centred, green editorial design in the existing Astro site. The user's final instruction to preserve current content and taglines overrides the mockup's sample copy. The subsequent request for a sans serif font updates the typography to Manrope. No push or deployment was performed.
+
+- Source visual: `/Users/tomauger/.codex/generated_images/01a0769f-e50a-71c1-81a5-9a88caddd803/exec-4da87788-32a5-451a-9bab-f7beae097074.png`
+- Production preview: `http://127.0.0.1:4322/`
+- Tailscale preview: `http://100.111.214.18:4322/`
+- Desktop evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/manrope-desktop.png`
+- Keyboard highlight: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/implemented-keyboard-focus.png`
+- Mobile evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/manrope-mobile.png`
+- Dark theme: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/implemented-dark.png`
+
+## Comparison and findings
+
+Source and desktop captures were displayed together for direct comparison at 1330 × 1182 pixels. The implementation viewport was 1330 × 1182 CSS pixels, with a 1:1 captured pixel scale; no density normalization was required. The source is a light homepage with its first project highlighted. The neutral implementation and an additional keyboard-focused capture were inspected; the latter has a visible focus outline and a slightly different scroll position. The highlight is an actual hover/focus state, not permanently applied decoration.
+
+No actionable P0, P1, or P2 findings remain. Full-view comparison covered the readable header, profile, headline, introduction, actions, and all featured project rows. A separate region crop was unnecessary because these were legible at the captured resolution. The lower teaching/speaking content was also inspected in the mobile page capture; a full-page capture with stitching artifacts was discarded as comparison evidence.
+
+- **Typography:** Manrope supplies headings and body/UI text, with semibold display headings and an upright green second headline line. Weights and responsive heading sizes were adjusted for the sans serif proportions. Existing monospace styling remains in code and some metadata. Noto Sans Armenian preserves Armenian glyph coverage. Manrope loading was confirmed in the browser.
+- **Layout:** header, main content, and footer share a centred 780px maximum width. The source column is approximately 750px. Equal margins, a profile above the headline, simple horizontal rows, and clear section spacing retain the selected composition. Navigation wraps on small screens instead of overflowing.
+- **Colors:** warm off-white, deep green links and headline emphasis, and a pale mint primary action. The first project gains a pale green wash and green left border on hover or keyboard focus. The existing theme switch remains functional; light is the new default, while stored choices take precedence.
+- **Images:** actual portrait, project logos, and teaching/speaking assets were reused. No failed homepage images were found. The real VueMarkik logo intentionally differs from the invented logo in the generated mockup.
+- **Content:** original headline, profile taglines, introduction, CTA labels, project metadata, featured order, recent engagements, footer, and locale strings remain intact. The page is longer than the mockup because full descriptions, dates, technologies, and both recent engagements are retained. No generated sample copy was introduced.
+
+## Browser verification
+
+The typography update was compared with the preceding implementation at 1330 × 1182 pixels. English was rechecked at 1330px, 390px, and 320px; Spanish was rechecked at 320px. There was no horizontal overflow, and browser warning/error logs were empty. The interaction and Armenian checks below were completed during the preceding layout review.
+
+- Homepage rendered from the completed production build.
+- English checked at 1330px, 390px, and 320px widths; no horizontal overflow.
+- Armenian checked on mobile and desktop; desktop header content fits its 780px container.
+- Spanish checked at 320px; no horizontal overflow.
+- Explore my work navigates to the selected-projects anchor.
+- Project navigation opens the existing project catalogue; project URLs remain unchanged.
+- About Tom opens the existing About page.
+- Language picker opens and switches to the selected locale.
+- Keyboard navigation reaches project links with visible focus and row highlighting.
+- Dark mode activates, persists through navigation to About, and switches back to light.
+- Browser warning/error log was empty for the preview session.
+
+## Checks and comparison history
+
+- `pnpm format`: passed.
+- `pnpm lint`: passed.
+- `pnpm build`: passed; 94 pages generated, including checks for 14 translated routes.
+- `git diff --check`: passed.
+- One production visual comparison pass, plus focused interaction and responsive checks. No P0/P1/P2 correction cycle was needed after the production comparison.
+
+## Review notes
+
+The local production preview remains running for review. Changes are uncommitted. All publishing decisions are deferred to the user. Font loading continues to use the site's existing Google Fonts integration.

@@ -72,7 +72,7 @@ const alternateLinks = translatedRoute
     <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <meta name="description" content={description} />
     <meta name="author" content={messages.site.footerName} />
     <meta property="og:title" content={title} />
@@ -99,7 +99,7 @@ const alternateLinks = translatedRoute
     <script is:inline>
       // Prevent flash of wrong theme
       (function() {
-        const theme = localStorage.getItem('theme') || 'dark';
+        const theme = localStorage.getItem('theme') || 'light';
         if (theme === 'dark') document.documentElement.classList.add('dark');
       })();
     </script>
