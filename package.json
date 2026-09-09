@@ -25,6 +25,7 @@
     "dev": "astro dev",
     "build": "astro build && node scripts/check-i18n.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
+    "test:webmcp": "node --experimental-strip-types --test scripts/webmcp.test.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "format": "oxfmt . --check",

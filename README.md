@@ -53,6 +53,26 @@ The site is intended to work on GitHub Pages, so old URL redirects are implement
 
 `vercel.json` is only useful if the site is also deployed on Vercel.
 
+## WebMCP
+
+Pages using the shared layout expose three read-only tools through the proposed
+`document.modelContext.registerTool` browser API:
+
+- `search_site`: search published titles, descriptions, and keywords, or browse by
+  content kind. Results include project/resource links and support pagination.
+- `get_site_navigation`: list sections, language choices, and public contact links.
+- `read_current_page`: read rendered main-page text in chunks and list content links.
+
+Registration is feature-detected, uses an abort signal for page cleanup, and is
+restored after back/forward-cache navigation. Unsupported browsers skip registration.
+The static `/webmcp/{en,es,hy}.json` indexes are generated from the same content and
+translations as the site, exclude draft articles, and load only on the first search.
+Article links remain canonical English URLs. Searches run locally in the browser;
+tool calls do not send analytics events, navigate, or contact anyone.
+
+The API is experimental; see the [WebMCP specification](https://webmachinelearning.github.io/webmcp/).
+Run `pnpm test:webmcp` for search, validation, fetch recovery, and registration lifecycle tests.
+
 ## Deployment
 
 GitHub Pages deployment is configured in `.github/workflows/deploy.yml`.

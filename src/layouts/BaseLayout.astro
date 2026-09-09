@@ -191,5 +191,10 @@ const alternateLinks = translatedRoute
         });
       });
     </script>
+    <script>
+      import { installWebMCP } from '../webmcp/register';
+
+      installWebMCP(document, window, window.fetch.bind(window));
+    </script>
   </body>
 </html>
