@@ -1,92 +1,48 @@
-# Centred portfolio redesign review
+# Homepage hero design QA
 
 final result: passed
 
-## Scope and visual target
+## Evidence
 
-Implemented the selected centred, green editorial design in the existing Astro site. The user's final instruction to preserve current content and taglines overrides the mockup's sample copy. The subsequent request for a sans serif font updates the typography to Manrope. No push or deployment was performed.
+- Source visual truth: `/Users/tomauger/.codex/generated_images/01a0863e-f104-7981-85ef-74bfdb31d2bb/exec-642ca877-85b8-41a5-b89c-26e4054df05c.png`.
+- Implementation: `http://127.0.0.1:4321/`, built Astro preview.
+- Screenshots and measurements: `/Users/tomauger/.codex/visualizations/2026/09/09/01a0863e-f104-7981-85ef-74bfdb31d2bb/home-hero/`.
+- Full-view comparison: approved mockup and `desktop.png` opened together in one image comparison tool response. Source 1487 × 1058 pixels; implementation and CSS viewport 1488 × 1056. Approximately 1:1 image density; no resampling. The negligible canvas difference does not affect the comparison.
+- State: English homepage, top of page, light theme, menus closed. Additional captures: 390 × 844 mobile, settled desktop dark theme, Armenian desktop.
+- Focused crop unnecessary: the complete hero, name, portrait, and action labels were legible in the full-view comparison; DOM measurements independently confirmed 128px portrait, 28px name, and 620px heading column.
 
-- Source visual: `/Users/tomauger/.codex/generated_images/01a0769f-e50a-71c1-81a5-9a88caddd803/exec-4da87788-32a5-451a-9bab-f7beae097074.png`
-- Production preview: `http://127.0.0.1:4322/`
-- Tailscale preview: `http://100.111.214.18:4322/`
-- Desktop evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/manrope-desktop.png`
-- Keyboard highlight: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/implemented-keyboard-focus.png`
-- Mobile evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/manrope-mobile.png`
-- Dark theme: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/implemented-dark.png`
+## Findings and fidelity surfaces
 
-## Comparison and findings
+No actionable P0, P1, or P2 findings.
 
-Source and desktop captures were displayed together for direct comparison at 1330 × 1182 pixels. The implementation viewport was 1330 × 1182 CSS pixels, with a 1:1 captured pixel scale; no density normalization was required. The source is a light homepage with its first project highlighted. The neutral implementation and an additional keyboard-focused capture were inspected; the latter has a visible focus outline and a slightly different scroll position. The highlight is an actual hover/focus state, not permanently applied decoration.
+- Typography: existing Manrope and Armenian font retained. The name is 28px semibold, with one large two-line English heading. Mobile uses a 24px name and existing responsive headline sizing. Armenian wraps naturally to accommodate longer copy.
+- Spacing/layout: portrait beside the desktop headline, name above it, paragraph and actions aligned to the text column. The repeated subtitle and standalone profile block are removed. Existing 780px page width retained, rather than expanding the whole site to the generated mockup's roughly 866px column; headline, portrait, buttons, and project rows therefore use the established site scale. This is an intentional scope constraint, not an unresolved visual defect.
+- Colors/tokens: existing cream, forest green, dark-theme tokens, separators, and button treatments preserved. Dark capture was repeated after the existing color transition settled to #111915.
+- Image quality: original 640px portrait asset used with circular object-fit at 128px desktop and 64px mobile. Original project icons retained. The mockup's regenerated face and project artwork were not substituted for source assets.
+- Copy/content: original headline, TUMO description, action labels, projects, metadata, and routes retained. Duplicate tagline and unused profile labels removed in all three locales.
 
-No actionable P0, P1, or P2 findings remain. Full-view comparison covered the readable header, profile, headline, introduction, actions, and all featured project rows. A separate region crop was unnecessary because these were legible at the captured resolution. The lower teaching/speaking content was also inspected in the mobile page capture; a full-page capture with stitching artifacts was discarded as comparison evidence.
+## Verification
 
-- **Typography:** Manrope supplies headings and body/UI text, with semibold display headings and an upright green second headline line. Weights and responsive heading sizes were adjusted for the sans serif proportions. Existing monospace styling remains in code and some metadata. Noto Sans Armenian preserves Armenian glyph coverage. Manrope loading was confirmed in the browser.
-- **Layout:** header, main content, and footer share a centred 780px maximum width. The source column is approximately 750px. Equal margins, a profile above the headline, simple horizontal rows, and clear section spacing retain the selected composition. Navigation wraps on small screens instead of overflowing.
-- **Colors:** warm off-white, deep green links and headline emphasis, and a pale mint primary action. The first project gains a pale green wash and green left border on hover or keyboard focus. The existing theme switch remains functional; light is the new default, while stored choices take precedence.
-- **Images:** actual portrait, project logos, and teaching/speaking assets were reused. No failed homepage images were found. The real VueMarkik logo intentionally differs from the invented logo in the generated mockup.
-- **Content:** original headline, profile taglines, introduction, CTA labels, project metadata, featured order, recent engagements, footer, and locale strings remain intact. The page is longer than the mockup because full descriptions, dates, technologies, and both recent engagements are retained. No generated sample copy was introduced.
+- English: no document or hero horizontal overflow at 320, 390, 639, 640, 641, and 1488px.
+- Spanish and Armenian: no document or hero horizontal overflow at 320, 640, and 1488px.
+- Explore my work reached #selected-projects with section top approximately 24px from viewport top.
+- About Tom opened the About page; language menu navigated to Spanish.
+- Theme toggle changed to dark and back to light.
+- Browser console error log empty when checked.
+- pnpm format, pnpm lint, and pnpm build passed; build checked 14 translated routes.
 
-## Browser verification
+## Comparison history
 
-The typography update was compared with the preceding implementation at 1330 × 1182 pixels. English was rechecked at 1330px, 390px, and 320px; Spanish was rechecked at 320px. There was no horizontal overflow, and browser warning/error logs were empty. The interaction and Armenian checks below were completed during the preceding layout review.
+First implementation comparison passed. No visual fixes were required. Initial mobile capture during rapid viewport changes and dark capture during the theme transition were replaced by settled captures; these were capture timing issues, not layout defects.
 
-- Homepage rendered from the completed production build.
-- English checked at 1330px, 390px, and 320px widths; no horizontal overflow.
-- Armenian checked on mobile and desktop; desktop header content fits its 780px container.
-- Spanish checked at 320px; no horizontal overflow.
-- Explore my work navigates to the selected-projects anchor.
-- Project navigation opens the existing project catalogue; project URLs remain unchanged.
-- About Tom opens the existing About page.
-- Language picker opens and switches to the selected locale.
-- Keyboard navigation reaches project links with visible focus and row highlighting.
-- Dark mode activates, persists through navigation to About, and switches back to light.
-- Browser warning/error log was empty for the preview session.
+## Implementation checklist
 
-## Checks and comparison history
+- [x] Implement approved smaller-portrait hierarchy across all homepages.
+- [x] Preserve mobile readability and existing site assets and metadata.
+- [x] Validate desktop, mobile, translated pages, actions, theme, and build.
+- [x] Leave local preview running for user review.
+- [x] Do not deploy or push.
 
-- `pnpm format`: passed.
-- `pnpm lint`: passed.
-- `pnpm build`: passed; 94 pages generated, including checks for 14 translated routes.
-- `git diff --check`: passed.
-- One production visual comparison pass, plus focused interaction and responsive checks. No P0/P1/P2 correction cycle was needed after the production comparison.
+## Follow-up polish
 
-## Review notes
-
-The local production preview remains running for review. Changes are uncommitted. All publishing decisions are deferred to the user. Font loading continues to use the site's existing Google Fonts integration.
-
-## About timeline update
-
-final result: passed
-
-The preceding homepage redesign was committed as `ae049d7ccdda3fdfef6b7a9666d362b965fa05d0` and deployed successfully by GitHub Pages run `34041688793`. The live homepage and About navigation were checked in the browser with no warning/error logs. The timeline changes below are a subsequent local update awaiting review.
-
-- Shared `AboutTimeline.astro` now renders all three languages with smaller original logos, a date column, chronological markers, and a subtle green highlight for the current role. Mobile dates move above each entry.
-- All six entries, descriptions, locations, dates, organization URLs, and the thesis link are preserved. Entries use an ordered list and level-two headings; redundant logo announcements are omitted.
-- Desktop light/dark layouts were visually inspected. English was checked at 390px and 320px, and both translated routes at 320px, with no horizontal overflow. All six entries render in each language. No broken desktop images or browser warnings/errors were found.
-- `pnpm lint` and `pnpm build` passed (94 pages; 14 translated-route checks).
-- Desktop evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/timeline-desktop.png`
-- Mobile evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/timeline-mobile.png`
-- Dark evidence: `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/timeline-dark.png`
-- Review: `http://100.111.214.18:4322/about/`
-
-## Contact and teaching preview
-
-final result: passed
-
-Local update for review before deployment. Added a translated contact invitation to the homepage and teaching page, and an email link to the shared footer. Teaching now uses the shared experience component for all three languages, with level-two headings, summaries of documented learning activities, larger galleries, and existing student-work images leading the AI chatroom gallery. July 2025 now precedes May 2025. All original descriptions, media, links, and dates remain available.
-
-Verified the completed build in the Tailscale preview. Nine entries and nine outcome summaries render in each language. Checked 390px English and 320px Spanish/Armenian layouts without horizontal overflow, and desktop light/dark appearance. The second chatroom thumbnail opens image 2 of 5; Next advances to image 3; Escape closes the dialog and restores focus to the trigger. Homepage and teaching contact actions target `mailto:tom@tau.gr`. Browser warning/error logs were empty. Formatting, lint, build (94 pages and 14 translated-route checks), and whitespace checks passed.
-
-Evidence: `teaching-desktop.png`, `teaching-mobile.png`, and `contact-mobile.png` in `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/`.
-
-Preview remains running at `http://100.111.214.18:4322/teaching/`. No commit, push, or deployment for this update.
-
-## Speaking preview
-
-final result: passed
-
-Speaking now shares the teaching page's open row layout and larger media treatment, with level-two headings and a translated speaking enquiry invitation. Existing recordings, slides, internal resources, and recaps receive prominent action labels and are ordered before event/agenda links. No resource availability or talk content was invented; all seven talks and source URLs remain. English and translated routes use the same component.
-
-Verified desktop light/dark appearance, 390px English, and 320px Spanish/Armenian with no horizontal overflow. Confirmed resource action destinations, seven talk entries, translated labels, and the enquiry mailto destination. Gallery Next advances to the second image; Escape closes and returns focus. Teaching still renders nine entries and nine outcome summaries. Browser warning/error logs were empty. Formatting, lint, build (94 pages; 14 translated routes), and whitespace checks passed.
-
-Evidence: `speaking-desktop.png` and `speaking-mobile.png` in `/Users/tomauger/.codex/visualizations/2026/09/06/01a0769f-e50a-71c1-81a5-9a88caddd803/`. Preview remains at `http://100.111.214.18:4322/speaking/`. Contact, teaching, and speaking updates remain uncommitted and undeployed for review.
+None required before local review. This is a focused homepage check, not a full-site accessibility audit.

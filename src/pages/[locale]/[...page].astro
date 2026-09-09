@@ -88,19 +88,14 @@ const recentEngagements = [
   {route === 'home' && (
     <>
       <section class="home-hero" aria-labelledby="home-title">
-        <aside class="home-profile" aria-label={messages.home.aboutLabel}>
-          <img src="/img/profile.webp" alt={messages.home.name} width="80" height="80" loading="eager" decoding="async" />
-          <div class="home-profile__text">
-            <p class="home-profile__eyebrow">{messages.home.name}</p>
-            <p>{messages.home.tagline}</p>
-          </div>
-        </aside>
-        <div class="home-hero__copy">
-          <h1 id="home-title">
-            {messages.home.heading.split('\n').map((line, index) => (
-              <>{index > 0 && <br />}{index > 0 ? <span>{line}</span> : line}</>
-            ))}
-          </h1>
+        <img class="home-hero__portrait" src="/img/profile.webp" alt={messages.home.name} width="128" height="128" loading="eager" decoding="async" />
+        <p class="home-hero__name">{messages.home.name}</p>
+        <h1 id="home-title">
+          {messages.home.heading.split('\n').map((line, index) => (
+            <>{index > 0 && <br />}{index > 0 ? <span>{line}</span> : line}</>
+          ))}
+        </h1>
+        <div class="home-hero__details">
           <p>{messages.home.intro}</p>
           <div class="home-hero__actions">
             <a href="#selected-projects" class="button button--primary">
