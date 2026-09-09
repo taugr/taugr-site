@@ -145,6 +145,8 @@ const en = {
       'My technical interests are in AI and cyber security. Occasionally I run workshops teaching AI to teens around the world.',
     contactBefore:
       'If you spot an error, or have comments or questions, email me at',
+    understandingQuote:
+      "You can outsource your thinking, but you can't outsource your understanding.",
     quote: "You can't be normal and expect abnormal returns.",
     logo: 'logo',
   },
@@ -250,6 +252,8 @@ const es: Messages = {
       'Mis intereses técnicos se centran en la IA y la ciberseguridad. De vez en cuando imparto talleres de IA para adolescentes de todo el mundo.',
     contactBefore:
       'Si encuentras algún error o tienes comentarios o preguntas, escríbeme a',
+    understandingQuote:
+      'Puedes delegar tu pensamiento, pero no tu comprensión.',
     quote: 'No puedes ser normal y esperar resultados extraordinarios.',
     logo: 'logotipo',
   },
@@ -373,6 +377,8 @@ const hy: Messages = {
       'Իմ տեխնիկական հետաքրքրությունների կենտրոնում արհեստական բանականությունն ու կիբեռանվտանգությունն են։ Երբեմն աշխարհի տարբեր երկրներում դեռահասների համար արհեստական բանականության աշխատարաններ եմ վարում։',
     contactBefore:
       'Եթե սխալ նկատեք կամ մեկնաբանություններ ու հարցեր ունենաք, գրեք ինձ՝',
+    understandingQuote:
+      'Կարող ես մտածելը ուրիշին պատվիրակել, բայց հասկանալը՝ ոչ։',
     quote: 'Չես կարող սովորական լինել և արտասովոր արդյունքներ ակնկալել։',
     logo: 'տարբերանշան',
   },
