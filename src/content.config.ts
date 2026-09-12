@@ -47,6 +47,7 @@ const projects = defineCollection({
       displayOrder: z.number().int().positive().optional(),
       image: image().optional(),
       imageAlt: z.string().optional(),
+      screenshotAlt: z.string().optional(),
     }),
 });
 

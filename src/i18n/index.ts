@@ -443,6 +443,7 @@ export function formatDate(date: Date, locale: Locale): string {
 export type LocalizedProject = {
   description: string;
   imageAlt: string;
+  screenshotAlt?: string;
 };
 
 const PROJECT_TRANSLATIONS: Record<
@@ -454,6 +455,13 @@ const PROJECT_TRANSLATIONS: Record<
       description:
         'CLI para inspeccionar archivos generations.json de Vercel AI SDK DevTools, de modo que los agentes de programación puedan consultar solicitudes, respuestas, llamadas a herramientas, tiempos y uso sin saturar el contexto.',
       imageAlt: 'Logotipo de aisdk-dt',
+    },
+    ayeride: {
+      description:
+        'Revisa giros difíciles, cruces y tramos antes de ir en bici o coche, con mapas y Street View opcional. Sirve para preparar el viaje, no para navegar en tiempo real. Los recorridos guardados y recientes se pueden volver a consultar sin conexión en el mismo dispositivo, sin crear una cuenta.',
+      imageAlt: 'Icono de la aplicación AyeRide',
+      screenshotAlt:
+        'AyeRide muestra una ruta ciclista desde Princes Street hasta Portobello, con puntos de revisión, un mapa de la ruta y Street View.',
     },
     'climatenet-mcp': {
       description:
@@ -506,6 +514,13 @@ const PROJECT_TRANSLATIONS: Record<
       description:
         'Հրամանային տողի գործիք՝ Vercel AI SDK DevTools-ի generations.json ֆայլերն ուսումնասիրելու համար։ Դրանով կոդ գրող գործակալները կարող են ստանալ հարցումները, պատասխանները, գործիքների կանչերը, կատարման ժամանակն ու օգտագործման տվյալները՝ առանց համատեքստը ծանրաբեռնելու։',
       imageAlt: 'aisdk-dt-ի տարբերանշանը',
+    },
+    ayeride: {
+      description:
+        'Հեծանվով կամ մեքենայով մեկնելուց առաջ ուսումնասիրեք բարդ շրջադարձերը, խաչմերուկներն ու երթուղու հատվածները՝ քարտեզներով և ըստ ցանկության Street View-ով։ Նախատեսված է նախապատրաստվելու, ոչ թե ընթացիկ նավիգացիայի համար։ Պահպանված և վերջին երթուղիների ամփոփումները հասանելի են անցանց՝ նույն սարքում, առանց հաշիվ ստեղծելու։',
+      imageAlt: 'AyeRide հավելվածի պատկերակը',
+      screenshotAlt:
+        'AyeRide-ը ցույց է տալիս հեծանվային երթուղի Փրինսես Սթրիթից դեպի Պորտոբելլո՝ ուսումնասիրվող հատվածներով, երթուղու քարտեզով և Street View-ով։',
     },
     'climatenet-mcp': {
       description:
@@ -563,6 +578,7 @@ export function localizeProject(
     return {
       description: project.data.description,
       imageAlt: project.data.imageAlt ?? project.data.name,
+      screenshotAlt: project.data.screenshotAlt,
     };
   }
   const translated = PROJECT_TRANSLATIONS[locale][project.id];

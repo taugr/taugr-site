@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 import { localizeProject, type Locale } from '../i18n';
 import { projectStories, storyLabels } from '../data/project-stories';
+import ayeride from '../assets/projects/ayeride.png';
 import scranbook from '../assets/projects/scranbook.png';
 import neukBike from '../assets/projects/neuk-bike.png';
 import vuemarkik from '../assets/projects/vuemarkik.png';
@@ -12,7 +13,7 @@ import cmdtime from '../content/projects/cmdtime-screenshot.png';
 interface Props { projects: CollectionEntry<'projects'>[]; locale?: Locale }
 const { projects, locale = 'en' } = Astro.props;
 const labels = storyLabels[locale];
-const screenshots = { scranbook, vuemarkik, 'neuk-bike': neukBike, cmdtime };
+const screenshots = { ayeride, scranbook, vuemarkik, 'neuk-bike': neukBike, cmdtime };
 ---
 
 <div class="projects-list">
@@ -27,7 +28,7 @@ const screenshots = { scranbook, vuemarkik, 'neuk-bike': neukBike, cmdtime };
           <div class="project-story">
             {screenshot && (
               <a class="project-story__preview" href={screenshot.src} target="_blank" rel="noopener" aria-label={`${labels.image}: ${project.data.name}`}>
-                <Image src={screenshot} alt={story?.alt ?? copy.imageAlt ?? project.data.name} width={800} format="webp" loading="lazy" />
+                <Image src={screenshot} alt={story?.alt ?? copy.screenshotAlt ?? copy.imageAlt ?? project.data.name} width={800} format="webp" loading="lazy" />
                 <span>{labels.image} <i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
               </a>
             )}
