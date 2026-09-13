@@ -5,9 +5,11 @@ import AboutTimeline from '../../components/AboutTimeline.astro';
 import ContactInvite from '../../components/ContactInvite.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ExperienceList from '../../components/ExperienceList.astro';
+import { essayLocale, getLocalizedPosts } from '../../data/essays';
 import PostList from '../../components/PostList.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import ProjectsList from '../../components/ProjectsList.astro';
+import RecentArticles from '../../components/RecentArticles.astro';
 import { speakingTalks } from '../../data/speaking';
 import { teachingItems } from '../../data/teaching';
 import {
@@ -49,9 +51,7 @@ const messages = getMessages(locale);
 const projects = await getCollection('projects');
 const sortedProjects = projects.sort(compareProjects);
 const featuredProjects = sortedProjects.filter(project => project.data.featured).slice(0, 3);
-const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const posts = await getLocalizedPosts(locale);
 const archiveEntries = (await getCollection('archive', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
@@ -136,6 +136,8 @@ const recentEngagements = [
           })}
         </div>
       </section>
+
+      <RecentArticles locale={locale} />
 
       <section class="home-section home-section--engagements" aria-labelledby="engagements-title">
         <div class="section-heading">
@@ -226,7 +228,7 @@ const recentEngagements = [
     <>
       <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">{messages.essays.heading}</h1>
       <p class="text-[0.95rem] text-(--color-text-secondary) mb-2">{messages.essays.description}</p>
-      <p class="article-language-notice">{messages.essays.englishNotice}</p>
+      {posts.some(post => essayLocale(post) === 'en') && <p class="article-language-notice">{messages.essays.englishNotice}</p>}
       <PostList posts={posts} locale={locale} />
     </>
   )}

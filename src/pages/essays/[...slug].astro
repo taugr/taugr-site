@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { essayAlternates, readingTime } from '../../data/essays';
 import PostLayout from '../../layouts/PostLayout.astro';
 
 export async function getStaticPaths() {
@@ -14,7 +15,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<PostLayout frontmatter={{ ...post.data, readingTime: (post as any).readingTime }}>
+<PostLayout frontmatter={{ ...post.data, readingTime: readingTime(post.body ?? '', 'en') }} alternatePaths={await essayAlternates(post.id)}>
   <Content />
 </PostLayout>
 

@@ -4,6 +4,7 @@ import { compareProjects } from '../data/project-order';
 import ContactInvite from '../components/ContactInvite.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import RecentArticles from '../components/RecentArticles.astro';
 import { SITE } from '../site';
 
 const projects = await getCollection('projects');
@@ -85,6 +86,8 @@ const recentEngagements = [
       ))}
     </div>
   </section>
+
+  <RecentArticles />
 
   <section class="home-section home-section--engagements" aria-labelledby="engagements-title">
     <div class="section-heading">

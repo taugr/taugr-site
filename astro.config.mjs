@@ -8,6 +8,16 @@ import { remarkReadingTime } from './src/plugins/reading-time.mjs';
 
 export default defineConfig({
   site: 'https://tau.gr',
+  redirects: {
+    '/essays/set-up-wireguard-vpn-ubuntu-mac/':
+      '/archive/posts/set-up-wireguard-vpn-ubuntu-mac/',
+    '/essays/set-up-cloudflared-ubuntu-wireguard/':
+      '/archive/posts/set-up-cloudflared-ubuntu-wireguard/',
+    '/blog/set-up-wireguard-vpn-ubuntu-mac/':
+      '/archive/posts/set-up-wireguard-vpn-ubuntu-mac/',
+    '/blog/set-up-cloudflared-ubuntu-wireguard/':
+      '/archive/posts/set-up-cloudflared-ubuntu-wireguard/',
+  },
   i18n: {
     defaultLocale: 'en',
     locales: [

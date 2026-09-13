@@ -9,7 +9,7 @@ originalUrl: 'https://tomauger.gitlab.io/posts/2019-03-03-set-up-cloudflared-ubu
 
 Once you've set up a WireGuard VPN server, you'll also want to protect your DNS requests. One method of achieving this is to set up a DNS over HTTPS resolver on your VPN server and route your DNS traffic over the VPN tunnel.
 
-This follows on from the last post [Set up a WireGuard VPN on Ubuntu and connect from Mac and Android](../2019-03-02-set-up-wireguard-vpn-ubuntu-mac) so check that out first if you don't already have a WireGuard VPN server set up.
+This follows on from the last post [Set up a WireGuard VPN on Ubuntu and connect from Mac and Android](/archive/posts/set-up-wireguard-vpn-ubuntu-mac/) so check that out first if you don't already have a WireGuard VPN server set up.
 
 Cloudflare provides a DNS over HTTPS (DoH) resolver to use with their `1.1.1.1` public DNS service. We'll install this on our WireGuard server and then configure each client to use it.
 
@@ -82,7 +82,7 @@ wg-quick up wg0
 
 # Configure WireGuard Clients
 
-On each client edit the WireGuard config and change the DNS address to be the WireGuard internal IP address of the server. If you used the settings in the [Set up a WireGuard VPN on Ubuntu and connect from Mac and Android](../2019-03-02-set-up-wireguard-vpn-ubuntu-mac) guide then this is `10.0.0.1`:
+On each client edit the WireGuard config and change the DNS address to be the WireGuard internal IP address of the server. If you used the settings in the [Set up a WireGuard VPN on Ubuntu and connect from Mac and Android](/archive/posts/set-up-wireguard-vpn-ubuntu-mac/) guide then this is `10.0.0.1`:
 
 ```ini
 DNS = 10.0.0.1

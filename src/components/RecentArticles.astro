@@ -1,0 +1,140 @@
+---
+import { essayLocale, essayPath, getLocalizedPosts, readingTime } from '../data/essays';
+import { Image } from 'astro:assets';
+import { formatDate, getMessages, LOCALES, localizedPath, type Locale } from '../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'en' } = Astro.props;
+const messages = getMessages(locale);
+const posts = (await getLocalizedPosts(locale)).slice(0, 3);
+---
+
+{posts.length > 0 && (
+  <section class="home-section home-section--articles" aria-labelledby="articles-title">
+    <div class="section-heading">
+      <h2 id="articles-title">{messages.home.recentArticles}</h2>
+      <span aria-hidden="true"></span>
+      <a href={localizedPath(locale, 'essays')}>{messages.home.viewAll}</a>
+    </div>
+    <div class="recent-articles">
+      {posts.map(post => (
+        <article class:list={['recent-article', { 'recent-article--illustrated': post.data.image }]} lang={LOCALES[essayLocale(post)].tag}>
+          <div class="recent-article__content">
+          <div class="recent-article__meta">
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, locale)}</time>
+            <span aria-hidden="true">·</span>
+            <span>{readingTime(post.body ?? '', locale)}</span>
+            {locale !== 'en' && essayLocale(post) === 'en' && <span lang={locale}>· {messages.essays.english}</span>}
+          </div>
+          <h3><a href={essayPath(post)}>{post.data.title}</a></h3>
+          <p>{post.data.description}</p>
+          <a class="recent-article__link" href={essayPath(post)} lang={locale}>
+            {messages.home.readArticle}<i class="ph ph-arrow-right" aria-hidden="true"></i>
+          </a>
+          </div>
+          {post.data.image && (
+            <a href={essayPath(post)} class="recent-article__image" tabindex="-1" aria-hidden="true">
+              <Image
+                src={post.data.image}
+                alt=""
+                width={480}
+                height={320}
+                widths={[96, 192, 240, 480]}
+                sizes="(min-width: 640px) 240px, 96px"
+                format="webp"
+                loading="lazy"
+              />
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .recent-articles {
+    margin-top: 2rem;
+  }
+  .recent-article {
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .recent-article:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .recent-article:last-child { padding-bottom: 0; }
+  .recent-article--illustrated {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 96px;
+    align-items: start;
+    gap: 1rem;
+  }
+  .recent-article__image {
+    display: block;
+    margin-top: 0.1rem;
+    border: 1px solid var(--color-border-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .recent-article__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  @media (min-width: 640px) {
+    .recent-article--illustrated { grid-template-columns: minmax(0, 1fr) 240px; gap: 2rem; }
+  }
+  @media (max-width: 639px) {
+    .recent-article--illustrated { row-gap: 0.75rem; }
+    .recent-article--illustrated .recent-article__content { display: contents; }
+    .recent-article--illustrated .recent-article__meta { margin-bottom: 0; }
+    .recent-article--illustrated h3 { font-size: 1.35rem; }
+    .recent-article--illustrated .recent-article__image { grid-column: 2; grid-row: 1 / span 2; }
+    .recent-article--illustrated p,
+    .recent-article--illustrated .recent-article__link { grid-column: 1 / -1; margin-top: 0; }
+  }
+  .recent-article__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-tertiary);
+    font-size: 0.76rem;
+  }
+  h3 {
+    max-width: 30ch;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.7rem, 4vw, 2.2rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.18;
+    text-wrap: balance;
+  }
+  h3 a { color: var(--color-text); text-decoration: none; }
+  h3 a:hover { color: var(--color-link); }
+  p {
+    max-width: 65ch;
+    margin-top: 0.8rem;
+    color: var(--color-text-secondary);
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+  .recent-article__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    color: var(--color-link);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .recent-article__link:hover { text-decoration: underline; }
+</style>

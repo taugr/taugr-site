@@ -1,4 +1,5 @@
 ---
+import type { EssayAlternates } from '../data/essays';
 import {
   closestRouteKey,
   getMessages,
@@ -10,14 +11,15 @@ import {
 interface Props {
   locale: Locale;
   pathname: string;
+  alternatePaths?: EssayAlternates;
 }
 
-const { locale, pathname } = Astro.props;
+const { locale, pathname, alternatePaths } = Astro.props;
 const route = closestRouteKey(pathname);
 const messages = getMessages(locale);
 const choices = (Object.keys(LOCALES) as Locale[]).map((choice) => ({
   locale: choice,
-  href: localizedPath(choice, route),
+  href: alternatePaths?.[choice] ?? localizedPath(choice, route),
   ...LOCALES[choice],
 }));
 ---

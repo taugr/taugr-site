@@ -1,4 +1,5 @@
 ---
+import type { EssayAlternates } from '../data/essays';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import LanguagePicker from '../components/LanguagePicker.astro';
 import PostHog from '../components/posthog.astro';
@@ -17,35 +18,47 @@ import '../styles/global.css';
 
 interface Props {
   title: string;
+  socialTitle?: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
+  ogImageType?: string;
   ogType?: 'website' | 'article';
   publishedTime?: Date | string;
   tags?: string[];
   wide?: boolean;
   locale?: Locale;
+  alternatePaths?: EssayAlternates;
 }
 
 const {
   title,
+  socialTitle = title,
   description = SITE.description,
   ogImage = '/social-card.png',
+  ogImageAlt,
+  ogImageType,
   ogType = 'website',
   publishedTime,
   tags = [],
   wide = false,
   locale: requestedLocale,
+  alternatePaths,
 } = Astro.props;
 const locale = requestedLocale ?? localeFromPath(Astro.url.pathname);
 const messages = getMessages(locale);
 const translatedRoute = exactRouteKey(Astro.url.pathname);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(ogImage, Astro.site);
+const socialImageAlt = ogImageAlt ?? messages.site.description;
+const socialImageType = ogImageType ?? (ogImage === '/social-card.png' ? 'image/png' : undefined);
 const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : undefined;
 const navItems = (Object.keys(ROUTES) as RouteKey[])
   .filter(route => route !== 'archive')
   .map(route => ({ route, href: localizedPath(locale, route), label: messages.nav[route] }));
-const alternateLinks = translatedRoute
+const alternateLinks = alternatePaths
+  ? (Object.entries(alternatePaths) as [Locale, string][]).map(([locale, path]) => ({ locale, href: new URL(path, Astro.site) }))
+  : translatedRoute
   ? (Object.keys(LOCALES) as Locale[]).map(alternateLocale => ({
       locale: alternateLocale,
       href: new URL(localizedPath(alternateLocale, translatedRoute), Astro.site),
@@ -60,7 +73,7 @@ const alternateLinks = translatedRoute
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href={canonicalURL} />
     {alternateLinks.map(link => <link rel="alternate" hreflang={LOCALES[link.locale].tag} href={link.href} />)}
-    {translatedRoute && <link rel="alternate" hreflang="x-default" href={new URL(localizedPath('en', translatedRoute), Astro.site)} />}
+    {alternateLinks.some(link => link.locale === 'en') && <link rel="alternate" hreflang="x-default" href={alternateLinks.find(link => link.locale === 'en')?.href} />}
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -75,7 +88,7 @@ const alternateLinks = translatedRoute
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <meta name="description" content={description} />
     <meta name="author" content={messages.site.footerName} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={socialTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
@@ -83,18 +96,20 @@ const alternateLinks = translatedRoute
     <meta property="og:locale" content={LOCALES[locale].og} />
     {alternateLinks.filter(link => link.locale !== locale).map(link => <meta property="og:locale:alternate" content={LOCALES[link.locale].og} />)}
     <meta property="og:image" content={socialImageURL} />
+    {socialImageType && <meta property="og:image:type" content={socialImageType} />}
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={messages.site.description} />
-    {ogType === 'article' && <meta property="article:author" content={messages.site.footerName} />}
+    <meta property="og:image:alt" content={socialImageAlt} />
+    {ogType === 'article' && <meta property="article:author" content={new URL(localizedPath(locale, 'about'), Astro.site)} />}
     {publishedDate && <meta property="article:published_time" content={publishedDate} />}
     {tags.map(tag => <meta property="article:tag" content={tag} />)}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@tomaugr" />
     <meta name="twitter:creator" content="@tomaugr" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={socialTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageURL} />
-    <meta name="twitter:image:alt" content={messages.site.description} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
     <title>{title}</title>
     <script is:inline>
       // Prevent flash of wrong theme
@@ -150,7 +165,7 @@ const alternateLinks = translatedRoute
                 ></i>
               </a>
             ))}
-            <LanguagePicker locale={locale} pathname={Astro.url.pathname} />
+            <LanguagePicker locale={locale} pathname={Astro.url.pathname} alternatePaths={alternatePaths} />
             <ThemeToggle locale={locale} />
           </div>
         </div>

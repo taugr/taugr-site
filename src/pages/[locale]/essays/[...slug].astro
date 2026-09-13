@@ -1,0 +1,32 @@
+---
+import { render } from 'astro:content';
+import { essayAlternates, essaySlug, publishedTranslations, readingTime } from '../../../data/essays';
+import PostLayout from '../../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  return (await publishedTranslations()).map(post => ({
+    params: { locale: post.data.locale, slug: essaySlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const locale = post.data.locale;
+const slug = essaySlug(post);
+const { Content } = await render(post);
+---
+
+<PostLayout locale={locale} alternatePaths={await essayAlternates(slug)} frontmatter={{ ...post.data, readingTime: readingTime(post.body ?? '', locale) }}>
+  <Content />
+</PostLayout>
+
+<script is:inline define:vars={{ title: post.data.title, slug, tags: post.data.tags, locale }}>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.posthog?.capture('essay_viewed', {
+      essay_title: title,
+      essay_slug: slug,
+      tags: tags,
+      locale: locale,
+    });
+  });
+</script>

@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { essayLocale, essayPath, getLocalizedPosts } from '../../data/essays';
 import { compareProjects } from '../../data/project-order';
 import { speakingTalks } from '../../data/speaking';
 import { teachingItems } from '../../data/teaching';
@@ -25,7 +26,7 @@ export async function GET({ params }: APIContext) {
   const messages = getMessages(locale);
   const [projects, posts, archive] = await Promise.all([
     getCollection('projects'),
-    getCollection('posts', ({ data }) => !data.draft),
+    getLocalizedPosts(locale),
     getCollection('archive', ({ data }) => !data.draft),
   ]);
   const entries: SearchEntry[] = (Object.keys(ROUTES) as RouteKey[]).map(
@@ -70,23 +71,28 @@ export async function GET({ params }: APIContext) {
       ],
     })),
   );
-  for (const [kind, collection] of [
-    ['essay', posts],
-    ['archive', archive],
-  ] as const) {
-    entries.push(
-      ...collection
-        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-        .map((entry) => ({
-          title: entry.data.title,
-          description: entry.data.description,
-          url: `/${kind === 'essay' ? 'essays' : 'archive'}/${entry.id}/`,
-          kind,
-          language: 'en',
-          keywords: entry.data.tags,
-        })),
-    );
-  }
+  entries.push(
+    ...posts.map((post) => ({
+      title: post.data.title,
+      description: post.data.description,
+      url: essayPath(post),
+      kind: 'essay' as const,
+      language: LOCALES[essayLocale(post)].tag,
+      keywords: post.data.tags,
+    })),
+  );
+  entries.push(
+    ...archive
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+      .map((entry) => ({
+        title: entry.data.title,
+        description: entry.data.description,
+        url: `/archive/${entry.id}/`,
+        kind: 'archive' as const,
+        language: 'en',
+        keywords: entry.data.tags,
+      })),
+  );
   for (const [kind, items] of [
     ['teaching', localizeTeaching(teachingItems, locale)],
     ['speaking', localizeSpeaking(speakingTalks, locale)],

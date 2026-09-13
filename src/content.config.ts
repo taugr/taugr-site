@@ -1,18 +1,35 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, reference, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+
+const essayMetadata = z.object({
+  title: z.string(),
+  description: z.string(),
+  date: z.coerce.date(),
+  tags: z.array(z.string()).default([]),
+  draft: z.boolean().default(false),
+  editorial: z.boolean().default(false),
+  imageAlt: z.string().optional(),
+});
 
 const posts = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
   schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      date: z.coerce.date(),
-      tags: z.array(z.string()).default([]),
-      draft: z.boolean().default(false),
+    essayMetadata.extend({
       image: image().optional(),
-      imageAlt: z.string().optional(),
       originalUrl: z.string().url().optional(),
+    }),
+});
+
+const postTranslations = defineCollection({
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/post-translations',
+  }),
+  schema: ({ image }) =>
+    essayMetadata.extend({
+      image: image().optional(),
+      locale: z.enum(['es', 'hy']),
+      translationOf: reference('posts'),
     }),
 });
 
@@ -51,4 +68,4 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { posts, projects, archive };
+export const collections = { posts, postTranslations, projects, archive };

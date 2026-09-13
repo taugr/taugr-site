@@ -1,24 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import { essayLocale, essayPath, readingTime, type Essay } from '../data/essays';
+import { LOCALES } from '../i18n';
 import { formatDate, getMessages, type Locale } from '../i18n';
 
-interface Post {
-  id: string;
-  data: {
-    title: string;
-    description: string;
-    date: Date;
-    tags: string[];
-    draft: boolean;
-    image?: ImageMetadata;
-    imageAlt?: string;
-  };
-  readingTime?: string;
-}
-
 interface Props {
-  posts: Post[];
+  posts: Essay[];
   locale?: Locale;
 }
 
@@ -50,17 +37,17 @@ function getTagColor(tag: string) {
 
 {posts.map((post, i) => (
   <article class:list={['mb-6 pb-6', i < posts.length - 1 && 'border-b border-(--color-border-light)']}>
-    <a href={`/essays/${post.id}/`} class:list={['group no-underline', post.data.image ? 'flex items-start gap-4' : 'block']}>
-      <div class="min-w-0 flex-1">
-        <h3 class="text-[1.08rem] font-semibold text-(--color-text) leading-snug group-hover:text-(--color-link) transition-colors">
+    <a href={essayPath(post)} class:list={['group no-underline', post.data.image ? 'post-list-entry--illustrated flex items-start gap-4' : 'block']}>
+      <div class="post-list-content min-w-0 flex-1">
+        <h3 lang={LOCALES[essayLocale(post)].tag} class="text-[1.08rem] font-semibold text-(--color-text) leading-snug group-hover:text-(--color-link) transition-colors">
           {post.data.title}
         </h3>
-        <div class="flex items-center gap-2 mt-1 text-[0.82rem] text-(--color-text-tertiary)">
-          {formatDate(post.data.date, locale)} · {post.readingTime || '5 min read'}
-          {locale !== 'en' && <span class="article-language">· {messages.essays.english}</span>}
+        <div class="flex flex-wrap items-center gap-2 mt-1 text-[0.82rem] text-(--color-text-tertiary)">
+          {formatDate(post.data.date, locale)} · {readingTime(post.body ?? '', locale)}
+          {locale !== 'en' && essayLocale(post) === 'en' && <span class="article-language">· {messages.essays.english}</span>}
         </div>
         {post.data.tags.length > 0 && (
-          <div class="flex gap-1.5 mt-1.5">
+          <div class="flex flex-wrap gap-1.5 mt-1.5">
             {post.data.tags.slice(0, 3).map(tag => {
               const color = getTagColor(tag);
               return (
@@ -74,7 +61,7 @@ function getTagColor(tag: string) {
             })}
           </div>
         )}
-        <p class="text-[0.94rem] text-(--color-text-secondary) mt-1.5 leading-relaxed">
+        <p lang={LOCALES[essayLocale(post)].tag} class="text-[0.94rem] text-(--color-text-secondary) mt-1.5 leading-relaxed">
           {post.data.description}
         </p>
       </div>
@@ -82,12 +69,29 @@ function getTagColor(tag: string) {
         <Image
           src={post.data.image}
           alt={post.data.imageAlt || post.data.title}
-          width={96}
-          height={64}
-          class="h-16 w-24 shrink-0 rounded-md border border-(--color-border-light) object-cover"
+          width={320}
+          height={214}
+          widths={[96, 160, 192, 320]}
+          sizes="(min-width: 640px) 160px, 96px"
+          format="webp"
+          class="h-16 w-24 sm:h-auto sm:w-40 aspect-[3/2] shrink-0 rounded border border-(--color-border-light) object-cover"
           loading="lazy"
         />
       )}
     </a>
   </article>
 ))}
+
+<style>
+  @media (max-width: 639px) {
+    .post-list-entry--illustrated {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 96px;
+      gap: 0.5rem 1rem;
+    }
+    .post-list-entry--illustrated .post-list-content { display: contents; }
+    .post-list-entry--illustrated .post-list-content > * { grid-column: 1; margin-top: 0; }
+    .post-list-entry--illustrated .post-list-content > p { grid-column: 1 / -1; }
+    .post-list-entry--illustrated > img { grid-column: 2; grid-row: 1 / span 3; }
+  }
+</style>

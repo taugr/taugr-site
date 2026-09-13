@@ -90,6 +90,96 @@ for (const locale of Object.keys(localeConfig)) {
   }
 }
 
+// Check translated essay discovery, language switching, and content structure.
+const englishEssays = JSON.parse(
+  readFileSync(join(dist, 'webmcp/en.json'), 'utf8'),
+).filter((entry) => entry.kind === 'essay');
+let translatedEssayCount = 0;
+for (const [locale, config] of Object.entries(localeConfig)) {
+  const essays = JSON.parse(
+    readFileSync(join(dist, `webmcp/${locale}.json`), 'utf8'),
+  ).filter((entry) => entry.kind === 'essay' && entry.language === config.lang);
+  for (const essay of essays) {
+    translatedEssayCount++;
+    const route = essay.url.replace(`/${locale}/`, '').replace(/\/$/, '');
+    const html = readRoute(locale, route);
+    const original = englishEssays.find(
+      (entry) => essay.url === `/${locale}${entry.url}`,
+    );
+    if (!original) {
+      failures.push(`${essay.url} has no published original`);
+      continue;
+    }
+    const originalHtml = readFileSync(
+      join(dist, original.url, 'index.html'),
+      'utf8',
+    );
+    const body =
+      html.match(/<div class="mt-6 prose"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '';
+    const originalBody =
+      originalHtml.match(
+        /<div class="mt-6 prose"[^>]*>([\s\S]*?)<\/div>/,
+      )?.[1] ?? '';
+    if (!body || !originalBody || body === originalBody)
+      failures.push(`${essay.url} has no translated body`);
+    const links = (value) =>
+      [...value.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
+    if (JSON.stringify(links(body)) !== JSON.stringify(links(originalBody))) {
+      failures.push(`${essay.url} changed or omitted source links`);
+    }
+    for (const tag of ['p', 'h2', 'blockquote', 'aside']) {
+      const count = (value) =>
+        (value.match(new RegExp(`<${tag}[ >]`, 'g')) ?? []).length;
+      if (count(body) !== count(originalBody))
+        failures.push(`${essay.url} changed ${tag} structure`);
+    }
+    if (
+      !html.includes(`<html lang="${config.lang}">`) ||
+      !html.includes(`<link rel="canonical" href="https://tau.gr${essay.url}">`)
+    ) {
+      failures.push(
+        `${essay.url} has incorrect language or canonical metadata`,
+      );
+    }
+    for (const [target, lang] of [
+      ['en', 'en'],
+      ...Object.entries(localeConfig).map(([key, value]) => [key, value.lang]),
+    ]) {
+      const path = target === 'en' ? original.url : `/${target}${original.url}`;
+      if (
+        !html.includes(`hreflang="${lang}" href="https://tau.gr${path}"`) ||
+        !html.includes(`href="${path}" lang="${lang}"`)
+      ) {
+        failures.push(
+          `${essay.url} is missing its ${target} article alternate or language choice`,
+        );
+      }
+      if (
+        !originalHtml.includes(
+          `hreflang="${lang}" href="https://tau.gr${path}"`,
+        )
+      ) {
+        failures.push(
+          `${original.url} is missing its ${target} reciprocal alternate`,
+        );
+      }
+    }
+    for (const index of ['', 'essays']) {
+      const indexHtml = readRoute(locale, index);
+      if (
+        !indexHtml.includes(`href="${essay.url}"`) ||
+        !indexHtml.includes(essay.title)
+      ) {
+        failures.push(`/${locale}/${index} does not list the translated essay`);
+      }
+    }
+    if (!sitemap.includes(`https://tau.gr${essay.url}`))
+      failures.push(`Sitemap is missing ${essay.url}`);
+    if (rss.includes(`https://tau.gr${essay.url}`))
+      failures.push(`English RSS duplicates ${essay.url}`);
+  }
+}
+
 if (failures.length > 0) {
   console.error(
     [
@@ -100,4 +190,6 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log('Localization checks passed for 14 translated routes.');
+console.log(
+  `Localization checks passed for 14 translated index routes and ${translatedEssayCount} translated essays.`,
+);

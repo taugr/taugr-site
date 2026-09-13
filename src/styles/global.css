@@ -383,6 +383,8 @@ html:lang(hy-AM) textarea {
   font-family: 'Noto Sans Armenian', var(--font-sans);
 }
 
+html:lang(hy-AM) .recent-article h3,
+html:lang(hy-AM) .editorial .pull-quote p,
 html:lang(hy-AM) .home-hero h1,
 html:lang(hy-AM) .project__title,
 html:lang(hy-AM) .project__meta p,
@@ -576,6 +578,10 @@ html:lang(hy-AM) .home-hero h1 {
   transition:
     background-color 0.18s ease,
     border-color 0.18s ease;
+}
+
+.project-list--featured > .project--featured:last-of-type {
+  border-bottom: 0;
 }
 
 .project--featured:hover,
@@ -783,6 +789,7 @@ html:lang(hy-AM) .home-hero h1 {
   border-left: 0;
 }
 
+.home-section--articles,
 .home-section--engagements {
   margin-top: 2.6rem;
 }

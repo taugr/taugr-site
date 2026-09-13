@@ -54,7 +54,7 @@ export function createTools(document: Document, fetcher: typeof fetch): Tool[] {
       name: 'search_site',
       title: 'Search Tom Auger’s site',
       description:
-        'Find published projects, essays, archived writing, teaching, speaking, and pages by title, description, or keywords. Omit query to browse. Returns links without opening them. Results use the current page language; articles remain English. Use offset to retrieve more results.',
+        'Find published projects, essays, archived writing, teaching, speaking, and pages by title, description, or keywords. Omit query to browse. Returns links without opening them. Results use the current page language; essays use available translations and otherwise fall back to English. Archived writing remains English. Use offset to retrieve more results.',
       inputSchema: objectSchema({
         query: { type: 'string', maxLength: 200 },
         kind: { type: 'string', enum: CONTENT_KINDS },
