@@ -108,6 +108,8 @@ const recentEngagements = [
         </div>
       </section>
 
+      <RecentArticles locale={locale} />
+
       <section id="selected-projects" class="home-section" aria-labelledby="projects-title">
         <div class="section-heading">
           <h2 id="projects-title">{messages.home.selectedProjects}</h2>
@@ -136,8 +138,6 @@ const recentEngagements = [
           })}
         </div>
       </section>
-
-      <RecentArticles locale={locale} />
 
       <section class="home-section home-section--engagements" aria-labelledby="engagements-title">
         <div class="section-heading">

@@ -789,8 +789,7 @@ html:lang(hy-AM) .home-hero h1 {
   border-left: 0;
 }
 
-.home-section--articles,
-.home-section--engagements {
+.home-section ~ .home-section {
   margin-top: 2.6rem;
 }
 

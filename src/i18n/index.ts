@@ -112,7 +112,7 @@ const en = {
     selectedProjects: 'Selected projects',
     viewAll: 'View all',
     recent: 'Recent teaching & speaking',
-    recentArticles: 'Recent articles',
+    recentArticles: 'Recent essays',
     readArticle: 'Read article',
     teaching: 'Teaching',
     speaking: 'Speaking',
