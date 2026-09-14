@@ -153,7 +153,7 @@ const en = {
   essays: {
     title: 'Essays — taugr',
     heading: 'Essays',
-    description: 'Essays and Thoughts',
+    description: 'Essays and thoughts',
     englishNotice: 'Articles without a translation are shown in English.',
     english: 'English',
   },
