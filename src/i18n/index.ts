@@ -153,7 +153,7 @@ const en = {
   essays: {
     title: 'Essays — taugr',
     heading: 'Essays',
-    description: 'Essays and experiments.',
+    description: 'Essays and Thoughts',
     englishNotice: 'Articles without a translation are shown in English.',
     english: 'English',
   },
@@ -260,7 +260,7 @@ const es: Messages = {
   essays: {
     title: 'Artículos — taugr',
     heading: 'Artículos',
-    description: 'Artículos y experimentos.',
+    description: 'Artículos y reflexiones',
     englishNotice: 'Los artículos sin traducción se muestran en inglés.',
     english: 'Inglés',
   },
@@ -385,7 +385,7 @@ const hy: Messages = {
   essays: {
     title: 'Հոդվածներ — taugr',
     heading: 'Հոդվածներ',
-    description: 'Հոդվածներ և փորձարկումներ։',
+    description: 'Հոդվածներ և մտքեր',
     englishNotice: 'Չթարգմանված հոդվածները ցուցադրվում են անգլերենով։',
     english: 'Անգլերեն',
   },

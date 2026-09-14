@@ -127,6 +127,7 @@ button:focus-visible {
 
 .site-shell {
   min-height: 100vh;
+  min-height: 100svh;
 }
 
 .site-header__inner,

@@ -36,7 +36,7 @@ function getTagColor(tag: string) {
 ---
 
 {posts.map((post, i) => (
-  <article class:list={['mb-6 pb-6', i < posts.length - 1 && 'border-b border-(--color-border-light)']}>
+  <article class:list={['mb-6 pb-6', i === posts.length - 1 ? 'max-sm:pb-0' : 'border-b border-(--color-border-light)']}>
     <a href={essayPath(post)} class:list={['group no-underline', post.data.image ? 'post-list-entry--illustrated flex items-start gap-4' : 'block']}>
       <div class="post-list-content min-w-0 flex-1">
         <h3 lang={LOCALES[essayLocale(post)].tag} class="text-[1.08rem] font-semibold text-(--color-text) leading-snug group-hover:text-(--color-link) transition-colors">
