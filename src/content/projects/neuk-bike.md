@@ -1,5 +1,5 @@
 ---
-name: neuk-bike
+name: Bike Neuks
 description: 'Static, mobile-friendly map for finding nearby cycle parking across the UK, Ireland, Spain, and Armenia.'
 date: 2026-05-08
 type: open-source
