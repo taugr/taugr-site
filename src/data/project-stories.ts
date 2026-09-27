@@ -99,6 +99,32 @@ export const projectStories: Record<string, Record<Locale, Story>> = {
         'Գտնել և համեմատել մոտակա կայանատեղերը, պլանավորել ու պահպանել հեծանվային երթուղիներ և արտահանել GPX ֆայլեր։ Քարտեզն ընդգրկում է Մեծ Բրիտանիան, Իռլանդիան, Իսպանիան և Հայաստանը։',
     },
   },
+  'rail-atlas': {
+    en: {
+      problem:
+        'Live rail data gives services and approximate positions, but it is hard to see how they relate to the landscape and railway network.',
+      decision:
+        'I proxy the public train feed, refresh position estimates every 30 seconds, and show them alongside railway lines and 3D terrain. The map makes clear that these are estimates, not GPS positions.',
+      result:
+        'Explore trains across Great Britain and select a service to see its destination, last reported stop, next stop, and status.',
+    },
+    es: {
+      problem:
+        'Los datos ferroviarios en directo muestran servicios y posiciones aproximadas, pero cuesta ver cómo se relacionan con el paisaje y la red ferroviaria.',
+      decision:
+        'Consulto el feed público mediante un proxy, actualizo las posiciones estimadas cada 30 segundos y las muestro junto a las vías y el relieve 3D. El mapa deja claro que son estimaciones, no posiciones GPS.',
+      result:
+        'Explorar los trenes de Gran Bretaña y seleccionar un servicio para ver su destino, la última parada registrada, la siguiente y su estado.',
+    },
+    hy: {
+      problem:
+        'Երկաթուղային ընթացիկ տվյալները ցույց են տալիս երթերն ու մոտավոր դիրքերը, բայց դժվար է պատկերացնել դրանք տեղանքի և երկաթուղային ցանցի վրա։',
+      decision:
+        'Հանրային տվյալները փոխանցում եմ միջնորդ սերվերի միջոցով, դիրքերի գնահատումները թարմացնում եմ յուրաքանչյուր 30 վայրկյանը մեկ և ցույց տալիս երկաթուղային գծերի ու 3D ռելիեֆի կողքին։ Քարտեզում հստակ նշված է, որ դրանք գնահատումներ են, ոչ թե GPS դիրքեր։',
+      result:
+        'Ուսումնասիրել Մեծ Բրիտանիայի գնացքները և ընտրել երթը՝ տեսնելու նշանակետը, վերջին գրանցված կանգառը, հաջորդ կանգառը և ընթացիկ կարգավիճակը։',
+    },
+  },
   vuemarkik: {
     en: {
       problem:

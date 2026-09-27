@@ -5,6 +5,7 @@ import ProjectCard from './ProjectCard.astro';
 import { localizeProject, type Locale } from '../i18n';
 import { projectStories, storyLabels } from '../data/project-stories';
 import ayeride from '../assets/projects/ayeride.png';
+import railAtlas from '../assets/projects/rail-atlas.jpg';
 import scranbook from '../assets/projects/scranbook.png';
 import neukBike from '../assets/projects/neuk-bike.png';
 import vuemarkik from '../assets/projects/vuemarkik.png';
@@ -13,7 +14,7 @@ import cmdtime from '../content/projects/cmdtime-screenshot.png';
 interface Props { projects: CollectionEntry<'projects'>[]; locale?: Locale }
 const { projects, locale = 'en' } = Astro.props;
 const labels = storyLabels[locale];
-const screenshots = { ayeride, scranbook, vuemarkik, 'neuk-bike': neukBike, cmdtime };
+const screenshots = { ayeride, 'rail-atlas': railAtlas, scranbook, vuemarkik, 'neuk-bike': neukBike, cmdtime };
 ---
 
 <div class="projects-list">

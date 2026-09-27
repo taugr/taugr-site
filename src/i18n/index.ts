@@ -489,6 +489,13 @@ const PROJECT_TRANSLATIONS: Record<
         'Mapa estático y adaptado a móviles para encontrar aparcamientos para bicicletas cercanos en el Reino Unido, Irlanda, España y Armenia.',
       imageAlt: 'Icono de Bike Neuks',
     },
+    'rail-atlas': {
+      description:
+        'Explora los servicios ferroviarios en tiempo real de Gran Bretaña en un mapa 3D interactivo, con posiciones estimadas, destinos y estado del servicio.',
+      imageAlt: 'Icono de la aplicación Rail Atlas',
+      screenshotAlt:
+        'Mapa de Rail Atlas junto al puente del Forth, con el tiempo activado y un tren de ScotRail de Leven a Edinburgh Waverley seleccionado, con sus detalles de viaje abiertos.',
+    },
     scranbook: {
       description:
         'Diario alimentario privado y local, con estimaciones editables de visión artificial y nutrición, almacenado en el navegador.',
@@ -547,6 +554,13 @@ const PROJECT_TRANSLATIONS: Record<
       description:
         'Ստատիկ, բջջային սարքերին հարմարեցված քարտեզ՝ Մեծ Բրիտանիայում, Իռլանդիայում, Իսպանիայում և Հայաստանում մոտակա հեծանվակայանները գտնելու համար։',
       imageAlt: 'Bike Neuks-ի պատկերակը',
+    },
+    'rail-atlas': {
+      description:
+        'Ուսումնասիրեք Մեծ Բրիտանիայում ընթացող գնացքները ինտերակտիվ 3D քարտեզի վրա՝ տեսնելով դրանց գնահատված դիրքերը, նշանակետերն ու երթևեկության կարգավիճակը։',
+      imageAlt: 'Rail Atlas-ի պատկերակը',
+      screenshotAlt:
+        'Rail Atlas-ի քարտեզը Ֆորթի կամրջի մոտ՝ միացված եղանակի շերտով և ընտրված ScotRail գնացքով, որը Լիվենից ուղևորվում է Էդինբուրգ Ուեյվերլի․ բաց են երթի մանրամասները։',
     },
     scranbook: {
       description:
