@@ -5,6 +5,8 @@ import { LOCALES, type Locale } from '../i18n';
 import { SITE } from '../site';
 
 const { frontmatter, alternatePaths, locale = 'en' as Locale } = Astro.props;
+const research = Boolean(frontmatter.research);
+const investigation = research;
 const socialImage = frontmatter.image
   ? await getImage({
       src: frontmatter.image,
@@ -58,8 +60,13 @@ function getTagColor(tag: string) {
   tags={frontmatter.tags}
 >
   <article class:list={{ 'editorial': frontmatter.editorial }}>
+    {investigation && (
+      <div class="article-research-context">
+        <a href="/research/">Research</a>
+      </div>
+    )}
     <div class="flex items-center gap-2 mb-2 text-[0.82rem] text-(--color-text-tertiary)">
-      {formatDate(frontmatter.date)} · {frontmatter.readingTime || '5 min read'}
+      {investigation && 'Updated '}<time datetime={new Date(frontmatter.date).toISOString().slice(0, 10)}>{formatDate(frontmatter.date)}</time> · {frontmatter.readingTime || '5 min read'}
     </div>
     {frontmatter.tags?.length > 0 && (
       <div class="flex gap-1.5 mb-3">
@@ -93,13 +100,38 @@ function getTagColor(tag: string) {
         decoding="async"
       />
     )}
+    {frontmatter.authorshipNote && (
+      <aside
+        class="article-authorship-note"
+        role="note"
+        aria-labelledby={frontmatter.authorshipNoteTitle ? 'article-authorship-note-title' : undefined}
+        aria-label={frontmatter.authorshipNoteTitle ? undefined : 'Article provenance'}
+      >
+        {frontmatter.authorshipNoteTitle && <h2 id="article-authorship-note-title">{frontmatter.authorshipNoteTitle}</h2>}
+        <p>{frontmatter.authorshipNote}</p>
+      </aside>
+    )}
     <div class="mt-6 prose">
       <slot />
+      {investigation && (
+        <nav class="article-end-navigation" aria-label="Research navigation">
+          <a href="/research/">Back to research</a>
+        </nav>
+      )}
     </div>
   </article>
 </BaseLayout>
 
 <style is:global>
+  .article-research-context {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+  }
+  .article-research-context a { color: var(--color-link); text-decoration: none; }
   .site-main > article.editorial > h1 {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: clamp(2.25rem, 6vw, 3.25rem);
@@ -107,6 +139,29 @@ function getTagColor(tag: string) {
     line-height: 1.08;
     letter-spacing: -0.035em;
     text-wrap: balance;
+  }
+  .site-main > article > .article-authorship-note {
+    margin-top: 1.25rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    background: var(--color-surface-muted);
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+  .site-main > article > .article-authorship-note h2 {
+    margin: 0 0 0.375rem;
+    color: var(--color-text);
+    font-size: inherit;
+    font-weight: 600;
+    line-height: inherit;
+  }
+  .site-main > article > .article-authorship-note p {
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
   }
   .article-deck {
     margin-top: 1.25rem;
@@ -135,16 +190,11 @@ function getTagColor(tag: string) {
     line-height: 1.85;
   }
   .prose strong { font-weight: 600; }
-  .prose .article-endnote {
+  .prose .article-end-navigation {
     margin-top: 2.5rem;
     padding-top: 1.25rem;
     border-top: 1px solid var(--color-border);
-  }
-  .prose .article-endnote p {
-    margin-bottom: 0;
-    color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    font-style: normal;
+    font-size: 0.82rem;
     line-height: 1.75;
   }
   .prose a {
@@ -208,6 +258,14 @@ function getTagColor(tag: string) {
     letter-spacing: -0.015em;
     text-wrap: pretty;
   }
+  .prose .pull-quote:has(+ .jev-chart-pair) {
+    margin-bottom: 1.5rem;
+  }
+  .prose .pull-quote + .jev-chart-pair {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
   .prose .pull-quote a {
     font-family: var(--font-sans);
     font-size: 0.75rem;
@@ -215,6 +273,20 @@ function getTagColor(tag: string) {
     white-space: nowrap;
     vertical-align: super;
   }
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  .prose th, .prose td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .prose th { text-align: left; }
+  .prose th[align="right"], .prose td[align="right"] { text-align: right; }
   .prose img {
     border-radius: 0.375rem;
     margin: 1.5rem 0;

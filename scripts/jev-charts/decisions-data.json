@@ -1,0 +1,330 @@
+{
+  "figure": 4,
+  "title": "Decisions, Jev and baseline Luna",
+  "metric": "Unsafe-positive F1 (%)",
+  "domain": [0, 100],
+  "scored_rows": 9155,
+  "distinct_requests": 9035,
+  "aggregation": "Separate datasets, no pooled or matched-subset score",
+  "refusal_fallback": "Decisions refusals count as blocks on full scored rows",
+  "intervals": "Recorded nominal 95% grouped-bootstrap intervals conditional on saved predictions, without multiple-comparison correction",
+  "sources": {
+    "decisions": {
+      "artifact": "decisions-comparison-results.json",
+      "sha256": "3040766e9dc6d6f265e1b5c22a38eda79652b14175b8adff364f7f47f2ef5648"
+    },
+    "historical_baseline": {
+      "artifact": "results/benchmark.json",
+      "sha256": "6d17a4bdb97b07f5bef28cf9fe422f3d4eb182ed6b7e31f29e24678ece9343ca"
+    },
+    "chat_prompt": {
+      "artifact": "prompts/luna-baseline.txt",
+      "sha256": "f429cd8f98a7787290edd9a94176974bba40fffa8c03b19df610ccad47b3a5fd"
+    }
+  },
+  "models": [
+    {
+      "id": "jev_original",
+      "label": "Jev \u00b7 baseline",
+      "configuration": "Jev 1.13.0, selected baseline prompt and 0.54 cutoff",
+      "class": "jev"
+    },
+    {
+      "id": "luna6",
+      "label": "GPT-6 Luna \u00b7 Chat",
+      "configuration": "GPT-6 Luna Chat Completions, unchanged strict-Boolean baseline prompt",
+      "class": "luna6"
+    },
+    {
+      "id": "decisions_original",
+      "label": "Decisions \u00b7 original",
+      "configuration": "GPT-6 Luna Decisions, frozen original assistant-safety prompt, cutoff 0.5",
+      "class": "decisions-original"
+    },
+    {
+      "id": "decisions_policy",
+      "label": "Decisions \u00b7 policy variant",
+      "configuration": "GPT-6 Luna Decisions, frozen content-focused policy variant, cutoff 0.5",
+      "class": "decisions-policy"
+    }
+  ],
+  "datasets": [
+    {
+      "id": "toxicchat",
+      "label": "ToxicChat",
+      "rows": 5083,
+      "series": [
+        {
+          "model": "jev_original",
+          "value": 75.40029112081513,
+          "display": "75.40",
+          "interval_95": [71.64634146341463, 78.99187233948697],
+          "counts": {
+            "tp": 259,
+            "fp": 66,
+            "tn": 4655,
+            "fn": 103
+          }
+        },
+        {
+          "model": "luna6",
+          "value": 63.67851622874807,
+          "display": "63.68",
+          "interval_95": [59.15388885034344, 67.83638611948373],
+          "counts": {
+            "tp": 206,
+            "fp": 79,
+            "tn": 4642,
+            "fn": 156
+          }
+        },
+        {
+          "model": "decisions_original",
+          "value": 50.0,
+          "display": "50.00",
+          "interval_95": [44.44444444444444, 55.39033457249071],
+          "counts": {
+            "tp": 133,
+            "fp": 37,
+            "tn": 4684,
+            "fn": 229
+          }
+        },
+        {
+          "model": "decisions_policy",
+          "value": 62.87625418060201,
+          "display": "62.88",
+          "interval_95": [58.122666543244165, 67.250514910831],
+          "counts": {
+            "tp": 188,
+            "fp": 48,
+            "tn": 4673,
+            "fn": 174
+          }
+        }
+      ],
+      "decisions_probability_coverage": {
+        "original": {
+          "answered_rows": 5083,
+          "refused_rows": 0,
+          "total_rows": 5083,
+          "display": "100.00%"
+        },
+        "policy": {
+          "answered_rows": 5070,
+          "refused_rows": 13,
+          "total_rows": 5083,
+          "display": "99.74%"
+        }
+      }
+    },
+    {
+      "id": "xstest",
+      "label": "XSTest",
+      "rows": 450,
+      "series": [
+        {
+          "model": "jev_original",
+          "value": 93.4010152284264,
+          "display": "93.40",
+          "interval_95": [90.76923076923077, 95.67429812834224],
+          "counts": {
+            "tp": 184,
+            "fp": 10,
+            "tn": 240,
+            "fn": 16
+          }
+        },
+        {
+          "model": "luna6",
+          "value": 91.4572864321608,
+          "display": "91.46",
+          "interval_95": [88.39684001286211, 94.37680879197646],
+          "counts": {
+            "tp": 182,
+            "fp": 16,
+            "tn": 234,
+            "fn": 18
+          }
+        },
+        {
+          "model": "decisions_original",
+          "value": 86.50137741046832,
+          "display": "86.50",
+          "interval_95": [82.61905292644688, 90.13333333333333],
+          "counts": {
+            "tp": 157,
+            "fp": 6,
+            "tn": 244,
+            "fn": 43
+          }
+        },
+        {
+          "model": "decisions_policy",
+          "value": 84.32432432432432,
+          "display": "84.32",
+          "interval_95": [79.89272496794499, 88.22282980177715],
+          "counts": {
+            "tp": 156,
+            "fp": 14,
+            "tn": 236,
+            "fn": 44
+          }
+        }
+      ],
+      "decisions_probability_coverage": {
+        "original": {
+          "answered_rows": 444,
+          "refused_rows": 6,
+          "total_rows": 450,
+          "display": "98.67%"
+        },
+        "policy": {
+          "answered_rows": 407,
+          "refused_rows": 43,
+          "total_rows": 450,
+          "display": "90.44%"
+        }
+      }
+    },
+    {
+      "id": "aegis",
+      "label": "Aegis 2",
+      "rows": 1923,
+      "series": [
+        {
+          "model": "jev_original",
+          "value": 80.27282266526757,
+          "display": "80.27",
+          "interval_95": [78.27433342944292, 82.0990667448451],
+          "counts": {
+            "tp": 765,
+            "fp": 104,
+            "tn": 782,
+            "fn": 272
+          }
+        },
+        {
+          "model": "luna6",
+          "value": 77.58433079434167,
+          "display": "77.58",
+          "interval_95": [75.41506310792273, 79.65858017146664],
+          "counts": {
+            "tp": 713,
+            "fp": 88,
+            "tn": 798,
+            "fn": 324
+          }
+        },
+        {
+          "model": "decisions_original",
+          "value": 72.9918509895227,
+          "display": "72.99",
+          "interval_95": [70.48400805109458, 75.27599964601247],
+          "counts": {
+            "tp": 627,
+            "fp": 54,
+            "tn": 832,
+            "fn": 410
+          }
+        },
+        {
+          "model": "decisions_policy",
+          "value": 72.40566037735849,
+          "display": "72.41",
+          "interval_95": [70.00589275191514, 74.88376093449968],
+          "counts": {
+            "tp": 614,
+            "fp": 45,
+            "tn": 841,
+            "fn": 423
+          }
+        }
+      ],
+      "decisions_probability_coverage": {
+        "original": {
+          "answered_rows": 1899,
+          "refused_rows": 24,
+          "total_rows": 1923,
+          "display": "98.75%"
+        },
+        "policy": {
+          "answered_rows": 1828,
+          "refused_rows": 95,
+          "total_rows": 1923,
+          "display": "95.06%"
+        }
+      }
+    },
+    {
+      "id": "wildguard",
+      "label": "WildGuardTest",
+      "rows": 1699,
+      "series": [
+        {
+          "model": "jev_original",
+          "value": 88.30449826989619,
+          "display": "88.30",
+          "interval_95": [86.46348558890068, 89.97377672882749],
+          "counts": {
+            "tp": 638,
+            "fp": 53,
+            "tn": 892,
+            "fn": 116
+          }
+        },
+        {
+          "model": "luna6",
+          "value": 85.16678495386799,
+          "display": "85.17",
+          "interval_95": [83.12399363106888, 87.11722173531989],
+          "counts": {
+            "tp": 600,
+            "fp": 55,
+            "tn": 890,
+            "fn": 154
+          }
+        },
+        {
+          "model": "decisions_original",
+          "value": 79.63386727688787,
+          "display": "79.63",
+          "interval_95": [77.15675267558171, 81.95273184759165],
+          "counts": {
+            "tp": 522,
+            "fp": 35,
+            "tn": 910,
+            "fn": 232
+          }
+        },
+        {
+          "model": "decisions_policy",
+          "value": 73.08003233629749,
+          "display": "73.08",
+          "interval_95": [70.03145542317174, 75.6889163076773],
+          "counts": {
+            "tp": 452,
+            "fp": 31,
+            "tn": 914,
+            "fn": 302
+          }
+        }
+      ],
+      "decisions_probability_coverage": {
+        "original": {
+          "answered_rows": 1696,
+          "refused_rows": 3,
+          "total_rows": 1699,
+          "display": "99.82%"
+        },
+        "policy": {
+          "answered_rows": 1655,
+          "refused_rows": 44,
+          "total_rows": 1699,
+          "display": "97.41%"
+        }
+      }
+    }
+  ],
+  "distinct_request_scope": "GPT-6 Luna Chat and each Decisions policy"
+}

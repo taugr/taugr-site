@@ -31,6 +31,12 @@ const STATIC_PAGES = [
     description: 'A selection of products, tools, and research.',
   },
   {
+    title: 'Research',
+    path: '/research/',
+    description:
+      'Investigations into AI systems, with methods, code and evidence.',
+  },
+  {
     title: 'Teaching',
     path: '/teaching/',
     description: 'AI workshops and learning labs.',
@@ -50,6 +56,7 @@ const STATIC_PAGES = [
 type SiteContent = {
   baseUrl: string;
   posts: CollectionEntry<'posts'>[];
+  research: CollectionEntry<'research'>[];
   projects: CollectionEntry<'projects'>[];
 };
 
@@ -88,21 +95,25 @@ function textResponse(body: string) {
 }
 
 async function getSiteContent(context: APIContext): Promise<SiteContent> {
-  const [posts, projects] = await Promise.all([
+  const [posts, projects, research] = await Promise.all([
     getCollection('posts', ({ data }) => !data.draft),
     getCollection('projects'),
+    getCollection('research', ({ data }) => !data.draft),
   ]);
 
   return {
     baseUrl: getBaseUrl(context),
     posts: posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    research: research.sort(
+      (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+    ),
     projects: projects.sort(
       (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
     ),
   };
 }
 
-function renderOverview({ baseUrl, posts, projects }: SiteContent) {
+function renderOverview({ baseUrl, posts, research, projects }: SiteContent) {
   const lines = [
     `# ${SITE.name}`,
     '',
@@ -128,6 +139,13 @@ function renderOverview({ baseUrl, posts, projects }: SiteContent) {
     ...posts.map(
       (post) =>
         `- [${post.data.title}](${absoluteUrl(baseUrl, `/essays/${post.id}/`)}) (${formatDate(post.data.date)}): ${normalizeText(post.data.description)}`,
+    ),
+    '',
+    '## Research',
+    '',
+    ...research.map(
+      (post) =>
+        `- [${post.data.title}](${absoluteUrl(baseUrl, `/research/${post.id}/`)}) (${formatDate(post.data.date)}): ${normalizeText(post.data.description)}`,
     ),
     '',
     '## Projects',
@@ -163,11 +181,14 @@ function renderOverview({ baseUrl, posts, projects }: SiteContent) {
   return lines.join('\n');
 }
 
-function renderPost(post: CollectionEntry<'posts'>, baseUrl: string) {
+function renderPost(
+  post: CollectionEntry<'posts'> | CollectionEntry<'research'>,
+  baseUrl: string,
+) {
   return [
     `## ${post.data.title}`,
     '',
-    `URL: ${absoluteUrl(baseUrl, `/essays/${post.id}/`)}`,
+    `URL: ${absoluteUrl(baseUrl, `/${post.collection === 'research' ? 'research' : 'essays'}/${post.id}/`)}`,
     `Date: ${formatDate(post.data.date)}`,
     `Description: ${normalizeText(post.data.description)}`,
     post.data.tags.length > 0
@@ -251,6 +272,10 @@ export async function createLlmsFullTxt(context: APIContext) {
     '# Full essay content',
     '',
     ...content.posts.flatMap((post) => [renderPost(post, content.baseUrl), '']),
+    ...content.research.flatMap((post) => [
+      renderPost(post, content.baseUrl),
+      '',
+    ]),
     '# Full project context',
     '',
     ...content.projects.flatMap((project) => [renderProject(project), '']),

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="jev-chart" viewBox="0 0 780 858" width="780" height="858" role="img" aria-labelledby="jev-cost-desktop-title jev-cost-desktop-desc" style="--color-bg:#f8f8f3;--color-text:#17231f;--color-text-secondary:#59645f;--color-text-tertiary:#69756e;--color-border-light:#dde3df;--color-accent:#246654;--color-tag-purple-text:#7056b8;">
+<title id="jev-cost-desktop-title">Estimated cost across the completed runs</title>
+<desc id="jev-cost-desktop-desc">ToxicChat: Jev $0.0201, GPT-5.6 Luna $0.0661, GPT-6 Luna $0.0318. XSTest: Jev $0.0189, GPT-5.6 Luna $0.0604, GPT-6 Luna $0.0289. Aegis 2: Jev $0.0210, GPT-5.6 Luna $0.0708, GPT-6 Luna $0.0345. WildGuardTest: Jev $0.0224, GPT-5.6 Luna $0.0766, GPT-6 Luna $0.0370. Historical estimates. Aegis covers 1,915 Jev requests and 1,910 requests for each Luna run.</desc>
+<style>.jev-chart-pair { margin: 2rem 0 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--color-border, #cbd3ce); }
+.jev-chart { display: block; width: 100%; height: auto; overflow: visible; color: var(--color-text, #17231f); font-family: var(--font-sans, 'Manrope', sans-serif); }
+.jev-chart--mobile { display: none; max-width: 440px; margin-inline: auto; }
+.jev-chart .heading { fill: currentColor; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.4px; }
+.jev-chart .label { fill: currentColor; }
+.jev-chart .muted { fill: var(--color-text-secondary, #59645f); }
+.jev-chart .number { font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-variant-numeric: tabular-nums; }
+.jev-chart .grid { stroke: var(--color-border-light, #dde3df); stroke-width: 0.75; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.jev-chart .zero { stroke: var(--color-text-tertiary, #69756e); stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.jev-chart .jev { fill: var(--color-accent, #246654); }
+.jev-chart .luna56 { fill: var(--color-tag-purple-text, #7056b8); }
+.jev-chart .luna6 { fill: var(--color-text-secondary, #59645f); }
+.jev-chart .texture { stroke: var(--color-bg, #f8f8f3); fill: var(--color-bg, #f8f8f3); opacity: 0.6; }
+@media (max-width: 720px) { .jev-chart-pair .jev-chart--desktop { display: none; } .jev-chart-pair .jev-chart--mobile { display: block; } }</style>
+<defs>
+<pattern id="jev-cost-desktop-stripe" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M-1 1L1-1 M0 7L7 0 M6 8L8 6" class="texture" stroke-width="1.2" fill="none" /></pattern>
+<pattern id="jev-cost-desktop-dot" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1" class="texture" stroke="none" /></pattern>
+</defs>
+<text x="0" y="14" font-size="12" class="muted number" text-anchor="start">Figure 2</text>
+<text x="0" y="52" font-size="29" class="heading" text-anchor="start">Estimated cost across the completed runs</text>
+<text x="0" y="83" font-size="14" class="muted" text-anchor="start">Historical USD per 1,000 requests</text>
+<text x="0" y="107" font-size="14" class="muted" text-anchor="start">Jev uses the original policy</text>
+<text x="0" y="158" font-size="18" class="label" text-anchor="start" font-weight="600">ToxicChat</text>
+<line x1="146.0000" y1="176" x2="146.0000" y2="272" class="zero" />
+<text x="146.0" y="288" font-size="12" class="muted number" text-anchor="middle">$0.00</text>
+<line x1="420.0000" y1="176" x2="420.0000" y2="272" class="grid" />
+<text x="420.0" y="288" font-size="12" class="muted number" text-anchor="middle">$0.04</text>
+<line x1="694.0000" y1="176" x2="694.0000" y2="272" class="grid" />
+<text x="694.0" y="288" font-size="12" class="muted number" text-anchor="middle">$0.08</text>
+<text x="132" y="194" font-size="14" class="label" text-anchor="end">Jev</text>
+<text x="292.6486" y="194" font-size="14" class="label number" text-anchor="start" font-weight="600">$0.0201</text>
+<rect x="146" y="181" width="137.6486" height="17" class="jev" data-dataset="toxicchat" data-model="jev_original" data-value="0.0200946788585209" data-label="$0.0201" />
+<text x="132" y="226" font-size="14" class="label" text-anchor="end">GPT-5.6 Luna</text>
+<text x="608.0841" y="226" font-size="14" class="label number" text-anchor="start">$0.0661</text>
+<rect x="146" y="213" width="453.0841" height="17" class="luna56" data-dataset="toxicchat" data-model="luna56" data-value="0.06614365956591639" data-label="$0.0661" />
+<rect x="146" y="213" width="453.0841" height="17" fill="url(#jev-cost-desktop-stripe)" aria-hidden="true" />
+<text x="132" y="258" font-size="14" class="label" text-anchor="end">GPT-6 Luna</text>
+<text x="372.6618" y="258" font-size="14" class="label number" text-anchor="start">$0.0318</text>
+<rect x="146" y="245" width="217.6618" height="17" class="luna6" data-dataset="toxicchat" data-model="luna6" data-value="0.03177544714630225" data-label="$0.0318" />
+<rect x="146" y="245" width="217.6618" height="17" fill="url(#jev-cost-desktop-dot)" aria-hidden="true" />
+<text x="0" y="323" font-size="18" class="label" text-anchor="start" font-weight="600">XSTest</text>
+<line x1="146.0000" y1="341" x2="146.0000" y2="437" class="zero" />
+<text x="146.0" y="453" font-size="12" class="muted number" text-anchor="middle">$0.00</text>
+<line x1="420.0000" y1="341" x2="420.0000" y2="437" class="grid" />
+<text x="420.0" y="453" font-size="12" class="muted number" text-anchor="middle">$0.04</text>
+<line x1="694.0000" y1="341" x2="694.0000" y2="437" class="grid" />
+<text x="694.0" y="453" font-size="12" class="muted number" text-anchor="middle">$0.08</text>
+<text x="132" y="359" font-size="14" class="label" text-anchor="end">Jev</text>
+<text x="284.3154" y="359" font-size="14" class="label number" text-anchor="start" font-weight="600">$0.0189</text>
+<rect x="146" y="346" width="129.3154" height="17" class="jev" data-dataset="xstest" data-model="jev_original" data-value="0.01887816" data-label="$0.0189" />
+<text x="132" y="391" font-size="14" class="label" text-anchor="end">GPT-5.6 Luna</text>
+<text x="568.9044" y="391" font-size="14" class="label number" text-anchor="start">$0.0604</text>
+<rect x="146" y="378" width="413.9044" height="17" class="luna56" data-dataset="xstest" data-model="luna56" data-value="0.060424000000000005" data-label="$0.0604" />
+<rect x="146" y="378" width="413.9044" height="17" fill="url(#jev-cost-desktop-stripe)" aria-hidden="true" />
+<text x="132" y="423" font-size="14" class="label" text-anchor="end">GPT-6 Luna</text>
+<text x="353.0472" y="423" font-size="14" class="label number" text-anchor="start">$0.0289</text>
+<rect x="146" y="410" width="198.0472" height="17" class="luna6" data-dataset="xstest" data-model="luna6" data-value="0.028912" data-label="$0.0289" />
+<rect x="146" y="410" width="198.0472" height="17" fill="url(#jev-cost-desktop-dot)" aria-hidden="true" />
+<text x="0" y="488" font-size="18" class="label" text-anchor="start" font-weight="600">Aegis 2</text>
+<line x1="146.0000" y1="506" x2="146.0000" y2="602" class="zero" />
+<text x="146.0" y="618" font-size="12" class="muted number" text-anchor="middle">$0.00</text>
+<line x1="420.0000" y1="506" x2="420.0000" y2="602" class="grid" />
+<text x="420.0" y="618" font-size="12" class="muted number" text-anchor="middle">$0.04</text>
+<line x1="694.0000" y1="506" x2="694.0000" y2="602" class="grid" />
+<text x="694.0" y="618" font-size="12" class="muted number" text-anchor="middle">$0.08</text>
+<text x="132" y="524" font-size="14" class="label" text-anchor="end">Jev</text>
+<text x="298.9987" y="524" font-size="14" class="label number" text-anchor="start" font-weight="600">$0.0210</text>
+<rect x="146" y="511" width="143.9987" height="17" class="jev" data-dataset="aegis" data-model="jev_original" data-value="0.02102171279373368" data-label="$0.0210" />
+<text x="132" y="556" font-size="14" class="label" text-anchor="end">GPT-5.6 Luna</text>
+<text x="640.3205" y="556" font-size="14" class="label number" text-anchor="start">$0.0708</text>
+<rect x="146" y="543" width="485.3205" height="17" class="luna56" data-dataset="aegis" data-model="luna56" data-value="0.07084971204188481" data-label="$0.0708" />
+<rect x="146" y="543" width="485.3205" height="17" fill="url(#jev-cost-desktop-stripe)" aria-hidden="true" />
+<text x="132" y="588" font-size="14" class="label" text-anchor="end">GPT-6 Luna</text>
+<text x="391.5441" y="588" font-size="14" class="label number" text-anchor="start">$0.0345</text>
+<rect x="146" y="575" width="236.5441" height="17" class="luna6" data-dataset="aegis" data-model="luna6" data-value="0.03453198952879582" data-label="$0.0345" />
+<rect x="146" y="575" width="236.5441" height="17" fill="url(#jev-cost-desktop-dot)" aria-hidden="true" />
+<text x="0" y="653" font-size="18" class="label" text-anchor="start" font-weight="600">WildGuardTest</text>
+<line x1="146.0000" y1="671" x2="146.0000" y2="767" class="zero" />
+<text x="146.0" y="783" font-size="12" class="muted number" text-anchor="middle">$0.00</text>
+<line x1="420.0000" y1="671" x2="420.0000" y2="767" class="grid" />
+<text x="420.0" y="783" font-size="12" class="muted number" text-anchor="middle">$0.04</text>
+<line x1="694.0000" y1="671" x2="694.0000" y2="767" class="grid" />
+<text x="694.0" y="783" font-size="12" class="muted number" text-anchor="middle">$0.08</text>
+<text x="132" y="689" font-size="14" class="label" text-anchor="end">Jev</text>
+<text x="308.2957" y="689" font-size="14" class="label number" text-anchor="start" font-weight="600">$0.0224</text>
+<rect x="146" y="676" width="153.2957" height="17" class="jev" data-dataset="wildguard" data-model="jev_original" data-value="0.022378929958799292" data-label="$0.0224" />
+<text x="132" y="721" font-size="14" class="label" text-anchor="end">GPT-5.6 Luna</text>
+<text x="679.5455" y="721" font-size="14" class="label number" text-anchor="start">$0.0766</text>
+<rect x="146" y="708" width="524.5455" height="17" class="luna56" data-dataset="wildguard" data-model="luna56" data-value="0.07657598587404357" data-label="$0.0766" />
+<rect x="146" y="708" width="524.5455" height="17" fill="url(#jev-cost-desktop-stripe)" aria-hidden="true" />
+<text x="132" y="753" font-size="14" class="label" text-anchor="end">GPT-6 Luna</text>
+<text x="408.404" y="753" font-size="14" class="label number" text-anchor="start">$0.0370</text>
+<rect x="146" y="740" width="253.4040" height="17" class="luna6" data-dataset="wildguard" data-model="luna6" data-value="0.036993290170688635" data-label="$0.0370" />
+<rect x="146" y="740" width="253.4040" height="17" fill="url(#jev-cost-desktop-dot)" aria-hidden="true" />
+<text x="390.0" y="843" font-size="13" class="muted" text-anchor="middle">Estimated USD per 1,000 requests</text>
+</svg>

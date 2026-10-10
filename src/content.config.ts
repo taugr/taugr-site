@@ -33,6 +33,16 @@ const postTranslations = defineCollection({
     }),
 });
 
+const research = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/research' }),
+  schema: ({ image }) =>
+    essayMetadata.extend({
+      image: image().optional(),
+      authorshipNoteTitle: z.string().optional(),
+      authorshipNote: z.string().optional(),
+    }),
+});
+
 const archive = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/archive' }),
   schema: z.object({
@@ -68,4 +78,10 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { posts, postTranslations, projects, archive };
+export const collections = {
+  posts,
+  postTranslations,
+  research,
+  projects,
+  archive,
+};

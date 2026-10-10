@@ -2,6 +2,7 @@ export const CONTENT_KINDS = [
   'page',
   'project',
   'essay',
+  'research',
   'archive',
   'teaching',
   'speaking',

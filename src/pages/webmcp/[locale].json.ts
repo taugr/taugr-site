@@ -24,10 +24,11 @@ export function getStaticPaths() {
 export async function GET({ params }: APIContext) {
   const locale = params.locale as Locale;
   const messages = getMessages(locale);
-  const [projects, posts, archive] = await Promise.all([
+  const [projects, posts, archive, research] = await Promise.all([
     getCollection('projects'),
     getLocalizedPosts(locale),
     getCollection('archive', ({ data }) => !data.draft),
+    getCollection('research', ({ data }) => !data.draft),
   ]);
   const entries: SearchEntry[] = (Object.keys(ROUTES) as RouteKey[]).map(
     (route) => ({
@@ -48,6 +49,25 @@ export async function GET({ params }: APIContext) {
       language: LOCALES[locale].tag,
       keywords: [route],
     }),
+  );
+  entries.push(
+    {
+      title: 'Research',
+      description:
+        'Investigations into AI systems, with methods, code and evidence.',
+      url: '/research/',
+      kind: 'page',
+      language: 'en',
+      keywords: ['research'],
+    },
+    ...research.map((post) => ({
+      title: post.data.title,
+      description: post.data.description,
+      url: `/research/${post.id}/`,
+      kind: 'research' as const,
+      language: 'en',
+      keywords: post.data.tags,
+    })),
   );
   entries.push(
     ...projects.sort(compareProjects).map((project) => ({

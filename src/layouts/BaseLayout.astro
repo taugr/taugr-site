@@ -53,9 +53,17 @@ const socialImageURL = new URL(ogImage, Astro.site);
 const socialImageAlt = ogImageAlt ?? messages.site.description;
 const socialImageType = ogImageType ?? (ogImage === '/social-card.png' ? 'image/png' : undefined);
 const publishedDate = publishedTime ? new Date(publishedTime).toISOString() : undefined;
+const developmentPreview = import.meta.env.DEV;
+const previewHome = localizedPath(locale, 'home');
+if (developmentPreview) Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
 const navItems = (Object.keys(ROUTES) as RouteKey[])
-  .filter(route => route !== 'archive')
-  .map(route => ({ route, href: localizedPath(locale, route), label: messages.nav[route] }));
+  .filter(route => route !== 'archive' && route !== 'home')
+  .flatMap(route => {
+    const item = { route, href: localizedPath(locale, route), label: messages.nav[route] };
+    return route === 'projects'
+      ? [item, { route: 'research', href: '/research/', label: 'research' }]
+      : [item];
+  });
 const alternateLinks = alternatePaths
   ? (Object.entries(alternatePaths) as [Locale, string][]).map(([locale, path]) => ({ locale, href: new URL(path, Astro.site) }))
   : translatedRoute
@@ -71,6 +79,26 @@ const alternateLinks = alternatePaths
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {developmentPreview && <meta name="robots" content="noindex, nofollow" />}
+    {developmentPreview && <style is:inline>astro-dev-toolbar { display: none; }</style>}
+    <style is:inline>
+      .curated-menu-toggle { display: none; }
+      @media (max-width: 760px) {
+        .site-header--curated .site-header__inner { grid-template-columns: minmax(0, 1fr) auto; gap: 0 0.5rem; min-height: 0; padding: 1rem 0; }
+        .site-header--curated .site-brand { grid-column: 1; grid-row: 1; display: flex; align-items: center; min-height: 44px; }
+        .site-header--curated[data-menu-ready="true"] .curated-menu-toggle { grid-column: 2; grid-row: 1; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 0.25rem; border: 0; background: transparent; color: var(--color-nav-muted); font: 450 0.82rem var(--font-sans); cursor: pointer; }
+        .site-header--curated .site-nav { grid-column: 1 / -1; grid-row: 2; flex-direction: column; align-items: stretch; gap: 0; padding: 0.75rem 0 0.5rem; }
+        .site-header--curated .site-nav__link { display: flex; align-items: center; min-height: 44px; padding: 0.25rem 0; }
+        .site-header--curated .site-actions { grid-column: 1 / -1; grid-row: 3; justify-self: start; gap: 0.5rem; padding-top: 0.5rem; }
+        .site-header--curated[data-menu-ready="true"] .site-nav, .site-header--curated[data-menu-ready="true"] .site-actions { display: none; }
+        .site-header--curated[data-menu-open="true"] .site-nav, .site-header--curated[data-menu-open="true"] .site-actions { display: flex; }
+        .site-header--curated .site-brand:focus-visible, .site-header--curated .curated-menu-toggle:focus-visible, .site-header--curated .site-nav__link:focus-visible, .site-header--curated .theme-toggle:focus-visible { outline: 2px solid var(--color-link); outline-offset: 2px; border-radius: 3px; }
+        .site-header--curated .curated-menu-toggle:hover, .site-header--curated .curated-menu-toggle[aria-expanded="true"] { color: var(--color-link); }
+        .site-header--curated .language-picker summary, .site-header--curated .language-picker a { min-height: 44px; }
+        .site-header--curated .language-picker ul { left: 0; right: auto; }
+        .site-header--curated .theme-toggle { min-width: 44px; min-height: 44px; justify-content: center; margin-left: 0; padding: 0; }
+      }
+    </style>
     <link rel="canonical" href={canonicalURL} />
     {alternateLinks.map(link => <link rel="alternate" hreflang={LOCALES[link.locale].tag} href={link.href} />)}
     {alternateLinks.some(link => link.locale === 'en') && <link rel="alternate" hreflang="x-default" href={alternateLinks.find(link => link.locale === 'en')?.href} />}
@@ -122,20 +150,21 @@ const alternateLinks = alternatePaths
   </head>
   <body>
     <div class="site-shell">
-      <header class="site-header">
+      <header class="site-header site-header--curated">
         <div class="site-header__inner">
-          <a href={localizedPath(locale, 'home')} class="site-brand" data-site-brand>
+          <a href={previewHome} class="site-brand" data-site-brand>
             {messages.site.name}
           </a>
-          <nav class="site-nav" aria-label={messages.site.primaryNavigation}>
+          <button type="button" class="curated-menu-toggle" id="curated-menu-toggle" aria-expanded="false" aria-controls="curated-navigation curated-menu-actions">menu</button>
+          <nav id="curated-navigation" class="site-nav" aria-label={messages.site.primaryNavigation}>
           {navItems.map(item => (
             <a
               href={item.href}
               data-nav-route={item.route}
+              aria-current={(Astro.url.pathname === item.href || Astro.url.pathname.startsWith(item.href)) ? 'page' : undefined}
               class:list={[
                 'site-nav__link',
-                item.route === 'home' && 'site-nav__home',
-                Astro.url.pathname === item.href || (item.route !== 'home' && Astro.url.pathname.startsWith(item.href))
+                Astro.url.pathname === item.href || Astro.url.pathname.startsWith(item.href)
                   ? 'site-nav__link--active'
                   : '',
               ]}
@@ -144,7 +173,7 @@ const alternateLinks = alternatePaths
             </a>
           ))}
           </nav>
-          <div class="site-actions">
+          <div id="curated-menu-actions" class="site-actions">
             {PROFILE_LINKS.map(link => (
               <a
                 href={link.href}
@@ -170,6 +199,49 @@ const alternateLinks = alternatePaths
           </div>
         </div>
       </header>
+      <script is:inline>
+        (function () {
+          var header = document.querySelector('.site-header--curated');
+          var button = document.getElementById('curated-menu-toggle');
+          var nav = document.getElementById('curated-navigation');
+          var actions = document.getElementById('curated-menu-actions');
+          if (!header || !button || !nav || !actions) return;
+          var mobile = window.matchMedia('(max-width: 760px)');
+          var lastFocused = null;
+          document.addEventListener('focusin', function (event) {
+            lastFocused = header.contains(event.target) ? event.target : null;
+          });
+          function setOpen(open, restoreFocus) {
+            header.dataset.menuOpen = String(open);
+            button.setAttribute('aria-expanded', String(open));
+            if (!open) {
+              header.querySelector('.language-picker[open]')?.removeAttribute('open');
+              if (restoreFocus) button.focus();
+            }
+          }
+          header.dataset.menuReady = 'true';
+          setOpen(false);
+          button.addEventListener('click', function () {
+            setOpen(button.getAttribute('aria-expanded') !== 'true');
+          });
+          nav.addEventListener('click', function (event) {
+            if (mobile.matches && event.target.closest('a')) setOpen(false);
+          });
+          document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && mobile.matches && button.getAttribute('aria-expanded') === 'true') {
+              event.preventDefault();
+              setOpen(false, true);
+            }
+          });
+          mobile.addEventListener('change', function () {
+            var focus = document.activeElement;
+            if (focus === document.body) focus = lastFocused;
+            setOpen(false);
+            if (!mobile.matches && focus === button) nav.querySelector('a')?.focus();
+            if (mobile.matches && (nav.contains(focus) || actions.contains(focus))) button.focus();
+          });
+        })();
+      </script>
 
       <main class:list={['site-main', wide ? 'site-main--wide' : 'site-main--reading']}>
         <slot />
@@ -213,3 +285,6 @@ const alternateLinks = alternatePaths
     </script>
   </body>
 </html>
+
+<style is:global>
+</style>

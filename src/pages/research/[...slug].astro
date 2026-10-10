@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostLayout from '../../layouts/PostLayout.astro';
+import ResearchEntry from '../../components/ResearchEntry.astro';
+import { readingTime } from '../../data/essays';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('research', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return [
+    { params: { slug: undefined }, props: { posts } },
+    ...posts.map(post => ({ params: { slug: post.id }, props: { post } })),
+  ];
+}
+
+const { post, posts } = Astro.props;
+const rendered = post ? await render(post) : undefined;
+const Content = rendered?.Content;
+const readingBody = (post?.body ?? '').replace(/<!-- jev-chart:[a-z0-9]+:start -->[\s\S]*?<!-- jev-chart:[a-z0-9]+:end -->/g, '');
+---
+
+{post && Content ? (
+  <PostLayout frontmatter={{ ...post.data, research: true, readingTime: readingTime(readingBody, 'en') }}>
+    <Content />
+  </PostLayout>
+) : (
+  <BaseLayout title="Research — Tom Auger (taugr)" description="Investigations into AI systems, with the methods, code and evidence behind the results.">
+    <h1 class="text-[1.6rem] font-bold text-(--color-text) tracking-tight mb-1">Research</h1>
+    <p class="text-[0.95rem] text-(--color-text-secondary) mb-6 sm:mb-8">Investigations into AI systems, with the methods, code and evidence behind the results.</p>
+    <section aria-label="Investigations">
+      {posts.map(post => <ResearchEntry post={post} />)}
+    </section>
+  </BaseLayout>
+)}

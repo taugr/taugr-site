@@ -1,0 +1,80 @@
+---
+import CuratedWork from './CuratedWork.astro';
+import ContactInvite from './ContactInvite.astro';
+import { teachingItems } from '../data/teaching';
+import { speakingTalks } from '../data/speaking';
+import { getMessages, localizeTeaching, localizeSpeaking, localizedPath, type Locale } from '../i18n';
+
+const { locale = 'en' as Locale } = Astro.props;
+const messages = getMessages(locale);
+const courseMedia = teachingItems.find(item => item.title === 'From Idea to Prototype')?.media[0];
+const sessionMedia = speakingTalks.find(item => item.title === 'Your New AI Co-Worker')?.media[0];
+const course = localizeTeaching(teachingItems, locale).find(item => item.canonicalTitle === 'From Idea to Prototype');
+const session = localizeSpeaking(speakingTalks, locale).find(item => item.canonicalTitle === 'Your New AI Co-Worker');
+---
+
+  <section class="home-hero" aria-labelledby="home-title">
+    <img class="home-hero__portrait" src="/img/profile.webp" alt={messages.home.name} width="128" height="128" loading="eager" decoding="async" />
+    <p class="home-hero__name">{messages.home.name}</p>
+    <h1 id="home-title">{messages.home.heading.split('\n').map((line, index) => <>{index > 0 && <br />}{index > 0 ? <span>{line}</span> : line}</>)}</h1>
+    <div class="home-hero__details">
+      <p>{messages.home.intro}</p>
+      <div class="home-hero__actions">
+        <a href="#recent-work" class="button button--primary">
+          <span>{messages.home.explore}</span><i class="ph ph-arrow-right" aria-hidden="true"></i>
+        </a>
+        <a href={localizedPath(locale, 'about')} class="button button--text">
+          <span>{messages.home.aboutTom}</span><i class="ph ph-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+<CuratedWork locale={locale} />
+
+<section class="home-section" aria-labelledby="engagements-title">
+  <div class="section-heading">
+    <h2 id="engagements-title">{messages.home.teaching} &amp; {messages.home.speaking.toLowerCase()}</h2>
+    <span aria-hidden="true"></span>
+    <div class="section-heading__links">
+      <a href={localizedPath(locale, 'teaching')}>{messages.home.teaching}</a>
+      <a href={localizedPath(locale, 'speaking')}>{messages.home.speaking}</a>
+    </div>
+  </div>
+  <div class="curated-engagements">
+    <article class:list={{ 'curated-engagements__item--illustrated': courseMedia }}>
+      <h3><a href={localizedPath(locale, 'teaching')}>{course?.title}</a></h3>
+      <p>{locale === 'en' ? 'Workshop · AI Onramp by TUMO Labs · Jun 8–19, 2026' : `${course?.format} · ${course?.secondary} · ${course?.date}`}</p>
+      {courseMedia && <div class="curated-engagements__image curated-engagements__image--flyer"><img src={courseMedia.src} alt={courseMedia.alt} width="240" height="300" loading="lazy" decoding="async" /></div>}
+    </article>
+    <article class:list={{ 'curated-engagements__item--illustrated': sessionMedia }}>
+      <h3><a href={localizedPath(locale, 'speaking')}>{session?.title}</a></h3>
+      <p>{locale === 'en' ? 'Session · AI Onramp by TUMO Labs · Apr 17, 2026' : `${session?.secondary} · ${session?.date}`}</p>
+      {sessionMedia && <div class="curated-engagements__image"><img src={sessionMedia.src} alt={sessionMedia.alt} width="1600" height="1066" loading="lazy" decoding="async" /></div>}
+    </article>
+  </div>
+</section>
+
+<ContactInvite locale={locale} />
+
+<style>
+  .curated-engagements { margin-top: 1.25rem; }
+  .curated-engagements article { padding: 1.15rem 0; border-top: 1px solid var(--color-border-light); }
+  .curated-engagements article:first-child { padding-top: 0; border-top: 0; }
+  .curated-engagements article:last-child { padding-bottom: 0; }
+  .curated-engagements__item--illustrated { display: grid; grid-template-columns: minmax(0, 1fr) 160px; column-gap: 1.5rem; align-content: start; }
+  .curated-engagements__item--illustrated h3, .curated-engagements__item--illustrated p { grid-column: 1; align-self: start; }
+  .curated-engagements__image { grid-column: 2; grid-row: 1 / span 2; align-self: start; overflow: hidden; aspect-ratio: 3 / 2; border: 1px solid var(--color-border-light); border-radius: 3px; }
+  .curated-engagements__image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .curated-engagements__image--flyer { background: var(--color-surface-muted); }
+  .curated-engagements__image--flyer img { object-fit: contain; }
+  .curated-engagements h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.375; }
+  .curated-engagements h3 a { color: var(--color-text); text-decoration: none; }
+  .curated-engagements h3 a:hover { color: var(--color-link); text-decoration: underline; }
+  .curated-engagements p { margin-top: 0.35rem; color: var(--color-text-secondary); font-size: 0.82rem; line-height: 1.65; }
+  @media (max-width: 639px) {
+    .curated-engagements__item--illustrated { grid-template-columns: minmax(0, 1fr) 96px; column-gap: 1rem; row-gap: 0.4rem; }
+    .curated-engagements .curated-engagements__item--illustrated p { grid-column: 1 / -1; margin-top: 0; }
+    .curated-engagements__image { grid-row: 1; }
+  }
+</style>

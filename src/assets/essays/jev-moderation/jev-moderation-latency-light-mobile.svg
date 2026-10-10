@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="jev-chart" viewBox="0 0 350 946" width="350" height="946" role="img" aria-labelledby="jev-latency-mobile-title jev-latency-mobile-desc" style="--color-bg:#f8f8f3;--color-text:#17231f;--color-text-secondary:#59645f;--color-text-tertiary:#69756e;--color-border-light:#dde3df;--color-accent:#246654;--color-tag-purple-text:#7056b8;">
+<title id="jev-latency-mobile-title">Recorded time for successful requests</title>
+<desc id="jev-latency-mobile-desc">ToxicChat: Jev 305, GPT-5.6 Luna 715, GPT-6 Luna 754. XSTest: Jev 289, GPT-5.6 Luna 707, GPT-6 Luna 750. Aegis 2: Jev 290, GPT-5.6 Luna 710, GPT-6 Luna 760. WildGuardTest: Jev 316, GPT-5.6 Luna 720, GPT-6 Luna 770. Recorded successful-request times from separate runs with different network and service conditions. Jev stops at HTTP return. Luna includes JSON parsing, response-file writing and label/cost processing. Client queue and rate-limit waiting are excluded. No timing uncertainty intervals were saved.</desc>
+<style>.jev-chart-pair { margin: 2rem 0 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--color-border, #cbd3ce); }
+.jev-chart { display: block; width: 100%; height: auto; overflow: visible; color: var(--color-text, #17231f); font-family: var(--font-sans, 'Manrope', sans-serif); }
+.jev-chart--mobile { display: none; max-width: 440px; margin-inline: auto; }
+.jev-chart .heading { fill: currentColor; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.4px; }
+.jev-chart .label { fill: currentColor; }
+.jev-chart .muted { fill: var(--color-text-secondary, #59645f); }
+.jev-chart .number { font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-variant-numeric: tabular-nums; }
+.jev-chart .grid { stroke: var(--color-border-light, #dde3df); stroke-width: 0.75; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.jev-chart .zero { stroke: var(--color-text-tertiary, #69756e); stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.jev-chart .jev { fill: var(--color-accent, #246654); }
+.jev-chart .luna56 { fill: var(--color-tag-purple-text, #7056b8); }
+.jev-chart .luna6 { fill: var(--color-text-secondary, #59645f); }
+.jev-chart .texture { stroke: var(--color-bg, #f8f8f3); fill: var(--color-bg, #f8f8f3); opacity: 0.6; }
+@media (max-width: 720px) { .jev-chart-pair .jev-chart--desktop { display: none; } .jev-chart-pair .jev-chart--mobile { display: block; } }</style>
+<defs>
+<pattern id="jev-latency-mobile-stripe" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M-1 1L1-1 M0 7L7 0 M6 8L8 6" class="texture" stroke-width="1.2" fill="none" /></pattern>
+<pattern id="jev-latency-mobile-dot" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1" class="texture" stroke="none" /></pattern>
+</defs>
+<text x="0" y="14" font-size="12.5" class="muted number" text-anchor="start">Figure 3</text>
+<text x="0" y="46" font-size="23" class="heading" text-anchor="start">Recorded time for</text>
+<text x="0" y="73" font-size="23" class="heading" text-anchor="start">successful requests</text>
+<text x="0" y="100" font-size="12.5" class="muted" text-anchor="start">Successful requests ·</text>
+<text x="0" y="119" font-size="12.5" class="muted" text-anchor="start">milliseconds</text>
+<text x="0" y="146" font-size="12.5" class="muted" text-anchor="start">Jev uses the original policy</text>
+<text x="0" y="191" font-size="17" class="label" text-anchor="start" font-weight="600">ToxicChat</text>
+<line x1="0.0000" y1="230" x2="0.0000" y2="240" class="zero" />
+<line x1="0.0000" y1="269" x2="0.0000" y2="279" class="zero" />
+<line x1="0.0000" y1="308" x2="0.0000" y2="318" class="zero" />
+<text x="0.0" y="343" font-size="12.5" class="muted number" text-anchor="start">0</text>
+<line x1="175.0000" y1="230" x2="175.0000" y2="240" class="grid" />
+<line x1="175.0000" y1="269" x2="175.0000" y2="279" class="grid" />
+<line x1="175.0000" y1="308" x2="175.0000" y2="318" class="grid" />
+<text x="175.0" y="343" font-size="12.5" class="muted number" text-anchor="middle">400</text>
+<line x1="350.0000" y1="230" x2="350.0000" y2="240" class="grid" />
+<line x1="350.0000" y1="269" x2="350.0000" y2="279" class="grid" />
+<line x1="350.0000" y1="308" x2="350.0000" y2="318" class="grid" />
+<text x="350.0" y="343" font-size="12.5" class="muted number" text-anchor="end">800</text>
+<text x="0" y="225" font-size="13" class="label" text-anchor="start">Jev</text>
+<text x="350" y="225" font-size="13" class="label number" text-anchor="end" font-weight="600">305</text>
+<rect x="0" y="230" width="133.4429" height="10" class="jev" data-dataset="toxicchat" data-model="jev_original" data-value="305.01237549833604" data-label="305" />
+<text x="0" y="264" font-size="13" class="label" text-anchor="start">GPT-5.6 Luna</text>
+<text x="350" y="264" font-size="13" class="label number" text-anchor="end">715</text>
+<rect x="0" y="269" width="312.8049" height="10" class="luna56" data-dataset="toxicchat" data-model="luna56" data-value="714.9825204978697" data-label="715" />
+<rect x="0" y="269" width="312.8049" height="10" fill="url(#jev-latency-mobile-stripe)" aria-hidden="true" />
+<text x="0" y="303" font-size="13" class="label" text-anchor="start">GPT-6 Luna</text>
+<text x="350" y="303" font-size="13" class="label number" text-anchor="end">754</text>
+<rect x="0" y="308" width="329.9574" height="10" class="luna6" data-dataset="toxicchat" data-model="luna6" data-value="754.1882294462994" data-label="754" />
+<rect x="0" y="308" width="329.9574" height="10" fill="url(#jev-latency-mobile-dot)" aria-hidden="true" />
+<text x="0" y="371" font-size="17" class="label" text-anchor="start" font-weight="600">XSTest</text>
+<line x1="0.0000" y1="410" x2="0.0000" y2="420" class="zero" />
+<line x1="0.0000" y1="449" x2="0.0000" y2="459" class="zero" />
+<line x1="0.0000" y1="488" x2="0.0000" y2="498" class="zero" />
+<text x="0.0" y="523" font-size="12.5" class="muted number" text-anchor="start">0</text>
+<line x1="175.0000" y1="410" x2="175.0000" y2="420" class="grid" />
+<line x1="175.0000" y1="449" x2="175.0000" y2="459" class="grid" />
+<line x1="175.0000" y1="488" x2="175.0000" y2="498" class="grid" />
+<text x="175.0" y="523" font-size="12.5" class="muted number" text-anchor="middle">400</text>
+<line x1="350.0000" y1="410" x2="350.0000" y2="420" class="grid" />
+<line x1="350.0000" y1="449" x2="350.0000" y2="459" class="grid" />
+<line x1="350.0000" y1="488" x2="350.0000" y2="498" class="grid" />
+<text x="350.0" y="523" font-size="12.5" class="muted number" text-anchor="end">800</text>
+<text x="0" y="405" font-size="13" class="label" text-anchor="start">Jev</text>
+<text x="350" y="405" font-size="13" class="label number" text-anchor="end" font-weight="600">289</text>
+<rect x="0" y="410" width="126.3701" height="10" class="jev" data-dataset="xstest" data-model="jev_original" data-value="288.8458749985148" data-label="289" />
+<text x="0" y="444" font-size="13" class="label" text-anchor="start">GPT-5.6 Luna</text>
+<text x="350" y="444" font-size="13" class="label number" text-anchor="end">707</text>
+<rect x="0" y="449" width="309.1652" height="10" class="luna56" data-dataset="xstest" data-model="luna56" data-value="706.6633965005167" data-label="707" />
+<rect x="0" y="449" width="309.1652" height="10" fill="url(#jev-latency-mobile-stripe)" aria-hidden="true" />
+<text x="0" y="483" font-size="13" class="label" text-anchor="start">GPT-6 Luna</text>
+<text x="350" y="483" font-size="13" class="label number" text-anchor="end">750</text>
+<rect x="0" y="488" width="327.9245" height="10" class="luna6" data-dataset="xstest" data-model="luna6" data-value="749.5416874880902" data-label="750" />
+<rect x="0" y="488" width="327.9245" height="10" fill="url(#jev-latency-mobile-dot)" aria-hidden="true" />
+<text x="0" y="551" font-size="17" class="label" text-anchor="start" font-weight="600">Aegis 2</text>
+<line x1="0.0000" y1="590" x2="0.0000" y2="600" class="zero" />
+<line x1="0.0000" y1="629" x2="0.0000" y2="639" class="zero" />
+<line x1="0.0000" y1="668" x2="0.0000" y2="678" class="zero" />
+<text x="0.0" y="703" font-size="12.5" class="muted number" text-anchor="start">0</text>
+<line x1="175.0000" y1="590" x2="175.0000" y2="600" class="grid" />
+<line x1="175.0000" y1="629" x2="175.0000" y2="639" class="grid" />
+<line x1="175.0000" y1="668" x2="175.0000" y2="678" class="grid" />
+<text x="175.0" y="703" font-size="12.5" class="muted number" text-anchor="middle">400</text>
+<line x1="350.0000" y1="590" x2="350.0000" y2="600" class="grid" />
+<line x1="350.0000" y1="629" x2="350.0000" y2="639" class="grid" />
+<line x1="350.0000" y1="668" x2="350.0000" y2="678" class="grid" />
+<text x="350.0" y="703" font-size="12.5" class="muted number" text-anchor="end">800</text>
+<text x="0" y="585" font-size="13" class="label" text-anchor="start">Jev</text>
+<text x="350" y="585" font-size="13" class="label number" text-anchor="end" font-weight="600">290</text>
+<rect x="0" y="590" width="126.7955" height="10" class="jev" data-dataset="aegis" data-model="jev_original" data-value="289.81833400030155" data-label="290" />
+<text x="0" y="624" font-size="13" class="label" text-anchor="start">GPT-5.6 Luna</text>
+<text x="350" y="624" font-size="13" class="label number" text-anchor="end">710</text>
+<rect x="0" y="629" width="310.5364" height="10" class="luna56" data-dataset="aegis" data-model="luna56" data-value="709.7974790012813" data-label="710" />
+<rect x="0" y="629" width="310.5364" height="10" fill="url(#jev-latency-mobile-stripe)" aria-hidden="true" />
+<text x="0" y="663" font-size="13" class="label" text-anchor="start">GPT-6 Luna</text>
+<text x="350" y="663" font-size="13" class="label number" text-anchor="end">760</text>
+<rect x="0" y="668" width="332.5461" height="10" class="luna6" data-dataset="aegis" data-model="luna6" data-value="760.1053539547138" data-label="760" />
+<rect x="0" y="668" width="332.5461" height="10" fill="url(#jev-latency-mobile-dot)" aria-hidden="true" />
+<text x="0" y="731" font-size="17" class="label" text-anchor="start" font-weight="600">WildGuardTest</text>
+<line x1="0.0000" y1="770" x2="0.0000" y2="780" class="zero" />
+<line x1="0.0000" y1="809" x2="0.0000" y2="819" class="zero" />
+<line x1="0.0000" y1="848" x2="0.0000" y2="858" class="zero" />
+<text x="0.0" y="883" font-size="12.5" class="muted number" text-anchor="start">0</text>
+<line x1="175.0000" y1="770" x2="175.0000" y2="780" class="grid" />
+<line x1="175.0000" y1="809" x2="175.0000" y2="819" class="grid" />
+<line x1="175.0000" y1="848" x2="175.0000" y2="858" class="grid" />
+<text x="175.0" y="883" font-size="12.5" class="muted number" text-anchor="middle">400</text>
+<line x1="350.0000" y1="770" x2="350.0000" y2="780" class="grid" />
+<line x1="350.0000" y1="809" x2="350.0000" y2="819" class="grid" />
+<line x1="350.0000" y1="848" x2="350.0000" y2="858" class="grid" />
+<text x="350.0" y="883" font-size="12.5" class="muted number" text-anchor="end">800</text>
+<text x="0" y="765" font-size="13" class="label" text-anchor="start">Jev</text>
+<text x="350" y="765" font-size="13" class="label number" text-anchor="end" font-weight="600">316</text>
+<rect x="0" y="770" width="138.1777" height="10" class="jev" data-dataset="wildguard" data-model="jev_original" data-value="315.83470800251234" data-label="316" />
+<text x="0" y="804" font-size="13" class="label" text-anchor="start">GPT-5.6 Luna</text>
+<text x="350" y="804" font-size="13" class="label number" text-anchor="end">720</text>
+<rect x="0" y="809" width="315.1465" height="10" class="luna56" data-dataset="wildguard" data-model="luna56" data-value="720.3348750044825" data-label="720" />
+<rect x="0" y="809" width="315.1465" height="10" fill="url(#jev-latency-mobile-stripe)" aria-hidden="true" />
+<text x="0" y="843" font-size="13" class="label" text-anchor="start">GPT-6 Luna</text>
+<text x="350" y="843" font-size="13" class="label number" text-anchor="end">770</text>
+<rect x="0" y="848" width="336.9468" height="10" class="luna6" data-dataset="wildguard" data-model="luna6" data-value="770.1640829909593" data-label="770" />
+<rect x="0" y="848" width="336.9468" height="10" fill="url(#jev-latency-mobile-dot)" aria-hidden="true" />
+<text x="175.0" y="931" font-size="12.5" class="muted" text-anchor="middle">Median recorded request time (ms)</text>
+</svg>

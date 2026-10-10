@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="decisions-chart" viewBox="0 0 780 1020" width="780" height="1020" role="img" aria-labelledby="decisions-f1-desktop-light-title decisions-f1-desktop-light-desc" style="--color-bg:#f8f8f3;--color-text:#17231f;--color-text-secondary:#59645f;--color-text-tertiary:#69756e;--color-border-light:#dde3df;--color-accent:#246654;--color-tag-purple-text:#7056b8;--color-tag-blue-text:#3372a8;">
+<title id="decisions-f1-desktop-light-title">Decisions, Jev and baseline Luna</title>
+<desc id="decisions-f1-desktop-light-desc">ToxicChat, 5,083 scored rows: Jev · baseline 75.40, nominal 95% interval 71.65 to 78.99, GPT-6 Luna · Chat 63.68, nominal 95% interval 59.15 to 67.84, Decisions · original 50.00, nominal 95% interval 44.44 to 55.39, Decisions · policy variant 62.88, nominal 95% interval 58.12 to 67.25. Decisions probability coverage: original 100.00%, 5,083 of 5,083 rows, policy 99.74%, 5,070 of 5,083 rows. XSTest, 450 scored rows: Jev · baseline 93.40, nominal 95% interval 90.77 to 95.67, GPT-6 Luna · Chat 91.46, nominal 95% interval 88.40 to 94.38, Decisions · original 86.50, nominal 95% interval 82.62 to 90.13, Decisions · policy variant 84.32, nominal 95% interval 79.89 to 88.22. Decisions probability coverage: original 98.67%, 444 of 450 rows, policy 90.44%, 407 of 450 rows. Aegis 2, 1,923 scored rows: Jev · baseline 80.27, nominal 95% interval 78.27 to 82.10, GPT-6 Luna · Chat 77.58, nominal 95% interval 75.42 to 79.66, Decisions · original 72.99, nominal 95% interval 70.48 to 75.28, Decisions · policy variant 72.41, nominal 95% interval 70.01 to 74.88. Decisions probability coverage: original 98.75%, 1,899 of 1,923 rows, policy 95.06%, 1,828 of 1,923 rows. WildGuardTest, 1,699 scored rows: Jev · baseline 88.30, nominal 95% interval 86.46 to 89.97, GPT-6 Luna · Chat 85.17, nominal 95% interval 83.12 to 87.12, Decisions · original 79.63, nominal 95% interval 77.16 to 81.95, Decisions · policy variant 73.08, nominal 95% interval 70.03 to 75.69. Decisions probability coverage: original 99.82%, 1,696 of 1,699 rows, policy 97.41%, 1,655 of 1,699 rows. Figure 4. Unsafe-positive F1 on the same full scored rows, with Decisions refusals blocked. GPT-6 Luna Chat uses the unchanged Boolean baseline prompt. Jev uses its selected baseline prompt and 0.54 cutoff. Decisions uses the original and policy-variant prompts at 0.5. Whiskers show recorded nominal 95% grouped-bootstrap intervals for the saved predictions, without correction for multiple comparisons. These are not equally tuned systems, and interval overlap is not a paired significance test.</desc>
+<style>.decisions-chart { display: block; width: 100%; height: auto; color: var(--color-text, #17231f); font-family: var(--font-sans, 'Manrope', sans-serif); }
+.decisions-chart--mobile { display: none; max-width: 440px; margin-inline: auto; }
+.decisions-chart .heading { fill: currentColor; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+.decisions-chart .label { fill: currentColor; }
+.decisions-chart .muted { fill: var(--color-text-secondary, #59645f); }
+.decisions-chart .number { font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-variant-numeric: tabular-nums; }
+.decisions-chart .grid { stroke: var(--color-border-light, #dde3df); stroke-width: 0.75; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.decisions-chart .zero { stroke: var(--color-text-tertiary, #69756e); stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.decisions-chart .jev { fill: var(--color-accent, #246654); }
+.decisions-chart .luna6 { fill: var(--color-text-secondary, #59645f); }
+.decisions-chart .decisions-original { fill: var(--color-tag-purple-text, #7056b8); }
+.decisions-chart .decisions-policy { fill: var(--color-tag-blue-text, #3372a8); }
+.decisions-chart .texture { stroke: var(--color-bg, #f8f8f3); fill: var(--color-bg, #f8f8f3); opacity: 0.65; }
+.decisions-chart .interval { stroke: currentColor; stroke-width: 1.25; fill: none; vector-effect: non-scaling-stroke; }
+.decisions-chart .interval-halo { stroke: var(--color-bg, #f8f8f3); stroke-width: 3.5; fill: none; vector-effect: non-scaling-stroke; }
+.decisions-chart-pair figcaption { margin-top: 1rem; color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.625; }
+@media (max-width: 720px) { .decisions-chart-pair .decisions-chart--desktop { display: none; } .decisions-chart-pair .decisions-chart--mobile { display: block; } }</style>
+<defs>
+<pattern id="decisions-f1-desktop-light-dot" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1" class="texture" stroke="none" /></pattern>
+<pattern id="decisions-f1-desktop-light-stripe" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M-1 1L1-1 M0 7L7 0 M6 8L8 6" class="texture" stroke-width="1.2" fill="none" /></pattern>
+<pattern id="decisions-f1-desktop-light-cross" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 0L8 8 M8 0L0 8" class="texture" stroke-width="1" fill="none" /></pattern>
+</defs>
+<text x="0" y="14" font-size="12.5" class="muted number" text-anchor="start">Figure 4</text>
+<text x="0" y="50" font-size="29" class="heading" text-anchor="start">Decisions, Jev and baseline Luna</text>
+<text x="0" y="80" font-size="14" class="muted" text-anchor="start">Full-row F1 · higher is better · Decisions refusals counted as blocks</text>
+<text x="0" y="104" font-size="13" class="muted" text-anchor="start">Recorded nominal 95% sampling intervals · unequal tuning</text>
+<text x="0" y="143" font-size="18" class="label" text-anchor="start" font-weight="600">ToxicChat</text>
+<text x="780" y="143" font-size="12.5" class="muted number" text-anchor="end">5,083 rows</text>
+<text x="174" y="177" font-size="13" class="label" text-anchor="end">Jev · baseline</text>
+<text x="773" y="177" font-size="13" class="label number" text-anchor="end" font-weight="600">75.40</text>
+<line x1="188.0000" y1="163" x2="188.0000" y2="183" class="zero" />
+<line x1="438.0000" y1="163" x2="438.0000" y2="183" class="grid" />
+<line x1="688.0000" y1="163" x2="688.0000" y2="183" class="grid" />
+<rect x="188" y="165" width="377.0015" height="16" class="jev" data-dataset="toxicchat" data-model="jev_original" data-value="75.40029112081513" data-label="75.40" />
+<path d="M546.2317 169.0V177.0 M546.2317 173.0H582.9594 M582.9594 169.0V177.0" class="interval-halo" aria-hidden="true" />
+<path d="M546.2317 169.0V177.0 M546.2317 173.0H582.9594 M582.9594 169.0V177.0" class="interval" data-interval-dataset="toxicchat" data-interval-model="jev_original" data-lower="71.64634146341463" data-upper="78.99187233948697" aria-hidden="true" />
+<text x="174" y="209" font-size="13" class="label" text-anchor="end">GPT-6 Luna · Chat</text>
+<text x="773" y="209" font-size="13" class="label number" text-anchor="end">63.68</text>
+<line x1="188.0000" y1="195" x2="188.0000" y2="215" class="zero" />
+<line x1="438.0000" y1="195" x2="438.0000" y2="215" class="grid" />
+<line x1="688.0000" y1="195" x2="688.0000" y2="215" class="grid" />
+<rect x="188" y="197" width="318.3926" height="16" class="luna6" data-dataset="toxicchat" data-model="luna6" data-value="63.67851622874807" data-label="63.68" />
+<rect x="188" y="197" width="318.3926" height="16" fill="url(#decisions-f1-desktop-light-dot)" aria-hidden="true" />
+<path d="M483.7694 201.0V209.0 M483.7694 205.0H527.1819 M527.1819 201.0V209.0" class="interval-halo" aria-hidden="true" />
+<path d="M483.7694 201.0V209.0 M483.7694 205.0H527.1819 M527.1819 201.0V209.0" class="interval" data-interval-dataset="toxicchat" data-interval-model="luna6" data-lower="59.15388885034344" data-upper="67.83638611948373" aria-hidden="true" />
+<text x="174" y="241" font-size="13" class="label" text-anchor="end">Decisions · original</text>
+<text x="773" y="241" font-size="13" class="label number" text-anchor="end">50.00</text>
+<line x1="188.0000" y1="227" x2="188.0000" y2="247" class="zero" />
+<line x1="438.0000" y1="227" x2="438.0000" y2="247" class="grid" />
+<line x1="688.0000" y1="227" x2="688.0000" y2="247" class="grid" />
+<rect x="188" y="229" width="250.0000" height="16" class="decisions-original" data-dataset="toxicchat" data-model="decisions_original" data-value="50.0" data-label="50.00" />
+<rect x="188" y="229" width="250.0000" height="16" fill="url(#decisions-f1-desktop-light-stripe)" aria-hidden="true" />
+<path d="M410.2222 233.0V241.0 M410.2222 237.0H464.9517 M464.9517 233.0V241.0" class="interval-halo" aria-hidden="true" />
+<path d="M410.2222 233.0V241.0 M410.2222 237.0H464.9517 M464.9517 233.0V241.0" class="interval" data-interval-dataset="toxicchat" data-interval-model="decisions_original" data-lower="44.44444444444444" data-upper="55.39033457249071" aria-hidden="true" />
+<text x="174" y="273" font-size="13" class="label" text-anchor="end">Decisions · policy variant</text>
+<text x="773" y="273" font-size="13" class="label number" text-anchor="end">62.88</text>
+<line x1="188.0000" y1="259" x2="188.0000" y2="279" class="zero" />
+<line x1="438.0000" y1="259" x2="438.0000" y2="279" class="grid" />
+<line x1="688.0000" y1="259" x2="688.0000" y2="279" class="grid" />
+<rect x="188" y="261" width="314.3813" height="16" class="decisions-policy" data-dataset="toxicchat" data-model="decisions_policy" data-value="62.87625418060201" data-label="62.88" />
+<rect x="188" y="261" width="314.3813" height="16" fill="url(#decisions-f1-desktop-light-cross)" aria-hidden="true" />
+<path d="M478.6133 265.0V273.0 M478.6133 269.0H524.2526 M524.2526 265.0V273.0" class="interval-halo" aria-hidden="true" />
+<path d="M478.6133 265.0V273.0 M478.6133 269.0H524.2526 M524.2526 265.0V273.0" class="interval" data-interval-dataset="toxicchat" data-interval-model="decisions_policy" data-lower="58.122666543244165" data-upper="67.250514910831" aria-hidden="true" />
+<text x="188.0" y="294" font-size="12.5" class="muted number" text-anchor="middle">0</text>
+<text x="438.0" y="294" font-size="12.5" class="muted number" text-anchor="middle">50</text>
+<text x="688.0" y="294" font-size="12.5" class="muted number" text-anchor="middle">100</text>
+<text x="0" y="326" font-size="13" class="muted" text-anchor="start">Decisions probability coverage: original 100.00% · policy variant 99.74%</text>
+<text x="0" y="359" font-size="18" class="label" text-anchor="start" font-weight="600">XSTest</text>
+<text x="780" y="359" font-size="12.5" class="muted number" text-anchor="end">450 rows</text>
+<text x="174" y="393" font-size="13" class="label" text-anchor="end">Jev · baseline</text>
+<text x="773" y="393" font-size="13" class="label number" text-anchor="end" font-weight="600">93.40</text>
+<line x1="188.0000" y1="379" x2="188.0000" y2="399" class="zero" />
+<line x1="438.0000" y1="379" x2="438.0000" y2="399" class="grid" />
+<line x1="688.0000" y1="379" x2="688.0000" y2="399" class="grid" />
+<rect x="188" y="381" width="467.0051" height="16" class="jev" data-dataset="xstest" data-model="jev_original" data-value="93.4010152284264" data-label="93.40" />
+<path d="M641.8462 385.0V393.0 M641.8462 389.0H666.3715 M666.3715 385.0V393.0" class="interval-halo" aria-hidden="true" />
+<path d="M641.8462 385.0V393.0 M641.8462 389.0H666.3715 M666.3715 385.0V393.0" class="interval" data-interval-dataset="xstest" data-interval-model="jev_original" data-lower="90.76923076923077" data-upper="95.67429812834224" aria-hidden="true" />
+<text x="174" y="425" font-size="13" class="label" text-anchor="end">GPT-6 Luna · Chat</text>
+<text x="773" y="425" font-size="13" class="label number" text-anchor="end">91.46</text>
+<line x1="188.0000" y1="411" x2="188.0000" y2="431" class="zero" />
+<line x1="438.0000" y1="411" x2="438.0000" y2="431" class="grid" />
+<line x1="688.0000" y1="411" x2="688.0000" y2="431" class="grid" />
+<rect x="188" y="413" width="457.2864" height="16" class="luna6" data-dataset="xstest" data-model="luna6" data-value="91.4572864321608" data-label="91.46" />
+<rect x="188" y="413" width="457.2864" height="16" fill="url(#decisions-f1-desktop-light-dot)" aria-hidden="true" />
+<path d="M629.9842 417.0V425.0 M629.9842 421.0H659.8840 M659.8840 417.0V425.0" class="interval-halo" aria-hidden="true" />
+<path d="M629.9842 417.0V425.0 M629.9842 421.0H659.8840 M659.8840 417.0V425.0" class="interval" data-interval-dataset="xstest" data-interval-model="luna6" data-lower="88.39684001286211" data-upper="94.37680879197646" aria-hidden="true" />
+<text x="174" y="457" font-size="13" class="label" text-anchor="end">Decisions · original</text>
+<text x="773" y="457" font-size="13" class="label number" text-anchor="end">86.50</text>
+<line x1="188.0000" y1="443" x2="188.0000" y2="463" class="zero" />
+<line x1="438.0000" y1="443" x2="438.0000" y2="463" class="grid" />
+<line x1="688.0000" y1="443" x2="688.0000" y2="463" class="grid" />
+<rect x="188" y="445" width="432.5069" height="16" class="decisions-original" data-dataset="xstest" data-model="decisions_original" data-value="86.50137741046832" data-label="86.50" />
+<rect x="188" y="445" width="432.5069" height="16" fill="url(#decisions-f1-desktop-light-stripe)" aria-hidden="true" />
+<path d="M601.0953 449.0V457.0 M601.0953 453.0H638.6667 M638.6667 449.0V457.0" class="interval-halo" aria-hidden="true" />
+<path d="M601.0953 449.0V457.0 M601.0953 453.0H638.6667 M638.6667 449.0V457.0" class="interval" data-interval-dataset="xstest" data-interval-model="decisions_original" data-lower="82.61905292644688" data-upper="90.13333333333333" aria-hidden="true" />
+<text x="174" y="489" font-size="13" class="label" text-anchor="end">Decisions · policy variant</text>
+<text x="773" y="489" font-size="13" class="label number" text-anchor="end">84.32</text>
+<line x1="188.0000" y1="475" x2="188.0000" y2="495" class="zero" />
+<line x1="438.0000" y1="475" x2="438.0000" y2="495" class="grid" />
+<line x1="688.0000" y1="475" x2="688.0000" y2="495" class="grid" />
+<rect x="188" y="477" width="421.6216" height="16" class="decisions-policy" data-dataset="xstest" data-model="decisions_policy" data-value="84.32432432432432" data-label="84.32" />
+<rect x="188" y="477" width="421.6216" height="16" fill="url(#decisions-f1-desktop-light-cross)" aria-hidden="true" />
+<path d="M587.4636 481.0V489.0 M587.4636 485.0H629.1141 M629.1141 481.0V489.0" class="interval-halo" aria-hidden="true" />
+<path d="M587.4636 481.0V489.0 M587.4636 485.0H629.1141 M629.1141 481.0V489.0" class="interval" data-interval-dataset="xstest" data-interval-model="decisions_policy" data-lower="79.89272496794499" data-upper="88.22282980177715" aria-hidden="true" />
+<text x="188.0" y="510" font-size="12.5" class="muted number" text-anchor="middle">0</text>
+<text x="438.0" y="510" font-size="12.5" class="muted number" text-anchor="middle">50</text>
+<text x="688.0" y="510" font-size="12.5" class="muted number" text-anchor="middle">100</text>
+<text x="0" y="542" font-size="13" class="muted" text-anchor="start">Decisions probability coverage: original 98.67% · policy variant 90.44%</text>
+<text x="0" y="575" font-size="18" class="label" text-anchor="start" font-weight="600">Aegis 2</text>
+<text x="780" y="575" font-size="12.5" class="muted number" text-anchor="end">1,923 rows</text>
+<text x="174" y="609" font-size="13" class="label" text-anchor="end">Jev · baseline</text>
+<text x="773" y="609" font-size="13" class="label number" text-anchor="end" font-weight="600">80.27</text>
+<line x1="188.0000" y1="595" x2="188.0000" y2="615" class="zero" />
+<line x1="438.0000" y1="595" x2="438.0000" y2="615" class="grid" />
+<line x1="688.0000" y1="595" x2="688.0000" y2="615" class="grid" />
+<rect x="188" y="597" width="401.3641" height="16" class="jev" data-dataset="aegis" data-model="jev_original" data-value="80.27282266526757" data-label="80.27" />
+<path d="M579.3717 601.0V609.0 M579.3717 605.0H598.4953 M598.4953 601.0V609.0" class="interval-halo" aria-hidden="true" />
+<path d="M579.3717 601.0V609.0 M579.3717 605.0H598.4953 M598.4953 601.0V609.0" class="interval" data-interval-dataset="aegis" data-interval-model="jev_original" data-lower="78.27433342944292" data-upper="82.0990667448451" aria-hidden="true" />
+<text x="174" y="641" font-size="13" class="label" text-anchor="end">GPT-6 Luna · Chat</text>
+<text x="773" y="641" font-size="13" class="label number" text-anchor="end">77.58</text>
+<line x1="188.0000" y1="627" x2="188.0000" y2="647" class="zero" />
+<line x1="438.0000" y1="627" x2="438.0000" y2="647" class="grid" />
+<line x1="688.0000" y1="627" x2="688.0000" y2="647" class="grid" />
+<rect x="188" y="629" width="387.9217" height="16" class="luna6" data-dataset="aegis" data-model="luna6" data-value="77.58433079434167" data-label="77.58" />
+<rect x="188" y="629" width="387.9217" height="16" fill="url(#decisions-f1-desktop-light-dot)" aria-hidden="true" />
+<path d="M565.0753 633.0V641.0 M565.0753 637.0H586.2929 M586.2929 633.0V641.0" class="interval-halo" aria-hidden="true" />
+<path d="M565.0753 633.0V641.0 M565.0753 637.0H586.2929 M586.2929 633.0V641.0" class="interval" data-interval-dataset="aegis" data-interval-model="luna6" data-lower="75.41506310792273" data-upper="79.65858017146664" aria-hidden="true" />
+<text x="174" y="673" font-size="13" class="label" text-anchor="end">Decisions · original</text>
+<text x="773" y="673" font-size="13" class="label number" text-anchor="end">72.99</text>
+<line x1="188.0000" y1="659" x2="188.0000" y2="679" class="zero" />
+<line x1="438.0000" y1="659" x2="438.0000" y2="679" class="grid" />
+<line x1="688.0000" y1="659" x2="688.0000" y2="679" class="grid" />
+<rect x="188" y="661" width="364.9593" height="16" class="decisions-original" data-dataset="aegis" data-model="decisions_original" data-value="72.9918509895227" data-label="72.99" />
+<rect x="188" y="661" width="364.9593" height="16" fill="url(#decisions-f1-desktop-light-stripe)" aria-hidden="true" />
+<path d="M540.4200 665.0V673.0 M540.4200 669.0H564.3800 M564.3800 665.0V673.0" class="interval-halo" aria-hidden="true" />
+<path d="M540.4200 665.0V673.0 M540.4200 669.0H564.3800 M564.3800 665.0V673.0" class="interval" data-interval-dataset="aegis" data-interval-model="decisions_original" data-lower="70.48400805109458" data-upper="75.27599964601247" aria-hidden="true" />
+<text x="174" y="705" font-size="13" class="label" text-anchor="end">Decisions · policy variant</text>
+<text x="773" y="705" font-size="13" class="label number" text-anchor="end">72.41</text>
+<line x1="188.0000" y1="691" x2="188.0000" y2="711" class="zero" />
+<line x1="438.0000" y1="691" x2="438.0000" y2="711" class="grid" />
+<line x1="688.0000" y1="691" x2="688.0000" y2="711" class="grid" />
+<rect x="188" y="693" width="362.0283" height="16" class="decisions-policy" data-dataset="aegis" data-model="decisions_policy" data-value="72.40566037735849" data-label="72.41" />
+<rect x="188" y="693" width="362.0283" height="16" fill="url(#decisions-f1-desktop-light-cross)" aria-hidden="true" />
+<path d="M538.0295 697.0V705.0 M538.0295 701.0H562.4188 M562.4188 697.0V705.0" class="interval-halo" aria-hidden="true" />
+<path d="M538.0295 697.0V705.0 M538.0295 701.0H562.4188 M562.4188 697.0V705.0" class="interval" data-interval-dataset="aegis" data-interval-model="decisions_policy" data-lower="70.00589275191514" data-upper="74.88376093449968" aria-hidden="true" />
+<text x="188.0" y="726" font-size="12.5" class="muted number" text-anchor="middle">0</text>
+<text x="438.0" y="726" font-size="12.5" class="muted number" text-anchor="middle">50</text>
+<text x="688.0" y="726" font-size="12.5" class="muted number" text-anchor="middle">100</text>
+<text x="0" y="758" font-size="13" class="muted" text-anchor="start">Decisions probability coverage: original 98.75% · policy variant 95.06%</text>
+<text x="0" y="791" font-size="18" class="label" text-anchor="start" font-weight="600">WildGuardTest</text>
+<text x="780" y="791" font-size="12.5" class="muted number" text-anchor="end">1,699 rows</text>
+<text x="174" y="825" font-size="13" class="label" text-anchor="end">Jev · baseline</text>
+<text x="773" y="825" font-size="13" class="label number" text-anchor="end" font-weight="600">88.30</text>
+<line x1="188.0000" y1="811" x2="188.0000" y2="831" class="zero" />
+<line x1="438.0000" y1="811" x2="438.0000" y2="831" class="grid" />
+<line x1="688.0000" y1="811" x2="688.0000" y2="831" class="grid" />
+<rect x="188" y="813" width="441.5225" height="16" class="jev" data-dataset="wildguard" data-model="jev_original" data-value="88.30449826989619" data-label="88.30" />
+<path d="M620.3174 817.0V825.0 M620.3174 821.0H637.8689 M637.8689 817.0V825.0" class="interval-halo" aria-hidden="true" />
+<path d="M620.3174 817.0V825.0 M620.3174 821.0H637.8689 M637.8689 817.0V825.0" class="interval" data-interval-dataset="wildguard" data-interval-model="jev_original" data-lower="86.46348558890068" data-upper="89.97377672882749" aria-hidden="true" />
+<text x="174" y="857" font-size="13" class="label" text-anchor="end">GPT-6 Luna · Chat</text>
+<text x="773" y="857" font-size="13" class="label number" text-anchor="end">85.17</text>
+<line x1="188.0000" y1="843" x2="188.0000" y2="863" class="zero" />
+<line x1="438.0000" y1="843" x2="438.0000" y2="863" class="grid" />
+<line x1="688.0000" y1="843" x2="688.0000" y2="863" class="grid" />
+<rect x="188" y="845" width="425.8339" height="16" class="luna6" data-dataset="wildguard" data-model="luna6" data-value="85.16678495386799" data-label="85.17" />
+<rect x="188" y="845" width="425.8339" height="16" fill="url(#decisions-f1-desktop-light-dot)" aria-hidden="true" />
+<path d="M603.6200 849.0V857.0 M603.6200 853.0H623.5861 M623.5861 849.0V857.0" class="interval-halo" aria-hidden="true" />
+<path d="M603.6200 849.0V857.0 M603.6200 853.0H623.5861 M623.5861 849.0V857.0" class="interval" data-interval-dataset="wildguard" data-interval-model="luna6" data-lower="83.12399363106888" data-upper="87.11722173531989" aria-hidden="true" />
+<text x="174" y="889" font-size="13" class="label" text-anchor="end">Decisions · original</text>
+<text x="773" y="889" font-size="13" class="label number" text-anchor="end">79.63</text>
+<line x1="188.0000" y1="875" x2="188.0000" y2="895" class="zero" />
+<line x1="438.0000" y1="875" x2="438.0000" y2="895" class="grid" />
+<line x1="688.0000" y1="875" x2="688.0000" y2="895" class="grid" />
+<rect x="188" y="877" width="398.1693" height="16" class="decisions-original" data-dataset="wildguard" data-model="decisions_original" data-value="79.63386727688787" data-label="79.63" />
+<rect x="188" y="877" width="398.1693" height="16" fill="url(#decisions-f1-desktop-light-stripe)" aria-hidden="true" />
+<path d="M573.7838 881.0V889.0 M573.7838 885.0H597.7637 M597.7637 881.0V889.0" class="interval-halo" aria-hidden="true" />
+<path d="M573.7838 881.0V889.0 M573.7838 885.0H597.7637 M597.7637 881.0V889.0" class="interval" data-interval-dataset="wildguard" data-interval-model="decisions_original" data-lower="77.15675267558171" data-upper="81.95273184759165" aria-hidden="true" />
+<text x="174" y="921" font-size="13" class="label" text-anchor="end">Decisions · policy variant</text>
+<text x="773" y="921" font-size="13" class="label number" text-anchor="end">73.08</text>
+<line x1="188.0000" y1="907" x2="188.0000" y2="927" class="zero" />
+<line x1="438.0000" y1="907" x2="438.0000" y2="927" class="grid" />
+<line x1="688.0000" y1="907" x2="688.0000" y2="927" class="grid" />
+<rect x="188" y="909" width="365.4002" height="16" class="decisions-policy" data-dataset="wildguard" data-model="decisions_policy" data-value="73.08003233629749" data-label="73.08" />
+<rect x="188" y="909" width="365.4002" height="16" fill="url(#decisions-f1-desktop-light-cross)" aria-hidden="true" />
+<path d="M538.1573 913.0V921.0 M538.1573 917.0H566.4446 M566.4446 913.0V921.0" class="interval-halo" aria-hidden="true" />
+<path d="M538.1573 913.0V921.0 M538.1573 917.0H566.4446 M566.4446 913.0V921.0" class="interval" data-interval-dataset="wildguard" data-interval-model="decisions_policy" data-lower="70.03145542317174" data-upper="75.6889163076773" aria-hidden="true" />
+<text x="188.0" y="942" font-size="12.5" class="muted number" text-anchor="middle">0</text>
+<text x="438.0" y="942" font-size="12.5" class="muted number" text-anchor="middle">50</text>
+<text x="688.0" y="942" font-size="12.5" class="muted number" text-anchor="middle">100</text>
+<text x="0" y="974" font-size="13" class="muted" text-anchor="start">Decisions probability coverage: original 99.82% · policy variant 97.41%</text>
+<text x="390.0" y="1006" font-size="13" class="muted" text-anchor="middle">Unsafe-positive F1 (%)</text>
+</svg>

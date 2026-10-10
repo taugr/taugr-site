@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="jev-chart" viewBox="0 0 350 946" width="350" height="946" role="img" aria-labelledby="jev-f1-mobile-title jev-f1-mobile-desc" style="--color-bg:#111915;--color-text:#f4f3ef;--color-text-secondary:#abb2b9;--color-text-tertiary:#89958e;--color-border-light:#232d35;--color-accent:#79dbc5;--color-tag-purple-text:#b9a9ee;">
+<title id="jev-f1-mobile-title">F1 across four moderation benchmarks</title>
+<desc id="jev-f1-mobile-desc">ToxicChat: Jev 75.40%, GPT-5.6 Luna 66.86%, GPT-6 Luna 63.68%. XSTest: Jev 93.40%, GPT-5.6 Luna 88.27%, GPT-6 Luna 91.46%. Aegis 2: Jev 80.27%, GPT-5.6 Luna 79.12%, GPT-6 Luna 77.58%. WildGuardTest: Jev 88.30%, GPT-5.6 Luna 83.54%, GPT-6 Luna 85.17%. Observed F1 point estimates. Aegis versus GPT-5.6 and XSTest versus GPT-6 were inconclusive in the sampling checks.</desc>
+<style>.jev-chart-pair { margin: 2rem 0 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--color-border, #cbd3ce); }
+.jev-chart { display: block; width: 100%; height: auto; overflow: visible; color: var(--color-text, #17231f); font-family: var(--font-sans, 'Manrope', sans-serif); }
+.jev-chart--mobile { display: none; max-width: 440px; margin-inline: auto; }
+.jev-chart .heading { fill: currentColor; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.4px; }
+.jev-chart .label { fill: currentColor; }
+.jev-chart .muted { fill: var(--color-text-secondary, #59645f); }
+.jev-chart .number { font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-variant-numeric: tabular-nums; }
+.jev-chart .grid { stroke: var(--color-border-light, #dde3df); stroke-width: 0.75; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.jev-chart .zero { stroke: var(--color-text-tertiary, #69756e); stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.jev-chart .jev { fill: var(--color-accent, #246654); }
+.jev-chart .luna56 { fill: var(--color-tag-purple-text, #7056b8); }
+.jev-chart .luna6 { fill: var(--color-text-secondary, #59645f); }
+.jev-chart .texture { stroke: var(--color-bg, #f8f8f3); fill: var(--color-bg, #f8f8f3); opacity: 0.6; }
+@media (max-width: 720px) { .jev-chart-pair .jev-chart--desktop { display: none; } .jev-chart-pair .jev-chart--mobile { display: block; } }</style>
+<defs>
+<pattern id="jev-f1-mobile-stripe" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M-1 1L1-1 M0 7L7 0 M6 8L8 6" class="texture" stroke-width="1.2" fill="none" /></pattern>
+<pattern id="jev-f1-mobile-dot" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1" class="texture" stroke="none" /></pattern>
+</defs>
+<text x="0" y="14" font-size="12.5" class="muted number" text-anchor="start">Figure 1</text>
+<text x="0" y="46" font-size="23" class="heading" text-anchor="start">F1 across four</text>
+<text x="0" y="73" font-size="23" class="heading" text-anchor="start">moderation benchmarks</text>
+<text x="0" y="100" font-size="12.5" class="muted" text-anchor="start">F1 on labelled test rows ·</text>
+<text x="0" y="119" font-size="12.5" class="muted" text-anchor="start">higher is better</text>
+<text x="0" y="146" font-size="12.5" class="muted" text-anchor="start">Jev uses the original policy</text>
+<text x="0" y="191" font-size="17" class="label" text-anchor="start" font-weight="600">ToxicChat</text>
+<text x="350" y="191" font-size="12.5" class="muted number" text-anchor="end">5,083 rows</text>
+<line x1="0.0000" y1="230" x2="0.0000" y2="240" class="zero" />
+<line x1="0.0000" y1="269" x2="0.0000" y2="279" class="zero" />
+<line x1="0.0000" y1="308" x2="0.0000" y2="318" class="zero" />
+<text x="0.0" y="343" font-size="12.5" class="muted number" text-anchor="start">0%</text>
+<line x1="175.0000" y1="230" x2="175.0000" y2="240" class="grid" />
+<line x1="175.0000" y1="269" x2="175.0000" y2="279" class="grid" />
+<line x1="175.0000" y1="308" x2="175.0000" y2="318" class="grid" />
+<text x="175.0" y="343" font-size="12.5" class="muted number" text-anchor="middle">50%</text>
+<line x1="350.0000" y1="230" x2="350.0000" y2="240" class="grid" />
+<line x1="350.0000" y1="269" x2="350.0000" y2="279" class="grid" />
+<line x1="350.0000" y1="308" x2="350.0000" y2="318" class="grid" />
+<text x="350.0" y="343" font-size="12.5" class="muted number" text-anchor="end">100%</text>
+<text x="0" y="225" font-size="13" class="label" text-anchor="start">Jev</text>
+<text x="350" y="225" font-size="13" class="label number" text-anchor="end" font-weight="600">75.40%</text>
+<rect x="0" y="230" width="263.9010" height="10" class="jev" data-dataset="toxicchat" data-model="jev_original" data-value="75.40029112081513" data-label="75.40%" />
+<text x="0" y="264" font-size="13" class="label" text-anchor="start">GPT-5.6 Luna</text>
+<text x="350" y="264" font-size="13" class="label number" text-anchor="end">66.86%</text>
+<rect x="0" y="269" width="234.0237" height="10" class="luna56" data-dataset="toxicchat" data-model="luna56" data-value="66.86390532544378" data-label="66.86%" />
+<rect x="0" y="269" width="234.0237" height="10" fill="url(#jev-f1-mobile-stripe)" aria-hidden="true" />
+<text x="0" y="303" font-size="13" class="label" text-anchor="start">GPT-6 Luna</text>
+<text x="350" y="303" font-size="13" class="label number" text-anchor="end">63.68%</text>
+<rect x="0" y="308" width="222.8748" height="10" class="luna6" data-dataset="toxicchat" data-model="luna6" data-value="63.67851622874807" data-label="63.68%" />
+<rect x="0" y="308" width="222.8748" height="10" fill="url(#jev-f1-mobile-dot)" aria-hidden="true" />
+<text x="0" y="371" font-size="17" class="label" text-anchor="start" font-weight="600">XSTest</text>
+<text x="350" y="371" font-size="12.5" class="muted number" text-anchor="end">450 rows</text>
+<line x1="0.0000" y1="410" x2="0.0000" y2="420" class="zero" />
+<line x1="0.0000" y1="449" x2="0.0000" y2="459" class="zero" />
+<line x1="0.0000" y1="488" x2="0.0000" y2="498" class="zero" />
+<text x="0.0" y="523" font-size="12.5" class="muted number" text-anchor="start">0%</text>
+<line x1="175.0000" y1="410" x2="175.0000" y2="420" class="grid" />
+<line x1="175.0000" y1="449" x2="175.0000" y2="459" class="grid" />
+<line x1="175.0000" y1="488" x2="175.0000" y2="498" class="grid" />
+<text x="175.0" y="523" font-size="12.5" class="muted number" text-anchor="middle">50%</text>
+<line x1="350.0000" y1="410" x2="350.0000" y2="420" class="grid" />
+<line x1="350.0000" y1="449" x2="350.0000" y2="459" class="grid" />
+<line x1="350.0000" y1="488" x2="350.0000" y2="498" class="grid" />
+<text x="350.0" y="523" font-size="12.5" class="muted number" text-anchor="end">100%</text>
+<text x="0" y="405" font-size="13" class="label" text-anchor="start">Jev</text>
+<text x="350" y="405" font-size="13" class="label number" text-anchor="end" font-weight="600">93.40%</text>
+<rect x="0" y="410" width="326.9036" height="10" class="jev" data-dataset="xstest" data-model="jev_original" data-value="93.4010152284264" data-label="93.40%" />
+<text x="0" y="444" font-size="13" class="label" text-anchor="start">GPT-5.6 Luna</text>
+<text x="350" y="444" font-size="13" class="label number" text-anchor="end">88.27%</text>
+<rect x="0" y="449" width="308.9286" height="10" class="luna56" data-dataset="xstest" data-model="luna56" data-value="88.26530612244898" data-label="88.27%" />
+<rect x="0" y="449" width="308.9286" height="10" fill="url(#jev-f1-mobile-stripe)" aria-hidden="true" />
+<text x="0" y="483" font-size="13" class="label" text-anchor="start">GPT-6 Luna</text>
+<text x="350" y="483" font-size="13" class="label number" text-anchor="end">91.46%</text>
+<rect x="0" y="488" width="320.1005" height="10" class="luna6" data-dataset="xstest" data-model="luna6" data-value="91.4572864321608" data-label="91.46%" />
+<rect x="0" y="488" width="320.1005" height="10" fill="url(#jev-f1-mobile-dot)" aria-hidden="true" />
+<text x="0" y="551" font-size="17" class="label" text-anchor="start" font-weight="600">Aegis 2</text>
+<text x="350" y="551" font-size="12.5" class="muted number" text-anchor="end">1,923 rows</text>
+<line x1="0.0000" y1="590" x2="0.0000" y2="600" class="zero" />
+<line x1="0.0000" y1="629" x2="0.0000" y2="639" class="zero" />
+<line x1="0.0000" y1="668" x2="0.0000" y2="678" class="zero" />
+<text x="0.0" y="703" font-size="12.5" class="muted number" text-anchor="start">0%</text>
+<line x1="175.0000" y1="590" x2="175.0000" y2="600" class="grid" />
+<line x1="175.0000" y1="629" x2="175.0000" y2="639" class="grid" />
+<line x1="175.0000" y1="668" x2="175.0000" y2="678" class="grid" />
+<text x="175.0" y="703" font-size="12.5" class="muted number" text-anchor="middle">50%</text>
+<line x1="350.0000" y1="590" x2="350.0000" y2="600" class="grid" />
+<line x1="350.0000" y1="629" x2="350.0000" y2="639" class="grid" />
+<line x1="350.0000" y1="668" x2="350.0000" y2="678" class="grid" />
+<text x="350.0" y="703" font-size="12.5" class="muted number" text-anchor="end">100%</text>
+<text x="0" y="585" font-size="13" class="label" text-anchor="start">Jev</text>
+<text x="350" y="585" font-size="13" class="label number" text-anchor="end" font-weight="600">80.27%</text>
+<rect x="0" y="590" width="280.9549" height="10" class="jev" data-dataset="aegis" data-model="jev_original" data-value="80.27282266526757" data-label="80.27%" />
+<text x="0" y="624" font-size="13" class="label" text-anchor="start">GPT-5.6 Luna</text>
+<text x="350" y="624" font-size="13" class="label number" text-anchor="end">79.12%</text>
+<rect x="0" y="629" width="276.9272" height="10" class="luna56" data-dataset="aegis" data-model="luna56" data-value="79.1220556745182" data-label="79.12%" />
+<rect x="0" y="629" width="276.9272" height="10" fill="url(#jev-f1-mobile-stripe)" aria-hidden="true" />
+<text x="0" y="663" font-size="13" class="label" text-anchor="start">GPT-6 Luna</text>
+<text x="350" y="663" font-size="13" class="label number" text-anchor="end">77.58%</text>
+<rect x="0" y="668" width="271.5452" height="10" class="luna6" data-dataset="aegis" data-model="luna6" data-value="77.58433079434167" data-label="77.58%" />
+<rect x="0" y="668" width="271.5452" height="10" fill="url(#jev-f1-mobile-dot)" aria-hidden="true" />
+<text x="0" y="731" font-size="17" class="label" text-anchor="start" font-weight="600">WildGuardTest</text>
+<text x="350" y="731" font-size="12.5" class="muted number" text-anchor="end">1,699 rows</text>
+<line x1="0.0000" y1="770" x2="0.0000" y2="780" class="zero" />
+<line x1="0.0000" y1="809" x2="0.0000" y2="819" class="zero" />
+<line x1="0.0000" y1="848" x2="0.0000" y2="858" class="zero" />
+<text x="0.0" y="883" font-size="12.5" class="muted number" text-anchor="start">0%</text>
+<line x1="175.0000" y1="770" x2="175.0000" y2="780" class="grid" />
+<line x1="175.0000" y1="809" x2="175.0000" y2="819" class="grid" />
+<line x1="175.0000" y1="848" x2="175.0000" y2="858" class="grid" />
+<text x="175.0" y="883" font-size="12.5" class="muted number" text-anchor="middle">50%</text>
+<line x1="350.0000" y1="770" x2="350.0000" y2="780" class="grid" />
+<line x1="350.0000" y1="809" x2="350.0000" y2="819" class="grid" />
+<line x1="350.0000" y1="848" x2="350.0000" y2="858" class="grid" />
+<text x="350.0" y="883" font-size="12.5" class="muted number" text-anchor="end">100%</text>
+<text x="0" y="765" font-size="13" class="label" text-anchor="start">Jev</text>
+<text x="350" y="765" font-size="13" class="label number" text-anchor="end" font-weight="600">88.30%</text>
+<rect x="0" y="770" width="309.0657" height="10" class="jev" data-dataset="wildguard" data-model="jev_original" data-value="88.30449826989619" data-label="88.30%" />
+<text x="0" y="804" font-size="13" class="label" text-anchor="start">GPT-5.6 Luna</text>
+<text x="350" y="804" font-size="13" class="label number" text-anchor="end">83.54%</text>
+<rect x="0" y="809" width="292.3858" height="10" class="luna56" data-dataset="wildguard" data-model="luna56" data-value="83.53879622915156" data-label="83.54%" />
+<rect x="0" y="809" width="292.3858" height="10" fill="url(#jev-f1-mobile-stripe)" aria-hidden="true" />
+<text x="0" y="843" font-size="13" class="label" text-anchor="start">GPT-6 Luna</text>
+<text x="350" y="843" font-size="13" class="label number" text-anchor="end">85.17%</text>
+<rect x="0" y="848" width="298.0837" height="10" class="luna6" data-dataset="wildguard" data-model="luna6" data-value="85.16678495386799" data-label="85.17%" />
+<rect x="0" y="848" width="298.0837" height="10" fill="url(#jev-f1-mobile-dot)" aria-hidden="true" />
+<text x="175.0" y="931" font-size="12.5" class="muted" text-anchor="middle">F1 (%)</text>
+</svg>

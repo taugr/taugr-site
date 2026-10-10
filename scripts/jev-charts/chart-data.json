@@ -1,0 +1,384 @@
+{
+  "source": "Recorded aggregate results used by the original article charts",
+  "source_sha256": "e97fb280d6cb5ae6de0b15db2e9665511df5e00ee0fa61ffe12a5c8522f2a462",
+  "charts": [
+    {
+      "id": "f1",
+      "figure": 1,
+      "title": "F1 across four moderation benchmarks",
+      "title_lines": ["F1 across four", "moderation benchmarks"],
+      "subtitle": "F1 on labelled test rows · higher is better",
+      "subtitle_lines": ["F1 on labelled test rows ·", "higher is better"],
+      "axis": "F1 (%)",
+      "domain": [0, 100],
+      "ticks": [0, 50, 100],
+      "policy_label": "Jev uses the original policy",
+      "datasets": [
+        {
+          "id": "toxicchat",
+          "label": "ToxicChat",
+          "rows": 5083,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 75.40029112081513,
+              "display": "75.40%",
+              "requests": 4976
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 66.86390532544378,
+              "display": "66.86%",
+              "requests": 4976
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 63.67851622874807,
+              "display": "63.68%",
+              "requests": 4976
+            }
+          ]
+        },
+        {
+          "id": "xstest",
+          "label": "XSTest",
+          "rows": 450,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 93.4010152284264,
+              "display": "93.40%",
+              "requests": 450
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 88.26530612244898,
+              "display": "88.27%",
+              "requests": 450
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 91.4572864321608,
+              "display": "91.46%",
+              "requests": 450
+            }
+          ]
+        },
+        {
+          "id": "aegis",
+          "label": "Aegis 2",
+          "rows": 1923,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 80.27282266526757,
+              "display": "80.27%",
+              "requests": 1915
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 79.1220556745182,
+              "display": "79.12%",
+              "requests": 1910
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 77.58433079434167,
+              "display": "77.58%",
+              "requests": 1910
+            }
+          ]
+        },
+        {
+          "id": "wildguard",
+          "label": "WildGuardTest",
+          "rows": 1699,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 88.30449826989619,
+              "display": "88.30%",
+              "requests": 1699
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 83.53879622915156,
+              "display": "83.54%",
+              "requests": 1699
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 85.16678495386799,
+              "display": "85.17%",
+              "requests": 1699
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "figure": 2,
+      "title": "Estimated cost across the completed runs",
+      "title_lines": ["Estimated cost across", "the completed runs"],
+      "subtitle": "Historical USD per 1,000 requests",
+      "subtitle_lines": ["Historical USD per 1,000 requests"],
+      "axis": "Estimated USD per 1,000 requests",
+      "domain": [0, 0.08],
+      "ticks": [0, 0.04, 0.08],
+      "policy_label": "Jev uses the original policy",
+      "datasets": [
+        {
+          "id": "toxicchat",
+          "label": "ToxicChat",
+          "rows": 5083,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 0.0200946788585209,
+              "display": "$0.0201",
+              "requests": 4976
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 0.06614365956591639,
+              "display": "$0.0661",
+              "requests": 4976
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 0.03177544714630225,
+              "display": "$0.0318",
+              "requests": 4976
+            }
+          ]
+        },
+        {
+          "id": "xstest",
+          "label": "XSTest",
+          "rows": 450,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 0.01887816,
+              "display": "$0.0189",
+              "requests": 450
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 0.060424000000000005,
+              "display": "$0.0604",
+              "requests": 450
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 0.028912,
+              "display": "$0.0289",
+              "requests": 450
+            }
+          ]
+        },
+        {
+          "id": "aegis",
+          "label": "Aegis 2",
+          "rows": 1923,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 0.02102171279373368,
+              "display": "$0.0210",
+              "requests": 1915
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 0.07084971204188481,
+              "display": "$0.0708",
+              "requests": 1910
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 0.03453198952879582,
+              "display": "$0.0345",
+              "requests": 1910
+            }
+          ]
+        },
+        {
+          "id": "wildguard",
+          "label": "WildGuardTest",
+          "rows": 1699,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 0.022378929958799292,
+              "display": "$0.0224",
+              "requests": 1699
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 0.07657598587404357,
+              "display": "$0.0766",
+              "requests": 1699
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 0.036993290170688635,
+              "display": "$0.0370",
+              "requests": 1699
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "latency",
+      "figure": 3,
+      "title": "Recorded time for successful requests",
+      "title_lines": ["Recorded time for", "successful requests"],
+      "subtitle": "Successful requests · milliseconds",
+      "subtitle_lines": ["Successful requests ·", "milliseconds"],
+      "axis": "Median recorded request time (ms)",
+      "domain": [0, 800],
+      "ticks": [0, 400, 800],
+      "policy_label": "Jev uses the original policy",
+      "datasets": [
+        {
+          "id": "toxicchat",
+          "label": "ToxicChat",
+          "rows": 5083,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 305.01237549833604,
+              "display": "305",
+              "requests": 4976
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 714.9825204978697,
+              "display": "715",
+              "requests": 4976
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 754.1882294462994,
+              "display": "754",
+              "requests": 4976
+            }
+          ]
+        },
+        {
+          "id": "xstest",
+          "label": "XSTest",
+          "rows": 450,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 288.8458749985148,
+              "display": "289",
+              "requests": 450
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 706.6633965005167,
+              "display": "707",
+              "requests": 450
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 749.5416874880902,
+              "display": "750",
+              "requests": 450
+            }
+          ]
+        },
+        {
+          "id": "aegis",
+          "label": "Aegis 2",
+          "rows": 1923,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 289.81833400030155,
+              "display": "290",
+              "requests": 1915
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 709.7974790012813,
+              "display": "710",
+              "requests": 1910
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 760.1053539547138,
+              "display": "760",
+              "requests": 1910
+            }
+          ]
+        },
+        {
+          "id": "wildguard",
+          "label": "WildGuardTest",
+          "rows": 1699,
+          "series": [
+            {
+              "model": "jev_original",
+              "label": "Jev",
+              "value": 315.83470800251234,
+              "display": "316",
+              "requests": 1699
+            },
+            {
+              "model": "luna56",
+              "label": "GPT-5.6 Luna",
+              "value": 720.3348750044825,
+              "display": "720",
+              "requests": 1699
+            },
+            {
+              "model": "luna6",
+              "label": "GPT-6 Luna",
+              "value": 770.1640829909593,
+              "display": "770",
+              "requests": 1699
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
